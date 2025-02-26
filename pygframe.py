@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 from tkinter.scrolledtext import ScrolledText
+from PIL import Image, ImageTk
 import re
 
 class CustomIDE:
@@ -35,6 +36,7 @@ class CustomIDE:
         file_menu = tk.Menu(menubar, tearoff=0, bg='#2d2d2d', fg='#d4af37')
         menubar.add_cascade(label="Archivo", menu=file_menu)
         file_menu.add_command(label="Abrir", command=self.open_file)
+        file_menu.add_command(label="Cerrar archivo", command=self.close_file)
         file_menu.add_command(label="Guardar", command=self.save_file)
         file_menu.add_command(label="Guardar como", command=self.save_as_file)
         file_menu.add_separator()
@@ -53,23 +55,35 @@ class CustomIDE:
         toolbar = ttk.Frame(self.root, style='Toolbar.TFrame')
         toolbar.pack(fill=tk.X, padx=5, pady=5)
         
+        # Cargar imágenes
+        self.open_icon = tk.PhotoImage(file="images/open_icon.png")
+        self.save_icon = tk.PhotoImage(file="images/save_icon.png")
+        self.compile_icon = tk.PhotoImage(file="images/compile_icon.png")
+        self.lexical_icon = tk.PhotoImage(file="images/lexical_icon.png")
+        self.syntax_icon = tk.PhotoImage(file="images/syntax_icon.png")
+        self.semantic_icon = tk.PhotoImage(file="images/semantic_icon.png")
+        self.intermediate_icon = tk.PhotoImage(file="images/intermediate_icon.png")
+        self.execute_icon = tk.PhotoImage(file="images/execute_icon.png")
+
         # Configurar estilo de botones
         self.style.configure('Toolbar.TButton',
             background='#2d2d2d',
             foreground='#5d5d3d',
             padding=5
         )
-        
-        # Crear botones
-        ttk.Button(toolbar, text="Abrir", command=self.open_file, style='Toolbar.TButton').pack(side=tk.LEFT, padx=2)
-        ttk.Button(toolbar, text="Guardar", command=self.save_file, style='Toolbar.TButton').pack(side=tk.LEFT, padx=2)
-        ttk.Button(toolbar, text="Compilar", command=self.compile_code, style='Toolbar.TButton').pack(side=tk.LEFT, padx=2)
-        ttk.Button(toolbar, text="A. Léxico", command=self.lexical_analysis, style='Toolbar.TButton').pack(side=tk.LEFT, padx=2)
-        ttk.Button(toolbar, text="A. Sintáctico", command=self.syntax_analysis, style='Toolbar.TButton').pack(side=tk.LEFT, padx=2)
-        ttk.Button(toolbar, text="A. Semántico", command=self.semantic_analysis, style='Toolbar.TButton').pack(side=tk.LEFT, padx=2)
-        ttk.Button(toolbar, text="C. Intermedio", command=self.intermediate_code, style='Toolbar.TButton').pack(side=tk.LEFT, padx=2)
-        ttk.Button(toolbar, text="Ejecutar", command=self.execute_code, style='Toolbar.TButton').pack(side=tk.LEFT, padx=2)
-        
+    
+    # Crear botones
+        ttk.Button(toolbar, image=self.open_icon, text="Abrir", command=self.open_file, style='Toolbar.TButton', compound=tk.LEFT).pack(side=tk.LEFT, padx=2)
+        ttk.Button(toolbar, image=self.save_icon, text="Guardar", command=self.save_file, style='Toolbar.TButton', compound=tk.LEFT).pack(side=tk.LEFT, padx=2)
+        ttk.Button(toolbar, image=self.compile_icon, text="Compilar", command=self.compile_code, style='Toolbar.TButton', compound=tk.LEFT).pack(side=tk.LEFT, padx=2)
+        ttk.Button(toolbar, image=self.lexical_icon, text="A. Léxico", command=self.lexical_analysis, style='Toolbar.TButton', compound=tk.LEFT).pack(side=tk.LEFT, padx=2)
+        ttk.Button(toolbar, image=self.syntax_icon, text="A. Sintáctico", command=self.syntax_analysis, style='Toolbar.TButton', compound=tk.LEFT).pack(side=tk.LEFT, padx=2)
+        ttk.Button(toolbar, image=self.semantic_icon, text="A. Semántico", command=self.semantic_analysis, style='Toolbar.TButton', compound=tk.LEFT).pack(side=tk.LEFT, padx=2)
+        ttk.Button(toolbar, image=self.intermediate_icon, text="C. Intermedio", command=self.intermediate_code, style='Toolbar.TButton', compound=tk.LEFT).pack(side=tk.LEFT, padx=2)
+        ttk.Button(toolbar, image=self.execute_icon, text="Ejecutar", command=self.execute_code, style='Toolbar.TButton', compound=tk.LEFT).pack(side=tk.LEFT, padx=2)
+
+
+    
     def create_main_interface(self):
         # Contenedor principal para organizar el diseño
         main_container = ttk.Frame(self.root)
@@ -181,7 +195,16 @@ class CustomIDE:
                 self.editor.delete('1.0', tk.END)
                 self.editor.insert('1.0', file.read())
             self.update_line_numbers()
-            
+            self.close_file_button["state"] = tk.NORMAL
+
+   
+    def close_file(self):
+        self.editor.delete(1.0, tk.END)
+        self.current_file = None
+        self.output.delete(1.0, tk.END)
+        self.error_output.delete(1.0, tk.END)
+        messagebox.showinfo("Cerrar archivo", "El archivo ha sido cerrado.")
+
     def save_file(self):
         if self.current_file:
             with open(self.current_file, 'w') as file:
@@ -196,7 +219,7 @@ class CustomIDE:
         if file_path:
             self.current_file = file_path
             self.save_file()
-            
+
     def lexical_analysis(self):
         code = self.editor.get('1.0', tk.END)
         # Ejemplo simple de análisis léxico
