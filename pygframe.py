@@ -57,8 +57,6 @@ class CustomIDE:
         self.style.configure('Toolbar.TButton',
             background='#2d2d2d',
             foreground='#5d5d3d',
-            #foreground='#a17c04',
-            #foreground='#d4af37',
             padding=5
         )
         
@@ -73,14 +71,29 @@ class CustomIDE:
         ttk.Button(toolbar, text="Ejecutar", command=self.execute_code, style='Toolbar.TButton').pack(side=tk.LEFT, padx=2)
         
     def create_main_interface(self):
-        # Panel principal
-        main_panel = ttk.PanedWindow(self.root, orient=tk.HORIZONTAL)
+        # Contenedor principal para organizar el diseño
+        main_container = ttk.Frame(self.root)
+        main_container.pack(fill=tk.BOTH, expand=True)
+        
+        # Crear barra de estado primero para que esté en la parte inferior
+        status_frame = ttk.Frame(main_container, height=25)
+        status_frame.pack(side=tk.BOTTOM, fill=tk.X)
+        
+        self.status_bar = ttk.Label(status_frame, text="Líneas: 1, Columnas: 1",
+                                  background='#2d2d2d', foreground='#d4af37',
+                                  padding=(5, 0))
+        self.status_bar.pack(side=tk.LEFT, fill=tk.X)
+        
+        # Panel principal para el área de trabajo
+        main_panel = ttk.PanedWindow(main_container, orient=tk.HORIZONTAL)
         main_panel.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+        
         
         # Panel izquierdo (editor)
         left_frame = ttk.Frame(main_panel)
         main_panel.add(left_frame, weight=1)
         
+
         # Editor con números de línea
         self.line_numbers = tk.Text(left_frame, width=4, padx=3, takefocus=0, border=0,
                                   background='#2d2d2d', foreground='#d4af37',
@@ -92,27 +105,55 @@ class CustomIDE:
                                  insertbackground='#d4af37')
         self.editor.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         
-        # Panel derecho (resultados)
+
+        # Panel derecho (resultados con pestañas)
         right_frame = ttk.Frame(main_panel)
         main_panel.add(right_frame, weight=1)
         
-        self.output = ScrolledText(right_frame, height=20, wrap=tk.WORD,
-                                 background='#1e1e1e', foreground='#d4af37')
-        self.output.pack(fill=tk.BOTH, expand=True)
+        # Crear pestañas para la parte derecha
+        self.right_tabs = ttk.Notebook(right_frame)
+        self.right_tabs.pack(fill=tk.BOTH, expand=True)
         
-        # Panel inferior
-        bottom_frame = ttk.Frame(self.root)
+        # Configurar estilo para pestañas
+        self.style.configure('TNotebook.Tab', background='#2d2d2d', foreground='#5d5d3d', padding=[10, 2])
+        self.style.map('TNotebook.Tab', 
+                      background=[('selected', '#3d3d3d')],
+                      foreground=[('selected', '#d4af37')])
+        
+        # Crear las pestañas para la parte derecha
+        self.lexico_tab = ScrolledText(self.right_tabs, wrap=tk.WORD, background='#1e1e1e', foreground='#d4af37')
+        self.sintactico_tab = ScrolledText(self.right_tabs, wrap=tk.WORD, background='#1e1e1e', foreground='#d4af37')
+        self.semantico_tab = ScrolledText(self.right_tabs, wrap=tk.WORD, background='#1e1e1e', foreground='#d4af37')
+        self.hash_table_tab = ScrolledText(self.right_tabs, wrap=tk.WORD, background='#1e1e1e', foreground='#d4af37')
+        self.codigo_intermedio_tab = ScrolledText(self.right_tabs, wrap=tk.WORD, background='#1e1e1e', foreground='#d4af37')
+        
+        # Añadir pestañas al notebook
+        self.right_tabs.add(self.lexico_tab, text="Léxico")
+        self.right_tabs.add(self.sintactico_tab, text="Sintáctico")
+        self.right_tabs.add(self.semantico_tab, text="Semántico")
+        self.right_tabs.add(self.hash_table_tab, text="Hash Table")
+        self.right_tabs.add(self.codigo_intermedio_tab, text="Código Intermedio")
+        
+
+        # Panel inferior con pestañas para errores
+        bottom_frame = ttk.Frame(main_container)
         bottom_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
         
-        # Área de errores y tabla de símbolos
-        self.error_output = ScrolledText(bottom_frame, height=10, wrap=tk.WORD,
-                                       background='#1e1e1e', foreground='#ff6b6b')
-        self.error_output.pack(fill=tk.BOTH, expand=True)
+        # Crear pestañas para la parte inferior
+        self.bottom_tabs = ttk.Notebook(bottom_frame)
+        self.bottom_tabs.pack(fill=tk.BOTH, expand=True)
         
-        # Barra de estado para posición del cursor
-        self.status_bar = ttk.Label(self.root, text="Línea: 1, Columna: 1",
-                                  background='#2d2d2d', foreground='#d4af37')
-        self.status_bar.pack(side=tk.BOTTOM, fill=tk.X)
+        # Crear las pestañas para la parte inferior
+        self.errores_lexicos_tab = ScrolledText(self.bottom_tabs, height=10, wrap=tk.WORD, background='#1e1e1e', foreground='#ff6b6b')
+        self.errores_sintacticos_tab = ScrolledText(self.bottom_tabs, height=10, wrap=tk.WORD, background='#1e1e1e', foreground='#ff6b6b')
+        self.errores_semanticos_tab = ScrolledText(self.bottom_tabs, height=10, wrap=tk.WORD, background='#1e1e1e', foreground='#ff6b6b')
+        self.resultados_tab = ScrolledText(self.bottom_tabs, height=10, wrap=tk.WORD, background='#1e1e1e', foreground='#d4af37')
+        
+        # Añadir pestañas al notebook
+        self.bottom_tabs.add(self.errores_lexicos_tab, text="Errores Léxicos")
+        self.bottom_tabs.add(self.errores_sintacticos_tab, text="Errores Sintácticos")
+        self.bottom_tabs.add(self.errores_semanticos_tab, text="Errores Semánticos")
+        self.bottom_tabs.add(self.resultados_tab, text="Resultados")
         
         self.update_line_numbers()
         self.editor.bind('<Key>', self.update_line_numbers)
@@ -129,7 +170,7 @@ class CustomIDE:
     def update_cursor_position(self, event=None):
         position = self.editor.index(tk.INSERT)
         line, column = position.split('.')
-        self.status_bar.config(text=f"Línea: {line}, Columna: {int(column) + 1}")
+        self.status_bar.config(text=f"Líneas: {line}, Columnas: {int(column) + 1}")
         
     def open_file(self):
         file_path = filedialog.askopenfilename(
@@ -171,36 +212,87 @@ class CustomIDE:
         if current_token:
             tokens.append(current_token)
             
-        self.output.delete('1.0', tk.END)
-        self.output.insert('1.0', "Análisis Léxico:\n" + "\n".join(tokens))
+        # Mostrar resultados en la pestaña correspondiente
+        self.lexico_tab.delete('1.0', tk.END)
+        self.lexico_tab.insert('1.0', "Análisis Léxico:\n" + "\n".join(tokens))
+        
+        # Cambiar a la pestaña léxico
+        self.right_tabs.select(0)  # Seleccionar la primera pestaña (Léxico)
+        
+        # Simular algunos errores léxicos
+        self.errores_lexicos_tab.delete('1.0', tk.END)
+        self.errores_lexicos_tab.insert('1.0', "No se encontraron errores léxicos")
+        
+        # Cambiar a la pestaña de errores léxicos
+        self.bottom_tabs.select(0)  # Seleccionar la primera pestaña (Errores Léxicos)
         
     def syntax_analysis(self):
-        self.output.delete('1.0', tk.END)
-        self.output.insert('1.0', "Análisis Sintáctico:\nImplementación pendiente")
+        # Mostrar resultados en la pestaña correspondiente
+        self.sintactico_tab.delete('1.0', tk.END)
+        self.sintactico_tab.insert('1.0', "Análisis Sintáctico:\nImplementación pendiente")
+        
+        # Cambiar a la pestaña sintáctico
+        self.right_tabs.select(1)  # Seleccionar la segunda pestaña (Sintáctico)
+        
+        # Simular algunos errores sintácticos
+        self.errores_sintacticos_tab.delete('1.0', tk.END)
+        self.errores_sintacticos_tab.insert('1.0', "No se encontraron errores sintácticos")
+        
+        # Cambiar a la pestaña de errores sintácticos
+        self.bottom_tabs.select(1)  # Seleccionar la segunda pestaña (Errores Sintácticos)
         
     def semantic_analysis(self):
-        self.output.delete('1.0', tk.END)
-        self.output.insert('1.0', "Análisis Semántico:\nImplementación pendiente")
+        # Mostrar resultados en la pestaña correspondiente
+        self.semantico_tab.delete('1.0', tk.END)
+        self.semantico_tab.insert('1.0', "Análisis Semántico:\nImplementación pendiente")
+        
+        # Cambiar a la pestaña semántico
+        self.right_tabs.select(2)  # Seleccionar la tercera pestaña (Semántico)
+        
+        # Simular algunos errores semánticos
+        self.errores_semanticos_tab.delete('1.0', tk.END)
+        self.errores_semanticos_tab.insert('1.0', "No se encontraron errores semánticos")
+        
+        # Cambiar a la pestaña de errores semánticos
+        self.bottom_tabs.select(2)  # Seleccionar la tercera pestaña (Errores Semánticos)
         
     def intermediate_code(self):
-        self.output.delete('1.0', tk.END)
-        self.output.insert('1.0', "Código Intermedio:\nImplementación pendiente")
+        # Mostrar resultados en la pestaña correspondiente
+        self.codigo_intermedio_tab.delete('1.0', tk.END)
+        self.codigo_intermedio_tab.insert('1.0', "Código Intermedio:\nImplementación pendiente")
+        
+        # Cambiar a la pestaña código intermedio
+        self.right_tabs.select(4)  # Seleccionar la quinta pestaña (Código Intermedio)
         
     def execute_code(self):
         code = self.editor.get('1.0', tk.END)
         try:
             # Aquí iría la implementación real de la ejecución
-            self.error_output.delete('1.0', tk.END)
-            self.error_output.insert('1.0', "Ejecución exitosa")
+            self.resultados_tab.delete('1.0', tk.END)
+            self.resultados_tab.insert('1.0', "Ejecución exitosa")
+            
+            # Cambiar a la pestaña de resultados
+            self.bottom_tabs.select(3)  # Seleccionar la cuarta pestaña (Resultados)
         except Exception as e:
-            self.error_output.delete('1.0', tk.END)
-            self.error_output.insert('1.0', f"Error de ejecución: {str(e)}")
+            self.resultados_tab.delete('1.0', tk.END)
+            self.resultados_tab.insert('1.0', f"Error de ejecución: {str(e)}")
             
     def compile_code(self):
         self.lexical_analysis()
         self.syntax_analysis()
         self.semantic_analysis()
         self.intermediate_code()
+        
+        # Ejemplo simple de tabla hash
+        self.hash_table_tab.delete('1.0', tk.END)
+        self.hash_table_tab.insert('1.0', "Tabla Hash:\n\nID\t|\tTipo\t|\tValor\n" + 
+                                 "-" * 40 + "\n" +
+                                 "var1\t|\tint\t|\t10\n" +
+                                 "var2\t|\tstring\t|\t\"texto\"\n" +
+                                 "func1\t|\tfunción\t|\tvoid")
+        
+        # Cambiar a la pestaña hash table
+        self.right_tabs.select(3)  # Seleccionar la cuarta pestaña (Hash Table)
 
 if __name__ == '__main__':
     root = tk.Tk()
