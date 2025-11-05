@@ -1,0 +1,4250 @@
+{
+  "metadata": {
+    "generated_at": "2025-11-04T20:43:50.822449",
+    "generator": "PyGFrame Semantic Analyzer",
+    "version": "1.0"
+  },
+  "statistics": {
+    "total_nodes": 264,
+    "annotated_nodes": 193,
+    "nodes_with_type": 193,
+    "nodes_with_value": 54,
+    "nodes_with_symbol_ref": 35,
+    "constant_nodes": 54,
+    "lvalue_nodes": 35,
+    "types_distribution": {
+      "int": 160,
+      "float": 25,
+      "boolean": 8
+    },
+    "node_types_distribution": {
+      "PROGRAMA": 1,
+      "LISTA_DECLARACION": 1,
+      "DECLARACION_VARIABLE": 2,
+      "TIPO": 2,
+      "IDENTIFICADOR": 2,
+      "ID": 38,
+      "=": 19,
+      "SENT_EXPRESION": 19,
+      "COMPONENTE": 66,
+      "NUM_INT": 48,
+      "NUM_FLOAT": 5,
+      "-": 6,
+      "+": 13,
+      "*": 6,
+      "/": 7,
+      "SELECCION": 2,
+      ">": 3,
+      "LISTA_SENTENCIAS": 7,
+      "ELSE": 2,
+      "&&": 1,
+      "BOOLEANO": 1,
+      "INCREMENTO_UNARIO": 2,
+      "OPERADOR_ASIG_UNARIO": 2,
+      "REPETICION": 1,
+      "ITERACION": 2,
+      "SENT_IN": 2,
+      "==": 2,
+      "SENT_OUT": 1,
+      "SALIDA": 1
+    },
+    "annotation_percentage": 73.10606060606061,
+    "type_annotation_percentage": 73.10606060606061
+  },
+  "annotated_ast": {
+    "tipo": "PROGRAMA",
+    "valor": null,
+    "linea": 0,
+    "columna": 0,
+    "hijos": [
+      {
+        "tipo": "LISTA_DECLARACION",
+        "valor": null,
+        "linea": 0,
+        "columna": 0,
+        "hijos": [
+          {
+            "tipo": "DECLARACION_VARIABLE",
+            "valor": null,
+            "linea": 0,
+            "columna": 0,
+            "hijos": [
+              {
+                "tipo": "TIPO",
+                "valor": "int",
+                "linea": 2,
+                "columna": 5,
+                "hijos": []
+              },
+              {
+                "tipo": "IDENTIFICADOR",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "ID",
+                    "valor": "x",
+                    "linea": 2,
+                    "columna": 9,
+                    "hijos": [],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      },
+                      "symbol": {
+                        "name": "x",
+                        "type": "int",
+                        "scope": "global_0",
+                        "line": 2,
+                        "column": 9,
+                        "memory_address": 1000,
+                        "is_initialized": false
+                      },
+                      "properties": {
+                        "is_lvalue": true
+                      }
+                    }
+                  },
+                  {
+                    "tipo": "ID",
+                    "valor": "y",
+                    "linea": 2,
+                    "columna": 12,
+                    "hijos": [],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      },
+                      "symbol": {
+                        "name": "y",
+                        "type": "int",
+                        "scope": "global_0",
+                        "line": 2,
+                        "column": 12,
+                        "memory_address": 1004,
+                        "is_initialized": false
+                      },
+                      "properties": {
+                        "is_lvalue": true
+                      }
+                    }
+                  },
+                  {
+                    "tipo": "ID",
+                    "valor": "z",
+                    "linea": 2,
+                    "columna": 15,
+                    "hijos": [],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      },
+                      "symbol": {
+                        "name": "z",
+                        "type": "int",
+                        "scope": "global_0",
+                        "line": 2,
+                        "column": 15,
+                        "memory_address": 1008,
+                        "is_initialized": false
+                      },
+                      "properties": {
+                        "is_lvalue": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "DECLARACION_VARIABLE",
+            "valor": null,
+            "linea": 0,
+            "columna": 0,
+            "hijos": [
+              {
+                "tipo": "TIPO",
+                "valor": "float",
+                "linea": 3,
+                "columna": 5,
+                "hijos": []
+              },
+              {
+                "tipo": "IDENTIFICADOR",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "ID",
+                    "valor": "a",
+                    "linea": 3,
+                    "columna": 11,
+                    "hijos": [],
+                    "semantic_attributes": {
+                      "type": "float",
+                      "type_details": {
+                        "base_type": "float",
+                        "is_array": false,
+                        "is_numeric": true
+                      },
+                      "symbol": {
+                        "name": "a",
+                        "type": "float",
+                        "scope": "global_0",
+                        "line": 3,
+                        "column": 11,
+                        "memory_address": 1012,
+                        "is_initialized": false
+                      },
+                      "properties": {
+                        "is_lvalue": true
+                      }
+                    }
+                  },
+                  {
+                    "tipo": "ID",
+                    "valor": "b",
+                    "linea": 3,
+                    "columna": 14,
+                    "hijos": [],
+                    "semantic_attributes": {
+                      "type": "float",
+                      "type_details": {
+                        "base_type": "float",
+                        "is_array": false,
+                        "is_numeric": true
+                      },
+                      "symbol": {
+                        "name": "b",
+                        "type": "float",
+                        "scope": "global_0",
+                        "line": 3,
+                        "column": 14,
+                        "memory_address": 1016,
+                        "is_initialized": false
+                      },
+                      "properties": {
+                        "is_lvalue": true
+                      }
+                    }
+                  },
+                  {
+                    "tipo": "ID",
+                    "valor": "c",
+                    "linea": 3,
+                    "columna": 17,
+                    "hijos": [],
+                    "semantic_attributes": {
+                      "type": "float",
+                      "type_details": {
+                        "base_type": "float",
+                        "is_array": false,
+                        "is_numeric": true
+                      },
+                      "symbol": {
+                        "name": "c",
+                        "type": "float",
+                        "scope": "global_0",
+                        "line": 3,
+                        "column": 17,
+                        "memory_address": 1020,
+                        "is_initialized": false
+                      },
+                      "properties": {
+                        "is_lvalue": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "=",
+            "valor": "=",
+            "linea": 4,
+            "columna": 5,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "suma",
+                "linea": 4,
+                "columna": 5,
+                "hijos": []
+              },
+              {
+                "tipo": "SENT_EXPRESION",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "COMPONENTE",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "NUM_INT",
+                        "valor": "45",
+                        "linea": 4,
+                        "columna": 12,
+                        "hijos": [],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          },
+                          "value": 45,
+                          "properties": {
+                            "is_constant": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "=",
+            "valor": "=",
+            "linea": 5,
+            "columna": 5,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "x",
+                "linea": 5,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "int",
+                  "type_details": {
+                    "base_type": "int",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "x",
+                    "type": "int",
+                    "scope": "global_0",
+                    "line": 2,
+                    "column": 9,
+                    "memory_address": 1000,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "SENT_EXPRESION",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "COMPONENTE",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "NUM_FLOAT",
+                        "valor": "32.32",
+                        "linea": 5,
+                        "columna": 9,
+                        "hijos": [],
+                        "semantic_attributes": {
+                          "type": "float",
+                          "type_details": {
+                            "base_type": "float",
+                            "is_array": false,
+                            "is_numeric": true
+                          },
+                          "value": 32.32,
+                          "properties": {
+                            "is_constant": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "float",
+                      "type_details": {
+                        "base_type": "float",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "=",
+            "valor": "=",
+            "linea": 6,
+            "columna": 5,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "x",
+                "linea": 6,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "int",
+                  "type_details": {
+                    "base_type": "int",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "x",
+                    "type": "int",
+                    "scope": "global_0",
+                    "line": 2,
+                    "column": 9,
+                    "memory_address": 1000,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "SENT_EXPRESION",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "COMPONENTE",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "NUM_INT",
+                        "valor": "23",
+                        "linea": 6,
+                        "columna": 9,
+                        "hijos": [],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          },
+                          "value": 23,
+                          "properties": {
+                            "is_constant": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "=",
+            "valor": "=",
+            "linea": 7,
+            "columna": 5,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "y",
+                "linea": 7,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "int",
+                  "type_details": {
+                    "base_type": "int",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "y",
+                    "type": "int",
+                    "scope": "global_0",
+                    "line": 2,
+                    "column": 12,
+                    "memory_address": 1004,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "SENT_EXPRESION",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "-",
+                    "valor": "-",
+                    "linea": 7,
+                    "columna": 15,
+                    "hijos": [
+                      {
+                        "tipo": "+",
+                        "valor": "+",
+                        "linea": 7,
+                        "columna": 11,
+                        "hijos": [
+                          {
+                            "tipo": "COMPONENTE",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "NUM_INT",
+                                "valor": "2",
+                                "linea": 7,
+                                "columna": 9,
+                                "hijos": [],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  },
+                                  "value": 2,
+                                  "properties": {
+                                    "is_constant": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          },
+                          {
+                            "tipo": "COMPONENTE",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "NUM_INT",
+                                "valor": "3",
+                                "linea": 7,
+                                "columna": 13,
+                                "hijos": [],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  },
+                                  "value": 3,
+                                  "properties": {
+                                    "is_constant": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      },
+                      {
+                        "tipo": "COMPONENTE",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "NUM_INT",
+                            "valor": "1",
+                            "linea": 7,
+                            "columna": 17,
+                            "hijos": [],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              },
+                              "value": 1,
+                              "properties": {
+                                "is_constant": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "=",
+            "valor": "=",
+            "linea": 8,
+            "columna": 5,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "z",
+                "linea": 8,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "int",
+                  "type_details": {
+                    "base_type": "int",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "z",
+                    "type": "int",
+                    "scope": "global_0",
+                    "line": 2,
+                    "column": 15,
+                    "memory_address": 1008,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "SENT_EXPRESION",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "+",
+                    "valor": "+",
+                    "linea": 8,
+                    "columna": 11,
+                    "hijos": [
+                      {
+                        "tipo": "COMPONENTE",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "ID",
+                            "valor": "y",
+                            "linea": 8,
+                            "columna": 9,
+                            "hijos": [],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              },
+                              "symbol": {
+                                "name": "y",
+                                "type": "int",
+                                "scope": "global_0",
+                                "line": 2,
+                                "column": 12,
+                                "memory_address": 1004,
+                                "is_initialized": false
+                              },
+                              "properties": {
+                                "is_lvalue": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      },
+                      {
+                        "tipo": "COMPONENTE",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "NUM_INT",
+                            "valor": "7",
+                            "linea": 8,
+                            "columna": 13,
+                            "hijos": [],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              },
+                              "value": 7,
+                              "properties": {
+                                "is_constant": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "=",
+            "valor": "=",
+            "linea": 9,
+            "columna": 5,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "y",
+                "linea": 9,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "int",
+                  "type_details": {
+                    "base_type": "int",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "y",
+                    "type": "int",
+                    "scope": "global_0",
+                    "line": 2,
+                    "column": 12,
+                    "memory_address": 1004,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "SENT_EXPRESION",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "+",
+                    "valor": "+",
+                    "linea": 9,
+                    "columna": 11,
+                    "hijos": [
+                      {
+                        "tipo": "COMPONENTE",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "ID",
+                            "valor": "y",
+                            "linea": 9,
+                            "columna": 9,
+                            "hijos": [],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              },
+                              "symbol": {
+                                "name": "y",
+                                "type": "int",
+                                "scope": "global_0",
+                                "line": 2,
+                                "column": 12,
+                                "memory_address": 1004,
+                                "is_initialized": false
+                              },
+                              "properties": {
+                                "is_lvalue": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      },
+                      {
+                        "tipo": "COMPONENTE",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "NUM_INT",
+                            "valor": "1",
+                            "linea": 9,
+                            "columna": 13,
+                            "hijos": [],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              },
+                              "value": 1,
+                              "properties": {
+                                "is_constant": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "=",
+            "valor": "=",
+            "linea": 10,
+            "columna": 5,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "a",
+                "linea": 10,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "float",
+                  "type_details": {
+                    "base_type": "float",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "a",
+                    "type": "float",
+                    "scope": "global_0",
+                    "line": 3,
+                    "column": 11,
+                    "memory_address": 1012,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "SENT_EXPRESION",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "-",
+                    "valor": "-",
+                    "linea": 10,
+                    "columna": 22,
+                    "hijos": [
+                      {
+                        "tipo": "+",
+                        "valor": "+",
+                        "linea": 10,
+                        "columna": 19,
+                        "hijos": [
+                          {
+                            "tipo": "-",
+                            "valor": "-",
+                            "linea": 10,
+                            "columna": 13,
+                            "hijos": [
+                              {
+                                "tipo": "+",
+                                "valor": "+",
+                                "linea": 10,
+                                "columna": 11,
+                                "hijos": [
+                                  {
+                                    "tipo": "COMPONENTE",
+                                    "valor": null,
+                                    "linea": 0,
+                                    "columna": 0,
+                                    "hijos": [
+                                      {
+                                        "tipo": "NUM_FLOAT",
+                                        "valor": "24.0",
+                                        "linea": 10,
+                                        "columna": 7,
+                                        "hijos": [],
+                                        "semantic_attributes": {
+                                          "type": "float",
+                                          "type_details": {
+                                            "base_type": "float",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          },
+                                          "value": 24.0,
+                                          "properties": {
+                                            "is_constant": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "float",
+                                      "type_details": {
+                                        "base_type": "float",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "tipo": "COMPONENTE",
+                                    "valor": null,
+                                    "linea": 0,
+                                    "columna": 0,
+                                    "hijos": [
+                                      {
+                                        "tipo": "NUM_INT",
+                                        "valor": "4",
+                                        "linea": 10,
+                                        "columna": 12,
+                                        "hijos": [],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          },
+                                          "value": 4,
+                                          "properties": {
+                                            "is_constant": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "float",
+                                  "type_details": {
+                                    "base_type": "float",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              },
+                              {
+                                "tipo": "*",
+                                "valor": "*",
+                                "linea": 10,
+                                "columna": 17,
+                                "hijos": [
+                                  {
+                                    "tipo": "/",
+                                    "valor": "/",
+                                    "linea": 10,
+                                    "columna": 15,
+                                    "hijos": [
+                                      {
+                                        "tipo": "COMPONENTE",
+                                        "valor": null,
+                                        "linea": 0,
+                                        "columna": 0,
+                                        "hijos": [
+                                          {
+                                            "tipo": "NUM_INT",
+                                            "valor": "1",
+                                            "linea": 10,
+                                            "columna": 14,
+                                            "hijos": [],
+                                            "semantic_attributes": {
+                                              "type": "int",
+                                              "type_details": {
+                                                "base_type": "int",
+                                                "is_array": false,
+                                                "is_numeric": true
+                                              },
+                                              "value": 1,
+                                              "properties": {
+                                                "is_constant": true
+                                              }
+                                            }
+                                          }
+                                        ],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "tipo": "COMPONENTE",
+                                        "valor": null,
+                                        "linea": 0,
+                                        "columna": 0,
+                                        "hijos": [
+                                          {
+                                            "tipo": "NUM_INT",
+                                            "valor": "3",
+                                            "linea": 10,
+                                            "columna": 16,
+                                            "hijos": [],
+                                            "semantic_attributes": {
+                                              "type": "int",
+                                              "type_details": {
+                                                "base_type": "int",
+                                                "is_array": false,
+                                                "is_numeric": true
+                                              },
+                                              "value": 3,
+                                              "properties": {
+                                                "is_constant": true
+                                              }
+                                            }
+                                          }
+                                        ],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "tipo": "COMPONENTE",
+                                    "valor": null,
+                                    "linea": 0,
+                                    "columna": 0,
+                                    "hijos": [
+                                      {
+                                        "tipo": "NUM_INT",
+                                        "valor": "2",
+                                        "linea": 10,
+                                        "columna": 18,
+                                        "hijos": [],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          },
+                                          "value": 2,
+                                          "properties": {
+                                            "is_constant": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "float",
+                              "type_details": {
+                                "base_type": "float",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          },
+                          {
+                            "tipo": "COMPONENTE",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "NUM_INT",
+                                "valor": "34",
+                                "linea": 10,
+                                "columna": 20,
+                                "hijos": [],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  },
+                                  "value": 34,
+                                  "properties": {
+                                    "is_constant": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "float",
+                          "type_details": {
+                            "base_type": "float",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      },
+                      {
+                        "tipo": "COMPONENTE",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "NUM_INT",
+                            "valor": "1",
+                            "linea": 10,
+                            "columna": 23,
+                            "hijos": [],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              },
+                              "value": 1,
+                              "properties": {
+                                "is_constant": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "float",
+                      "type_details": {
+                        "base_type": "float",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "=",
+            "valor": "=",
+            "linea": 11,
+            "columna": 5,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "x",
+                "linea": 11,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "int",
+                  "type_details": {
+                    "base_type": "int",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "x",
+                    "type": "int",
+                    "scope": "global_0",
+                    "line": 2,
+                    "column": 9,
+                    "memory_address": 1000,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "SENT_EXPRESION",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "*",
+                    "valor": "*",
+                    "linea": 11,
+                    "columna": 12,
+                    "hijos": [
+                      {
+                        "tipo": "COMPONENTE",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "-",
+                            "valor": "-",
+                            "linea": 11,
+                            "columna": 9,
+                            "hijos": [
+                              {
+                                "tipo": "COMPONENTE",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "NUM_INT",
+                                    "valor": "5",
+                                    "linea": 11,
+                                    "columna": 8,
+                                    "hijos": [],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      },
+                                      "value": 5,
+                                      "properties": {
+                                        "is_constant": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              },
+                              {
+                                "tipo": "COMPONENTE",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "NUM_INT",
+                                    "valor": "3",
+                                    "linea": 11,
+                                    "columna": 10,
+                                    "hijos": [],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      },
+                                      "value": 3,
+                                      "properties": {
+                                        "is_constant": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      },
+                      {
+                        "tipo": "COMPONENTE",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "/",
+                            "valor": "/",
+                            "linea": 11,
+                            "columna": 15,
+                            "hijos": [
+                              {
+                                "tipo": "COMPONENTE",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "NUM_INT",
+                                    "valor": "8",
+                                    "linea": 11,
+                                    "columna": 14,
+                                    "hijos": [],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      },
+                                      "value": 8,
+                                      "properties": {
+                                        "is_constant": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              },
+                              {
+                                "tipo": "COMPONENTE",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "NUM_INT",
+                                    "valor": "2",
+                                    "linea": 11,
+                                    "columna": 16,
+                                    "hijos": [],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      },
+                                      "value": 2,
+                                      "properties": {
+                                        "is_constant": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "=",
+            "valor": "=",
+            "linea": 12,
+            "columna": 5,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "y",
+                "linea": 12,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "int",
+                  "type_details": {
+                    "base_type": "int",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "y",
+                    "type": "int",
+                    "scope": "global_0",
+                    "line": 2,
+                    "column": 12,
+                    "memory_address": 1004,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "SENT_EXPRESION",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "-",
+                    "valor": "-",
+                    "linea": 12,
+                    "columna": 16,
+                    "hijos": [
+                      {
+                        "tipo": "-",
+                        "valor": "-",
+                        "linea": 12,
+                        "columna": 10,
+                        "hijos": [
+                          {
+                            "tipo": "+",
+                            "valor": "+",
+                            "linea": 12,
+                            "columna": 8,
+                            "hijos": [
+                              {
+                                "tipo": "COMPONENTE",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "NUM_INT",
+                                    "valor": "5",
+                                    "linea": 12,
+                                    "columna": 7,
+                                    "hijos": [],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      },
+                                      "value": 5,
+                                      "properties": {
+                                        "is_constant": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              },
+                              {
+                                "tipo": "COMPONENTE",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "NUM_INT",
+                                    "valor": "3",
+                                    "linea": 12,
+                                    "columna": 9,
+                                    "hijos": [],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      },
+                                      "value": 3,
+                                      "properties": {
+                                        "is_constant": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          },
+                          {
+                            "tipo": "/",
+                            "valor": "/",
+                            "linea": 12,
+                            "columna": 14,
+                            "hijos": [
+                              {
+                                "tipo": "*",
+                                "valor": "*",
+                                "linea": 12,
+                                "columna": 12,
+                                "hijos": [
+                                  {
+                                    "tipo": "COMPONENTE",
+                                    "valor": null,
+                                    "linea": 0,
+                                    "columna": 0,
+                                    "hijos": [
+                                      {
+                                        "tipo": "NUM_INT",
+                                        "valor": "2",
+                                        "linea": 12,
+                                        "columna": 11,
+                                        "hijos": [],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          },
+                                          "value": 2,
+                                          "properties": {
+                                            "is_constant": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "tipo": "COMPONENTE",
+                                    "valor": null,
+                                    "linea": 0,
+                                    "columna": 0,
+                                    "hijos": [
+                                      {
+                                        "tipo": "NUM_INT",
+                                        "valor": "4",
+                                        "linea": 12,
+                                        "columna": 13,
+                                        "hijos": [],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          },
+                                          "value": 4,
+                                          "properties": {
+                                            "is_constant": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              },
+                              {
+                                "tipo": "COMPONENTE",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "NUM_INT",
+                                    "valor": "7",
+                                    "linea": 12,
+                                    "columna": 15,
+                                    "hijos": [],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      },
+                                      "value": 7,
+                                      "properties": {
+                                        "is_constant": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      },
+                      {
+                        "tipo": "COMPONENTE",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "NUM_INT",
+                            "valor": "9",
+                            "linea": 12,
+                            "columna": 17,
+                            "hijos": [],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              },
+                              "value": 9,
+                              "properties": {
+                                "is_constant": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "=",
+            "valor": "=",
+            "linea": 13,
+            "columna": 5,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "z",
+                "linea": 13,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "int",
+                  "type_details": {
+                    "base_type": "int",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "z",
+                    "type": "int",
+                    "scope": "global_0",
+                    "line": 2,
+                    "column": 15,
+                    "memory_address": 1008,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "SENT_EXPRESION",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "+",
+                    "valor": "+",
+                    "linea": 13,
+                    "columna": 15,
+                    "hijos": [
+                      {
+                        "tipo": "/",
+                        "valor": "/",
+                        "linea": 13,
+                        "columna": 11,
+                        "hijos": [
+                          {
+                            "tipo": "COMPONENTE",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "NUM_INT",
+                                "valor": "8",
+                                "linea": 13,
+                                "columna": 9,
+                                "hijos": [],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  },
+                                  "value": 8,
+                                  "properties": {
+                                    "is_constant": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          },
+                          {
+                            "tipo": "COMPONENTE",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "NUM_INT",
+                                "valor": "2",
+                                "linea": 13,
+                                "columna": 13,
+                                "hijos": [],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  },
+                                  "value": 2,
+                                  "properties": {
+                                    "is_constant": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      },
+                      {
+                        "tipo": "*",
+                        "valor": "*",
+                        "linea": 13,
+                        "columna": 20,
+                        "hijos": [
+                          {
+                            "tipo": "COMPONENTE",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "NUM_INT",
+                                "valor": "15",
+                                "linea": 13,
+                                "columna": 17,
+                                "hijos": [],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  },
+                                  "value": 15,
+                                  "properties": {
+                                    "is_constant": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          },
+                          {
+                            "tipo": "COMPONENTE",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "NUM_INT",
+                                "valor": "4",
+                                "linea": 13,
+                                "columna": 22,
+                                "hijos": [],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  },
+                                  "value": 4,
+                                  "properties": {
+                                    "is_constant": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "=",
+            "valor": "=",
+            "linea": 14,
+            "columna": 5,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "y",
+                "linea": 14,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "int",
+                  "type_details": {
+                    "base_type": "int",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "y",
+                    "type": "int",
+                    "scope": "global_0",
+                    "line": 2,
+                    "column": 12,
+                    "memory_address": 1004,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "SENT_EXPRESION",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "COMPONENTE",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "NUM_FLOAT",
+                        "valor": "14.54",
+                        "linea": 14,
+                        "columna": 9,
+                        "hijos": [],
+                        "semantic_attributes": {
+                          "type": "float",
+                          "type_details": {
+                            "base_type": "float",
+                            "is_array": false,
+                            "is_numeric": true
+                          },
+                          "value": 14.54,
+                          "properties": {
+                            "is_constant": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "float",
+                      "type_details": {
+                        "base_type": "float",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "SELECCION",
+            "valor": null,
+            "linea": 0,
+            "columna": 0,
+            "hijos": [
+              {
+                "tipo": ">",
+                "valor": ">",
+                "linea": 15,
+                "columna": 9,
+                "hijos": [
+                  {
+                    "tipo": "COMPONENTE",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "NUM_INT",
+                        "valor": "2",
+                        "linea": 15,
+                        "columna": 8,
+                        "hijos": [],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          },
+                          "value": 2,
+                          "properties": {
+                            "is_constant": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  },
+                  {
+                    "tipo": "COMPONENTE",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "NUM_INT",
+                        "valor": "3",
+                        "linea": 15,
+                        "columna": 10,
+                        "hijos": [],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          },
+                          "value": 3,
+                          "properties": {
+                            "is_constant": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ],
+                "semantic_attributes": {
+                  "type": "boolean",
+                  "type_details": {
+                    "base_type": "boolean",
+                    "is_array": false,
+                    "is_numeric": false
+                  }
+                }
+              },
+              {
+                "tipo": "LISTA_SENTENCIAS",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "=",
+                    "valor": "=",
+                    "linea": 16,
+                    "columna": 9,
+                    "hijos": [
+                      {
+                        "tipo": "ID",
+                        "valor": "y",
+                        "linea": 16,
+                        "columna": 9,
+                        "hijos": [],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          },
+                          "symbol": {
+                            "name": "y",
+                            "type": "int",
+                            "scope": "global_0",
+                            "line": 2,
+                            "column": 12,
+                            "memory_address": 1004,
+                            "is_initialized": false
+                          },
+                          "properties": {
+                            "is_lvalue": true
+                          }
+                        }
+                      },
+                      {
+                        "tipo": "SENT_EXPRESION",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "+",
+                            "valor": "+",
+                            "linea": 16,
+                            "columna": 15,
+                            "hijos": [
+                              {
+                                "tipo": "COMPONENTE",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "ID",
+                                    "valor": "a",
+                                    "linea": 16,
+                                    "columna": 13,
+                                    "hijos": [],
+                                    "semantic_attributes": {
+                                      "type": "float",
+                                      "type_details": {
+                                        "base_type": "float",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      },
+                                      "symbol": {
+                                        "name": "a",
+                                        "type": "float",
+                                        "scope": "global_0",
+                                        "line": 3,
+                                        "column": 11,
+                                        "memory_address": 1012,
+                                        "is_initialized": false
+                                      },
+                                      "properties": {
+                                        "is_lvalue": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "float",
+                                  "type_details": {
+                                    "base_type": "float",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              },
+                              {
+                                "tipo": "COMPONENTE",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "NUM_INT",
+                                    "valor": "3",
+                                    "linea": 16,
+                                    "columna": 17,
+                                    "hijos": [],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      },
+                                      "value": 3,
+                                      "properties": {
+                                        "is_constant": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "float",
+                              "type_details": {
+                                "base_type": "float",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tipo": "ELSE",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "LISTA_SENTENCIAS",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "SELECCION",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "&&",
+                            "valor": "&&",
+                            "linea": 18,
+                            "columna": 16,
+                            "hijos": [
+                              {
+                                "tipo": ">",
+                                "valor": ">",
+                                "linea": 18,
+                                "columna": 13,
+                                "hijos": [
+                                  {
+                                    "tipo": "COMPONENTE",
+                                    "valor": null,
+                                    "linea": 0,
+                                    "columna": 0,
+                                    "hijos": [
+                                      {
+                                        "tipo": "NUM_INT",
+                                        "valor": "4",
+                                        "linea": 18,
+                                        "columna": 12,
+                                        "hijos": [],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          },
+                                          "value": 4,
+                                          "properties": {
+                                            "is_constant": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "tipo": "COMPONENTE",
+                                    "valor": null,
+                                    "linea": 0,
+                                    "columna": 0,
+                                    "hijos": [
+                                      {
+                                        "tipo": "NUM_INT",
+                                        "valor": "2",
+                                        "linea": 18,
+                                        "columna": 14,
+                                        "hijos": [],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          },
+                                          "value": 2,
+                                          "properties": {
+                                            "is_constant": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "boolean",
+                                  "type_details": {
+                                    "base_type": "boolean",
+                                    "is_array": false,
+                                    "is_numeric": false
+                                  }
+                                }
+                              },
+                              {
+                                "tipo": "COMPONENTE",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "BOOLEANO",
+                                    "valor": "true",
+                                    "linea": 18,
+                                    "columna": 19,
+                                    "hijos": [],
+                                    "semantic_attributes": {
+                                      "type": "boolean",
+                                      "type_details": {
+                                        "base_type": "boolean",
+                                        "is_array": false,
+                                        "is_numeric": false
+                                      },
+                                      "value": true,
+                                      "properties": {
+                                        "is_constant": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "boolean",
+                                  "type_details": {
+                                    "base_type": "boolean",
+                                    "is_array": false,
+                                    "is_numeric": false
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "boolean",
+                              "type_details": {
+                                "base_type": "boolean",
+                                "is_array": false,
+                                "is_numeric": false
+                              }
+                            }
+                          },
+                          {
+                            "tipo": "LISTA_SENTENCIAS",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "=",
+                                "valor": "=",
+                                "linea": 19,
+                                "columna": 13,
+                                "hijos": [
+                                  {
+                                    "tipo": "ID",
+                                    "valor": "b",
+                                    "linea": 19,
+                                    "columna": 13,
+                                    "hijos": [],
+                                    "semantic_attributes": {
+                                      "type": "float",
+                                      "type_details": {
+                                        "base_type": "float",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      },
+                                      "symbol": {
+                                        "name": "b",
+                                        "type": "float",
+                                        "scope": "global_0",
+                                        "line": 3,
+                                        "column": 14,
+                                        "memory_address": 1016,
+                                        "is_initialized": false
+                                      },
+                                      "properties": {
+                                        "is_lvalue": true
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "tipo": "SENT_EXPRESION",
+                                    "valor": null,
+                                    "linea": 0,
+                                    "columna": 0,
+                                    "hijos": [
+                                      {
+                                        "tipo": "COMPONENTE",
+                                        "valor": null,
+                                        "linea": 0,
+                                        "columna": 0,
+                                        "hijos": [
+                                          {
+                                            "tipo": "NUM_FLOAT",
+                                            "valor": "3.2",
+                                            "linea": 19,
+                                            "columna": 17,
+                                            "hijos": [],
+                                            "semantic_attributes": {
+                                              "type": "float",
+                                              "type_details": {
+                                                "base_type": "float",
+                                                "is_array": false,
+                                                "is_numeric": true
+                                              },
+                                              "value": 3.2,
+                                              "properties": {
+                                                "is_constant": true
+                                              }
+                                            }
+                                          }
+                                        ],
+                                        "semantic_attributes": {
+                                          "type": "float",
+                                          "type_details": {
+                                            "base_type": "float",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tipo": "ELSE",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "LISTA_SENTENCIAS",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "=",
+                                    "valor": "=",
+                                    "linea": 21,
+                                    "columna": 13,
+                                    "hijos": [
+                                      {
+                                        "tipo": "ID",
+                                        "valor": "b",
+                                        "linea": 21,
+                                        "columna": 13,
+                                        "hijos": [],
+                                        "semantic_attributes": {
+                                          "type": "float",
+                                          "type_details": {
+                                            "base_type": "float",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          },
+                                          "symbol": {
+                                            "name": "b",
+                                            "type": "float",
+                                            "scope": "global_0",
+                                            "line": 3,
+                                            "column": 14,
+                                            "memory_address": 1016,
+                                            "is_initialized": false
+                                          },
+                                          "properties": {
+                                            "is_lvalue": true
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "tipo": "SENT_EXPRESION",
+                                        "valor": null,
+                                        "linea": 0,
+                                        "columna": 0,
+                                        "hijos": [
+                                          {
+                                            "tipo": "COMPONENTE",
+                                            "valor": null,
+                                            "linea": 0,
+                                            "columna": 0,
+                                            "hijos": [
+                                              {
+                                                "tipo": "NUM_FLOAT",
+                                                "valor": "5.0",
+                                                "linea": 21,
+                                                "columna": 17,
+                                                "hijos": [],
+                                                "semantic_attributes": {
+                                                  "type": "float",
+                                                  "type_details": {
+                                                    "base_type": "float",
+                                                    "is_array": false,
+                                                    "is_numeric": true
+                                                  },
+                                                  "value": 5.0,
+                                                  "properties": {
+                                                    "is_constant": true
+                                                  }
+                                                }
+                                              }
+                                            ],
+                                            "semantic_attributes": {
+                                              "type": "float",
+                                              "type_details": {
+                                                "base_type": "float",
+                                                "is_array": false,
+                                                "is_numeric": true
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tipo": "=",
+                        "valor": "=",
+                        "linea": 23,
+                        "columna": 9,
+                        "hijos": [
+                          {
+                            "tipo": "ID",
+                            "valor": "y",
+                            "linea": 23,
+                            "columna": 9,
+                            "hijos": [],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              },
+                              "symbol": {
+                                "name": "y",
+                                "type": "int",
+                                "scope": "global_0",
+                                "line": 2,
+                                "column": 12,
+                                "memory_address": 1004,
+                                "is_initialized": false
+                              },
+                              "properties": {
+                                "is_lvalue": true
+                              }
+                            }
+                          },
+                          {
+                            "tipo": "SENT_EXPRESION",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "+",
+                                "valor": "+",
+                                "linea": 23,
+                                "columna": 15,
+                                "hijos": [
+                                  {
+                                    "tipo": "COMPONENTE",
+                                    "valor": null,
+                                    "linea": 0,
+                                    "columna": 0,
+                                    "hijos": [
+                                      {
+                                        "tipo": "ID",
+                                        "valor": "y",
+                                        "linea": 23,
+                                        "columna": 13,
+                                        "hijos": [],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          },
+                                          "symbol": {
+                                            "name": "y",
+                                            "type": "int",
+                                            "scope": "global_0",
+                                            "line": 2,
+                                            "column": 12,
+                                            "memory_address": 1004,
+                                            "is_initialized": false
+                                          },
+                                          "properties": {
+                                            "is_lvalue": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "tipo": "COMPONENTE",
+                                    "valor": null,
+                                    "linea": 0,
+                                    "columna": 0,
+                                    "hijos": [
+                                      {
+                                        "tipo": "NUM_INT",
+                                        "valor": "1",
+                                        "linea": 23,
+                                        "columna": 17,
+                                        "hijos": [],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          },
+                                          "value": 1,
+                                          "properties": {
+                                            "is_constant": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "INCREMENTO_UNARIO",
+            "valor": null,
+            "linea": 0,
+            "columna": 0,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "a",
+                "linea": 25,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "float",
+                  "type_details": {
+                    "base_type": "float",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "a",
+                    "type": "float",
+                    "scope": "global_0",
+                    "line": 3,
+                    "column": 11,
+                    "memory_address": 1012,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "OPERADOR_ASIG_UNARIO",
+                "valor": "++",
+                "linea": 25,
+                "columna": 6,
+                "hijos": []
+              }
+            ]
+          },
+          {
+            "tipo": "INCREMENTO_UNARIO",
+            "valor": null,
+            "linea": 0,
+            "columna": 0,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "c",
+                "linea": 26,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "float",
+                  "type_details": {
+                    "base_type": "float",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "c",
+                    "type": "float",
+                    "scope": "global_0",
+                    "line": 3,
+                    "column": 17,
+                    "memory_address": 1020,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "OPERADOR_ASIG_UNARIO",
+                "valor": "--",
+                "linea": 26,
+                "columna": 6,
+                "hijos": []
+              }
+            ]
+          },
+          {
+            "tipo": "=",
+            "valor": "=",
+            "linea": 27,
+            "columna": 5,
+            "hijos": [
+              {
+                "tipo": "ID",
+                "valor": "x",
+                "linea": 27,
+                "columna": 5,
+                "hijos": [],
+                "semantic_attributes": {
+                  "type": "int",
+                  "type_details": {
+                    "base_type": "int",
+                    "is_array": false,
+                    "is_numeric": true
+                  },
+                  "symbol": {
+                    "name": "x",
+                    "type": "int",
+                    "scope": "global_0",
+                    "line": 2,
+                    "column": 9,
+                    "memory_address": 1000,
+                    "is_initialized": false
+                  },
+                  "properties": {
+                    "is_lvalue": true
+                  }
+                }
+              },
+              {
+                "tipo": "SENT_EXPRESION",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "+",
+                    "valor": "+",
+                    "linea": 27,
+                    "columna": 11,
+                    "hijos": [
+                      {
+                        "tipo": "COMPONENTE",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "NUM_INT",
+                            "valor": "3",
+                            "linea": 27,
+                            "columna": 9,
+                            "hijos": [],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              },
+                              "value": 3,
+                              "properties": {
+                                "is_constant": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      },
+                      {
+                        "tipo": "COMPONENTE",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "NUM_INT",
+                            "valor": "4",
+                            "linea": 27,
+                            "columna": 13,
+                            "hijos": [],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              },
+                              "value": 4,
+                              "properties": {
+                                "is_constant": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tipo": "REPETICION",
+            "valor": null,
+            "linea": 0,
+            "columna": 0,
+            "hijos": [
+              {
+                "tipo": "LISTA_SENTENCIAS",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "=",
+                    "valor": "=",
+                    "linea": 29,
+                    "columna": 9,
+                    "hijos": [
+                      {
+                        "tipo": "ID",
+                        "valor": "y",
+                        "linea": 29,
+                        "columna": 9,
+                        "hijos": [],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          },
+                          "symbol": {
+                            "name": "y",
+                            "type": "int",
+                            "scope": "global_0",
+                            "line": 2,
+                            "column": 12,
+                            "memory_address": 1004,
+                            "is_initialized": false
+                          },
+                          "properties": {
+                            "is_lvalue": true
+                          }
+                        }
+                      },
+                      {
+                        "tipo": "SENT_EXPRESION",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "+",
+                            "valor": "+",
+                            "linea": 29,
+                            "columna": 25,
+                            "hijos": [
+                              {
+                                "tipo": "*",
+                                "valor": "*",
+                                "linea": 29,
+                                "columna": 21,
+                                "hijos": [
+                                  {
+                                    "tipo": "COMPONENTE",
+                                    "valor": null,
+                                    "linea": 0,
+                                    "columna": 0,
+                                    "hijos": [
+                                      {
+                                        "tipo": "+",
+                                        "valor": "+",
+                                        "linea": 29,
+                                        "columna": 16,
+                                        "hijos": [
+                                          {
+                                            "tipo": "COMPONENTE",
+                                            "valor": null,
+                                            "linea": 0,
+                                            "columna": 0,
+                                            "hijos": [
+                                              {
+                                                "tipo": "ID",
+                                                "valor": "y",
+                                                "linea": 29,
+                                                "columna": 14,
+                                                "hijos": [],
+                                                "semantic_attributes": {
+                                                  "type": "int",
+                                                  "type_details": {
+                                                    "base_type": "int",
+                                                    "is_array": false,
+                                                    "is_numeric": true
+                                                  },
+                                                  "symbol": {
+                                                    "name": "y",
+                                                    "type": "int",
+                                                    "scope": "global_0",
+                                                    "line": 2,
+                                                    "column": 12,
+                                                    "memory_address": 1004,
+                                                    "is_initialized": false
+                                                  },
+                                                  "properties": {
+                                                    "is_lvalue": true
+                                                  }
+                                                }
+                                              }
+                                            ],
+                                            "semantic_attributes": {
+                                              "type": "int",
+                                              "type_details": {
+                                                "base_type": "int",
+                                                "is_array": false,
+                                                "is_numeric": true
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "tipo": "COMPONENTE",
+                                            "valor": null,
+                                            "linea": 0,
+                                            "columna": 0,
+                                            "hijos": [
+                                              {
+                                                "tipo": "NUM_INT",
+                                                "valor": "1",
+                                                "linea": 29,
+                                                "columna": 18,
+                                                "hijos": [],
+                                                "semantic_attributes": {
+                                                  "type": "int",
+                                                  "type_details": {
+                                                    "base_type": "int",
+                                                    "is_array": false,
+                                                    "is_numeric": true
+                                                  },
+                                                  "value": 1,
+                                                  "properties": {
+                                                    "is_constant": true
+                                                  }
+                                                }
+                                              }
+                                            ],
+                                            "semantic_attributes": {
+                                              "type": "int",
+                                              "type_details": {
+                                                "base_type": "int",
+                                                "is_array": false,
+                                                "is_numeric": true
+                                              }
+                                            }
+                                          }
+                                        ],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "tipo": "COMPONENTE",
+                                    "valor": null,
+                                    "linea": 0,
+                                    "columna": 0,
+                                    "hijos": [
+                                      {
+                                        "tipo": "NUM_INT",
+                                        "valor": "2",
+                                        "linea": 29,
+                                        "columna": 23,
+                                        "hijos": [],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          },
+                                          "value": 2,
+                                          "properties": {
+                                            "is_constant": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              },
+                              {
+                                "tipo": "COMPONENTE",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "NUM_INT",
+                                    "valor": "1",
+                                    "linea": 29,
+                                    "columna": 27,
+                                    "hijos": [],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      },
+                                      "value": 1,
+                                      "properties": {
+                                        "is_constant": true
+                                      }
+                                    }
+                                  }
+                                ],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tipo": "ITERACION",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": ">",
+                        "valor": ">",
+                        "linea": 30,
+                        "columna": 17,
+                        "hijos": [
+                          {
+                            "tipo": "COMPONENTE",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "ID",
+                                "valor": "x",
+                                "linea": 30,
+                                "columna": 15,
+                                "hijos": [],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  },
+                                  "symbol": {
+                                    "name": "x",
+                                    "type": "int",
+                                    "scope": "global_0",
+                                    "line": 2,
+                                    "column": 9,
+                                    "memory_address": 1000,
+                                    "is_initialized": false
+                                  },
+                                  "properties": {
+                                    "is_lvalue": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          },
+                          {
+                            "tipo": "COMPONENTE",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "NUM_INT",
+                                "valor": "7",
+                                "linea": 30,
+                                "columna": 19,
+                                "hijos": [],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  },
+                                  "value": 7,
+                                  "properties": {
+                                    "is_constant": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          }
+                        ],
+                        "semantic_attributes": {
+                          "type": "boolean",
+                          "type_details": {
+                            "base_type": "boolean",
+                            "is_array": false,
+                            "is_numeric": false
+                          }
+                        }
+                      },
+                      {
+                        "tipo": "LISTA_SENTENCIAS",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "=",
+                            "valor": "=",
+                            "linea": 31,
+                            "columna": 13,
+                            "hijos": [
+                              {
+                                "tipo": "ID",
+                                "valor": "x",
+                                "linea": 31,
+                                "columna": 13,
+                                "hijos": [],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  },
+                                  "symbol": {
+                                    "name": "x",
+                                    "type": "int",
+                                    "scope": "global_0",
+                                    "line": 2,
+                                    "column": 9,
+                                    "memory_address": 1000,
+                                    "is_initialized": false
+                                  },
+                                  "properties": {
+                                    "is_lvalue": true
+                                  }
+                                }
+                              },
+                              {
+                                "tipo": "SENT_EXPRESION",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "+",
+                                    "valor": "+",
+                                    "linea": 31,
+                                    "columna": 19,
+                                    "hijos": [
+                                      {
+                                        "tipo": "COMPONENTE",
+                                        "valor": null,
+                                        "linea": 0,
+                                        "columna": 0,
+                                        "hijos": [
+                                          {
+                                            "tipo": "NUM_INT",
+                                            "valor": "6",
+                                            "linea": 31,
+                                            "columna": 17,
+                                            "hijos": [],
+                                            "semantic_attributes": {
+                                              "type": "int",
+                                              "type_details": {
+                                                "base_type": "int",
+                                                "is_array": false,
+                                                "is_numeric": true
+                                              },
+                                              "value": 6,
+                                              "properties": {
+                                                "is_constant": true
+                                              }
+                                            }
+                                          }
+                                        ],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "tipo": "/",
+                                        "valor": "/",
+                                        "linea": 31,
+                                        "columna": 31,
+                                        "hijos": [
+                                          {
+                                            "tipo": "*",
+                                            "valor": "*",
+                                            "linea": 31,
+                                            "columna": 27,
+                                            "hijos": [
+                                              {
+                                                "tipo": "/",
+                                                "valor": "/",
+                                                "linea": 31,
+                                                "columna": 23,
+                                                "hijos": [
+                                                  {
+                                                    "tipo": "COMPONENTE",
+                                                    "valor": null,
+                                                    "linea": 0,
+                                                    "columna": 0,
+                                                    "hijos": [
+                                                      {
+                                                        "tipo": "NUM_INT",
+                                                        "valor": "8",
+                                                        "linea": 31,
+                                                        "columna": 21,
+                                                        "hijos": [],
+                                                        "semantic_attributes": {
+                                                          "type": "int",
+                                                          "type_details": {
+                                                            "base_type": "int",
+                                                            "is_array": false,
+                                                            "is_numeric": true
+                                                          },
+                                                          "value": 8,
+                                                          "properties": {
+                                                            "is_constant": true
+                                                          }
+                                                        }
+                                                      }
+                                                    ],
+                                                    "semantic_attributes": {
+                                                      "type": "int",
+                                                      "type_details": {
+                                                        "base_type": "int",
+                                                        "is_array": false,
+                                                        "is_numeric": true
+                                                      }
+                                                    }
+                                                  },
+                                                  {
+                                                    "tipo": "COMPONENTE",
+                                                    "valor": null,
+                                                    "linea": 0,
+                                                    "columna": 0,
+                                                    "hijos": [
+                                                      {
+                                                        "tipo": "NUM_INT",
+                                                        "valor": "9",
+                                                        "linea": 31,
+                                                        "columna": 25,
+                                                        "hijos": [],
+                                                        "semantic_attributes": {
+                                                          "type": "int",
+                                                          "type_details": {
+                                                            "base_type": "int",
+                                                            "is_array": false,
+                                                            "is_numeric": true
+                                                          },
+                                                          "value": 9,
+                                                          "properties": {
+                                                            "is_constant": true
+                                                          }
+                                                        }
+                                                      }
+                                                    ],
+                                                    "semantic_attributes": {
+                                                      "type": "int",
+                                                      "type_details": {
+                                                        "base_type": "int",
+                                                        "is_array": false,
+                                                        "is_numeric": true
+                                                      }
+                                                    }
+                                                  }
+                                                ],
+                                                "semantic_attributes": {
+                                                  "type": "int",
+                                                  "type_details": {
+                                                    "base_type": "int",
+                                                    "is_array": false,
+                                                    "is_numeric": true
+                                                  }
+                                                }
+                                              },
+                                              {
+                                                "tipo": "COMPONENTE",
+                                                "valor": null,
+                                                "linea": 0,
+                                                "columna": 0,
+                                                "hijos": [
+                                                  {
+                                                    "tipo": "NUM_INT",
+                                                    "valor": "8",
+                                                    "linea": 31,
+                                                    "columna": 29,
+                                                    "hijos": [],
+                                                    "semantic_attributes": {
+                                                      "type": "int",
+                                                      "type_details": {
+                                                        "base_type": "int",
+                                                        "is_array": false,
+                                                        "is_numeric": true
+                                                      },
+                                                      "value": 8,
+                                                      "properties": {
+                                                        "is_constant": true
+                                                      }
+                                                    }
+                                                  }
+                                                ],
+                                                "semantic_attributes": {
+                                                  "type": "int",
+                                                  "type_details": {
+                                                    "base_type": "int",
+                                                    "is_array": false,
+                                                    "is_numeric": true
+                                                  }
+                                                }
+                                              }
+                                            ],
+                                            "semantic_attributes": {
+                                              "type": "int",
+                                              "type_details": {
+                                                "base_type": "int",
+                                                "is_array": false,
+                                                "is_numeric": true
+                                              }
+                                            }
+                                          },
+                                          {
+                                            "tipo": "COMPONENTE",
+                                            "valor": null,
+                                            "linea": 0,
+                                            "columna": 0,
+                                            "hijos": [
+                                              {
+                                                "tipo": "NUM_INT",
+                                                "valor": "3",
+                                                "linea": 31,
+                                                "columna": 33,
+                                                "hijos": [],
+                                                "semantic_attributes": {
+                                                  "type": "int",
+                                                  "type_details": {
+                                                    "base_type": "int",
+                                                    "is_array": false,
+                                                    "is_numeric": true
+                                                  },
+                                                  "value": 3,
+                                                  "properties": {
+                                                    "is_constant": true
+                                                  }
+                                                }
+                                              }
+                                            ],
+                                            "semantic_attributes": {
+                                              "type": "int",
+                                              "type_details": {
+                                                "base_type": "int",
+                                                "is_array": false,
+                                                "is_numeric": true
+                                              }
+                                            }
+                                          }
+                                        ],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tipo": "SENT_IN",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "ID",
+                                "valor": "x",
+                                "linea": 32,
+                                "columna": 20,
+                                "hijos": [],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  },
+                                  "symbol": {
+                                    "name": "x",
+                                    "type": "int",
+                                    "scope": "global_0",
+                                    "line": 2,
+                                    "column": 9,
+                                    "memory_address": 1000,
+                                    "is_initialized": false
+                                  },
+                                  "properties": {
+                                    "is_lvalue": true
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "tipo": "=",
+                            "valor": "=",
+                            "linea": 33,
+                            "columna": 13,
+                            "hijos": [
+                              {
+                                "tipo": "ID",
+                                "valor": "mas",
+                                "linea": 33,
+                                "columna": 13,
+                                "hijos": []
+                              },
+                              {
+                                "tipo": "SENT_EXPRESION",
+                                "valor": null,
+                                "linea": 0,
+                                "columna": 0,
+                                "hijos": [
+                                  {
+                                    "tipo": "/",
+                                    "valor": "/",
+                                    "linea": 33,
+                                    "columna": 22,
+                                    "hijos": [
+                                      {
+                                        "tipo": "COMPONENTE",
+                                        "valor": null,
+                                        "linea": 0,
+                                        "columna": 0,
+                                        "hijos": [
+                                          {
+                                            "tipo": "NUM_INT",
+                                            "valor": "36",
+                                            "linea": 33,
+                                            "columna": 19,
+                                            "hijos": [],
+                                            "semantic_attributes": {
+                                              "type": "int",
+                                              "type_details": {
+                                                "base_type": "int",
+                                                "is_array": false,
+                                                "is_numeric": true
+                                              },
+                                              "value": 36,
+                                              "properties": {
+                                                "is_constant": true
+                                              }
+                                            }
+                                          }
+                                        ],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "tipo": "COMPONENTE",
+                                        "valor": null,
+                                        "linea": 0,
+                                        "columna": 0,
+                                        "hijos": [
+                                          {
+                                            "tipo": "NUM_INT",
+                                            "valor": "7",
+                                            "linea": 33,
+                                            "columna": 24,
+                                            "hijos": [],
+                                            "semantic_attributes": {
+                                              "type": "int",
+                                              "type_details": {
+                                                "base_type": "int",
+                                                "is_array": false,
+                                                "is_numeric": true
+                                              },
+                                              "value": 7,
+                                              "properties": {
+                                                "is_constant": true
+                                              }
+                                            }
+                                          }
+                                        ],
+                                        "semantic_attributes": {
+                                          "type": "int",
+                                          "type_details": {
+                                            "base_type": "int",
+                                            "is_array": false,
+                                            "is_numeric": true
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "semantic_attributes": {
+                                      "type": "int",
+                                      "type_details": {
+                                        "base_type": "int",
+                                        "is_array": false,
+                                        "is_numeric": true
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tipo": "==",
+                "valor": "==",
+                "linea": 35,
+                "columna": 13,
+                "hijos": [
+                  {
+                    "tipo": "COMPONENTE",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "ID",
+                        "valor": "y",
+                        "linea": 35,
+                        "columna": 11,
+                        "hijos": [],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          },
+                          "symbol": {
+                            "name": "y",
+                            "type": "int",
+                            "scope": "global_0",
+                            "line": 2,
+                            "column": 12,
+                            "memory_address": 1004,
+                            "is_initialized": false
+                          },
+                          "properties": {
+                            "is_lvalue": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  },
+                  {
+                    "tipo": "COMPONENTE",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "NUM_INT",
+                        "valor": "5",
+                        "linea": 35,
+                        "columna": 16,
+                        "hijos": [],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          },
+                          "value": 5,
+                          "properties": {
+                            "is_constant": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ],
+                "semantic_attributes": {
+                  "type": "boolean",
+                  "type_details": {
+                    "base_type": "boolean",
+                    "is_array": false,
+                    "is_numeric": false
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "tipo": "ITERACION",
+            "valor": null,
+            "linea": 0,
+            "columna": 0,
+            "hijos": [
+              {
+                "tipo": "==",
+                "valor": "==",
+                "linea": 36,
+                "columna": 13,
+                "hijos": [
+                  {
+                    "tipo": "COMPONENTE",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "ID",
+                        "valor": "y",
+                        "linea": 36,
+                        "columna": 11,
+                        "hijos": [],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          },
+                          "symbol": {
+                            "name": "y",
+                            "type": "int",
+                            "scope": "global_0",
+                            "line": 2,
+                            "column": 12,
+                            "memory_address": 1004,
+                            "is_initialized": false
+                          },
+                          "properties": {
+                            "is_lvalue": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  },
+                  {
+                    "tipo": "COMPONENTE",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "NUM_INT",
+                        "valor": "0",
+                        "linea": 36,
+                        "columna": 16,
+                        "hijos": [],
+                        "semantic_attributes": {
+                          "type": "int",
+                          "type_details": {
+                            "base_type": "int",
+                            "is_array": false,
+                            "is_numeric": true
+                          },
+                          "value": 0,
+                          "properties": {
+                            "is_constant": true
+                          }
+                        }
+                      }
+                    ],
+                    "semantic_attributes": {
+                      "type": "int",
+                      "type_details": {
+                        "base_type": "int",
+                        "is_array": false,
+                        "is_numeric": true
+                      }
+                    }
+                  }
+                ],
+                "semantic_attributes": {
+                  "type": "boolean",
+                  "type_details": {
+                    "base_type": "boolean",
+                    "is_array": false,
+                    "is_numeric": false
+                  }
+                }
+              },
+              {
+                "tipo": "LISTA_SENTENCIAS",
+                "valor": null,
+                "linea": 0,
+                "columna": 0,
+                "hijos": [
+                  {
+                    "tipo": "SENT_IN",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "ID",
+                        "valor": "mas",
+                        "linea": 37,
+                        "columna": 16,
+                        "hijos": []
+                      }
+                    ]
+                  },
+                  {
+                    "tipo": "SENT_OUT",
+                    "valor": null,
+                    "linea": 0,
+                    "columna": 0,
+                    "hijos": [
+                      {
+                        "tipo": "SALIDA",
+                        "valor": null,
+                        "linea": 0,
+                        "columna": 0,
+                        "hijos": [
+                          {
+                            "tipo": "COMPONENTE",
+                            "valor": null,
+                            "linea": 0,
+                            "columna": 0,
+                            "hijos": [
+                              {
+                                "tipo": "ID",
+                                "valor": "x",
+                                "linea": 38,
+                                "columna": 17,
+                                "hijos": [],
+                                "semantic_attributes": {
+                                  "type": "int",
+                                  "type_details": {
+                                    "base_type": "int",
+                                    "is_array": false,
+                                    "is_numeric": true
+                                  },
+                                  "symbol": {
+                                    "name": "x",
+                                    "type": "int",
+                                    "scope": "global_0",
+                                    "line": 2,
+                                    "column": 9,
+                                    "memory_address": 1000,
+                                    "is_initialized": false
+                                  },
+                                  "properties": {
+                                    "is_lvalue": true
+                                  }
+                                }
+                              }
+                            ],
+                            "semantic_attributes": {
+                              "type": "int",
+                              "type_details": {
+                                "base_type": "int",
+                                "is_array": false,
+                                "is_numeric": true
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

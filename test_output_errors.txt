@@ -1,0 +1,11 @@
+REPORTE DE ERRORES SEMÁNTICOS
+================================================================================
+Generado: 2025-11-03 22:39:18
+
+✓ No se encontraron errores semánticos
+
+El código fuente pasó todas las verificaciones semánticas:
+- Variables declaradas correctamente
+- Tipos compatibles en todas las operaciones
+- No hay variables no declaradas
+- No hay declaraciones duplicadas

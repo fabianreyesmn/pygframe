@@ -1,0 +1,86 @@
+REPORTE DE ERRORES SEMÁNTICOS
+================================================================================
+Generado: 2025-11-04 20:43:50
+
+ERRORES SEMÁNTICOS:
+====================================================================================================
+| SEVERIDAD    | TIPO            | DESCRIPCIÓN                                        | LÍNEA    | COLUMNA  |
+====================================================================================================
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | duplicate_declaration | Variable 'x' ya declarada en línea 2               | 2        | 9        |
+| ERROR        | duplicate_declaration | Variable 'y' ya declarada en línea 2               | 2        | 12       |
+| ERROR        | duplicate_declaration | Variable 'z' ya declarada en línea 2               | 2        | 15       |
+| ERROR        | duplicate_declaration | Variable 'a' ya declarada en línea 3               | 3        | 11       |
+| ERROR        | duplicate_declaration | Variable 'b' ya declarada en línea 3               | 3        | 14       |
+| ERROR        | duplicate_declaration | Variable 'c' ya declarada en línea 3               | 3        | 17       |
+| ERROR        | undeclared_variable | Variable 'suma' no declarada                       | 4        | 5        |
+| ERROR        | undeclared_variable | Variable 'suma' no declarada                       | 4        | 5        |
+| ERROR        | undeclared_variable | Variable 'mas' no declarada                        | 33       | 13       |
+| ERROR        | undeclared_variable | Variable 'mas' no declarada                        | 33       | 13       |
+| ERROR        | undeclared_variable | Variable 'mas' no declarada                        | 37       | 16       |
+| ERROR        | undeclared_variable | Variable 'mas' no declarada                        | 37       | 16       |
+====================================================================================================
+
+RESUMEN:
+- Errores: 29
+- Advertencias: 0
+
+ERRORES POR TIPO:
+- Undeclared Variable: 6
+- Duplicate Declaration: 6
+- Other: 17
+
+
+ANÁLISIS DETALLADO DE ERRORES:
+--------------------------------------------------
+
+Undeclared Variable:
+  - Línea 4, Columna 5: Variable 'suma' no declarada
+  - Línea 33, Columna 13: Variable 'mas' no declarada
+  - Línea 37, Columna 16: Variable 'mas' no declarada
+  - Línea 4, Columna 5: Variable 'suma' no declarada
+  - Línea 33, Columna 13: Variable 'mas' no declarada
+  - Línea 37, Columna 16: Variable 'mas' no declarada
+
+Type Inference Failed:
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+  - Línea 0, Columna 0: No se puede determinar el tipo de la expresión en la asignación
+
+Duplicate Declaration:
+  - Línea 2, Columna 9: Variable 'x' ya declarada en línea 2
+  - Línea 2, Columna 12: Variable 'y' ya declarada en línea 2
+  - Línea 2, Columna 15: Variable 'z' ya declarada en línea 2
+  - Línea 3, Columna 11: Variable 'a' ya declarada en línea 3
+  - Línea 3, Columna 14: Variable 'b' ya declarada en línea 3
+  - Línea 3, Columna 17: Variable 'c' ya declarada en línea 3

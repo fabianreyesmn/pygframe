@@ -1,0 +1,40 @@
+RESUMEN COMPLETO DEL ANÁLISIS SEMÁNTICO
+================================================================================
+Generado: 2025-11-04 20:43:50
+
+INFORMACIÓN GENERAL:
+----------------------------------------
+AST anotado generado: Sí
+Variables declaradas: 6
+Errores semánticos: 29
+Estado del análisis: Con errores
+
+ARCHIVOS GENERADOS:
+----------------------------------------
+✓ symbol_table: semantic_analysis_output_symbol_table.txt
+✓ errors: semantic_analysis_output_errors.txt
+✓ annotated_ast: semantic_analysis_output_annotated_ast.txt
+✓ annotated_ast_json: semantic_analysis_output_annotated_ast_json.txt
+
+TABLA DE SÍMBOLOS (RESUMEN):
+----------------------------------------
+  x (int) - Línea 2
+  y (int) - Línea 2
+  z (int) - Línea 2
+  a (float) - Línea 3
+  b (float) - Línea 3
+  c (float) - Línea 3
+
+ERRORES ENCONTRADOS (RESUMEN):
+----------------------------------------
+  Línea 4: Variable 'suma' no declarada
+  Línea 33: Variable 'mas' no declarada
+  Línea 37: Variable 'mas' no declarada
+  Línea 0: No se puede determinar el tipo de la expresión en la asignación
+  Línea 0: No se puede determinar el tipo de la expresión en la asignación
+  Línea 0: No se puede determinar el tipo de la expresión en la asignación
+  Línea 0: No se puede determinar el tipo de la expresión en la asignación
+  Línea 0: No se puede determinar el tipo de la expresión en la asignación
+  Línea 0: No se puede determinar el tipo de la expresión en la asignación
+  Línea 0: No se puede determinar el tipo de la expresión en la asignación
+  ... y 19 errores más

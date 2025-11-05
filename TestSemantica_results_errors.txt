@@ -1,0 +1,43 @@
+ERRORES SEMÁNTICOS - TestSemantica.txt
+==================================================
+
+ERRORES SEMÁNTICOS:
+====================================================================================================
+| SEVERIDAD    | TIPO            | DESCRIPCIÓN                                        | LÍNEA    | COLUMNA  |
+====================================================================================================
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | type_inference_failed | No se puede determinar el tipo de la expresió...   | 0        | 0        |
+| ERROR        | duplicate_declaration | Variable 'x' ya declarada en línea 2               | 2        | 9        |
+| ERROR        | duplicate_declaration | Variable 'y' ya declarada en línea 2               | 2        | 12       |
+| ERROR        | duplicate_declaration | Variable 'z' ya declarada en línea 2               | 2        | 15       |
+| ERROR        | duplicate_declaration | Variable 'a' ya declarada en línea 3               | 3        | 11       |
+| ERROR        | duplicate_declaration | Variable 'b' ya declarada en línea 3               | 3        | 14       |
+| ERROR        | duplicate_declaration | Variable 'c' ya declarada en línea 3               | 3        | 17       |
+| ERROR        | undeclared_variable | Variable 'suma' no declarada                       | 4        | 5        |
+| ERROR        | undeclared_variable | Variable 'suma' no declarada                       | 4        | 5        |
+| ERROR        | undeclared_variable | Variable 'mas' no declarada                        | 33       | 13       |
+| ERROR        | undeclared_variable | Variable 'mas' no declarada                        | 33       | 13       |
+| ERROR        | undeclared_variable | Variable 'mas' no declarada                        | 37       | 16       |
+| ERROR        | undeclared_variable | Variable 'mas' no declarada                        | 37       | 16       |
+====================================================================================================
+
+RESUMEN:
+- Errores: 29
+- Advertencias: 0
+
+ERRORES POR TIPO:

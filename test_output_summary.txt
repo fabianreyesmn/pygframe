@@ -1,0 +1,23 @@
+RESUMEN COMPLETO DEL ANÁLISIS SEMÁNTICO
+================================================================================
+Generado: 2025-11-03 22:39:18
+
+INFORMACIÓN GENERAL:
+----------------------------------------
+AST anotado generado: No
+Variables declaradas: 1
+Errores semánticos: 0
+Estado del análisis: Exitoso
+
+ARCHIVOS GENERADOS:
+----------------------------------------
+✓ symbol_table: test_output_symbol_table.txt
+✓ errors: test_output_errors.txt
+✗ annotated_ast: test_output_annotated_ast.txt
+✗ annotated_ast_json: test_output_annotated_ast_json.txt
+
+TABLA DE SÍMBOLOS (RESUMEN):
+----------------------------------------
+  test_var (int) - Línea 1
+
+✓ No se encontraron errores semánticos
