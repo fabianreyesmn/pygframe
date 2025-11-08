@@ -306,7 +306,7 @@ class AnnotatedASTNode(Nodo):
         # Obtener diccionario base del nodo
         base_dict = {
             'tipo': self.tipo,
-            'valor': self.valor,
+            'valor': self.semantic_value if self.semantic_value is not None else self.valor,
             'linea': self.linea,
             'columna': self.columna,
             'hijos': []
@@ -375,7 +375,9 @@ class AnnotatedASTNode(Nodo):
         result = f"{indent_str}{self.tipo}"
         
         # Agregar valor si existe
-        if self.valor:
+        if self.semantic_value is not None:
+            result += f": {self.semantic_value}"
+        elif self.valor:
             result += f": {self.valor}"
         
         # Agregar información de posición
