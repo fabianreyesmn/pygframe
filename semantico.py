@@ -810,33 +810,55 @@ class SymbolTable:
         return []
     
     def to_formatted_table(self) -> str:
-        """Genera una representación formateada de la tabla de símbolos"""
+        """Genera una representación formateada de la tabla de símbolos con ancho adaptable"""
         if not any(self.symbols.values()):
             return "Tabla de símbolos vacía"
         
-        resultado = "TABLA DE SÍMBOLOS:\n"
-        header = "| {:<20} | {:<15} | {:<20} | {:<15} |\n".format(
-            "Nombre", "Tipo", "Líneas", "Dirección"
-        )
-        # Ajustar el separador a la nueva longitud del encabezado
-        separator_len = len(header.split('\n')[0]) - 1
-        separator = "=" * separator_len + "\n"
-
-        resultado += separator
-        resultado += header
-        resultado += separator
-        
-        # Ordenar símbolos por ámbito y luego por línea para consistencia
         all_symbols = self.get_all_symbols()
         all_symbols.sort(key=lambda s: (s.scope, s.lines[0] if s.lines else 0))
         
+        # Calcular anchos máximos para cada columna
+        max_widths = {
+            "Nombre": len("Nombre"),
+            "Tipo": len("Tipo"),
+            "Líneas": len("Líneas"),
+            "Dirección": len("Dirección")
+        }
+        
+        for symbol in all_symbols:
+            max_widths["Nombre"] = max(max_widths["Nombre"], len(symbol.name))
+            max_widths["Tipo"] = max(max_widths["Tipo"], len(str(symbol.type_info)))
+            max_widths["Líneas"] = max(max_widths["Líneas"], len(", ".join(map(str, symbol.lines))))
+            max_widths["Dirección"] = max(max_widths["Dirección"], len(str(symbol.memory_address or "N/A")))
+            
+        # Formato de la tabla
+        resultado = "TABLA DE SÍMBOLOS:\n"
+        
+        # Crear el formato de la línea del encabezado y de los datos
+        header_format_str = "| {name:<{name_width}} | {type:<{type_width}} | {lines:<{lines_width}} | {address:<{address_width}} |\n"
+        row_format_str = "| {name:<{name_width}} | {type:<{type_width}} | {lines:<{lines_width}} | {address:<{address_width}} |\n"
+        
+        header_line = header_format_str.format(
+            name="Nombre", name_width=max_widths["Nombre"],
+            type="Tipo", type_width=max_widths["Tipo"],
+            lines="Líneas", lines_width=max_widths["Líneas"],
+            address="Dirección", address_width=max_widths["Dirección"]
+        )
+        
+        separator_len = len(header_line) - 1
+        separator = "=" * separator_len + "\n"
+
+        resultado += separator
+        resultado += header_line
+        resultado += separator
+        
         for symbol in all_symbols:
             lines_str = ", ".join(map(str, symbol.lines))
-            resultado += "| {:<20} | {:<15} | {:<20} | {:<15} |\n".format(
-                symbol.name,
-                str(symbol.type_info),
-                lines_str,
-                symbol.memory_address or "N/A"
+            resultado += row_format_str.format(
+                name=symbol.name, name_width=max_widths["Nombre"],
+                type=str(symbol.type_info), type_width=max_widths["Tipo"],
+                lines=lines_str, lines_width=max_widths["Líneas"],
+                address=symbol.memory_address or "N/A", address_width=max_widths["Dirección"]
             )
         
         resultado += separator
