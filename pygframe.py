@@ -202,11 +202,17 @@ class CustomIDE:
         self.semantico_tab.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
         hash_table_frame = ttk.Frame(self.right_tabs)
-        self.hash_table_tab = tk.Text(hash_table_frame, wrap=tk.WORD, background='#282c34', foreground='#abb2bf', relief='flat', borderwidth=0)
-        hash_table_scroll = ttk.Scrollbar(hash_table_frame, orient=tk.VERTICAL, command=self.hash_table_tab.yview)
-        self.hash_table_tab.config(yscrollcommand=hash_table_scroll.set)
-        hash_table_scroll.pack(side=tk.RIGHT, fill=tk.Y)
-        self.hash_table_tab.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.hash_table_tab = tk.Text(hash_table_frame, wrap=tk.NONE, background='#282c34', foreground='#abb2bf', relief='flat', borderwidth=0)
+        
+        v_scroll_ht = ttk.Scrollbar(hash_table_frame, orient=tk.VERTICAL, command=self.hash_table_tab.yview)
+        self.hash_table_tab.config(yscrollcommand=v_scroll_ht.set)
+        
+        h_scroll_ht = ttk.Scrollbar(hash_table_frame, orient=tk.HORIZONTAL, command=self.hash_table_tab.xview)
+        self.hash_table_tab.config(xscrollcommand=h_scroll_ht.set)
+        
+        v_scroll_ht.pack(side=tk.RIGHT, fill=tk.Y)
+        h_scroll_ht.pack(side=tk.BOTTOM, fill=tk.X)
+        self.hash_table_tab.pack(fill=tk.BOTH, expand=True)
 
         codigo_intermedio_frame = ttk.Frame(self.right_tabs)
         self.codigo_intermedio_tab = tk.Text(codigo_intermedio_frame, wrap=tk.WORD, background='#282c34', foreground='#abb2bf', relief='flat', borderwidth=0)
@@ -219,7 +225,7 @@ class CustomIDE:
         self.right_tabs.add(lexico_frame, text="Léxico")
         self.right_tabs.add(sintactico_frame, text="Sintáctico")
         self.right_tabs.add(semantico_frame, text="Semántico")
-        self.right_tabs.add(hash_table_frame, text="Hash Table")
+        self.right_tabs.add(hash_table_frame, text="Tabla de Símbolos")
         self.right_tabs.add(codigo_intermedio_frame, text="Código Intermedio")
         
         # Panel inferior con pestañas para errores
@@ -647,9 +653,13 @@ class CustomIDE:
             import semantico
             import lexico
             import sintactico
-            
+            from ast_visualizer import VisualizadorAST
+
             # Limpiar pestañas
             self.semantico_tab.delete('1.0', 'end')
+            for widget in self.semantico_tab.winfo_children():
+                widget.destroy()
+            self.hash_table_tab.delete('1.0', 'end')
             self.errores_semanticos_tab.delete('1.0', 'end')
             
             # Obtener el código del editor
@@ -660,282 +670,59 @@ class CustomIDE:
                 self.right_tabs.select(2)
                 return
             
-            # Realizar análisis léxico
+            # Realizar análisis léxico y sintáctico
             tokens, errores_lexicos = lexico.analizar_codigo(codigo_fuente)
-            
             if errores_lexicos:
-                self.semantico_tab.insert('1.0', "Error: Se encontraron errores léxicos. Corrija primero los errores léxicos.")
-                self.errores_semanticos_tab.insert('1.0', "Análisis semántico no realizado debido a errores léxicos")
-                self.right_tabs.select(2)
-                self.bottom_tabs.select(2)
+                self.semantico_tab.insert('1.0', "Análisis semántico no realizado debido a errores léxicos.")
                 return
-            
-            # Realizar análisis sintáctico
+
             tokens_filtrados = [token for token in tokens if token[0] not in ['COMENTARIO_LINEA', 'COMENTARIO_MULTILINEA']]
             ast, errores_sintacticos = sintactico.analizar_desde_tokens(tokens_filtrados)
-            
             if errores_sintacticos or not ast:
-                self.semantico_tab.insert('1.0', "Error: Se encontraron errores sintácticos. Corrija primero los errores sintácticos.")
-                self.errores_semanticos_tab.insert('1.0', "Análisis semántico no realizado debido a errores sintácticos")
-                self.right_tabs.select(2)
-                self.bottom_tabs.select(2)
+                self.semantico_tab.insert('1.0', "Análisis semántico no realizado debido a errores sintácticos.")
                 return
-            
+
             # Realizar análisis semántico
             semantic_analyzer = semantico.SemanticAnalyzer(ast, tokens_filtrados)
             annotated_ast, symbol_table, semantic_errors = semantic_analyzer.analyze()
             
-            # Mostrar resultados mejorados en la pestaña semántico
-            resultado_semantico = self._format_enhanced_semantic_results(
-                semantic_analyzer, annotated_ast, symbol_table, semantic_errors
+            # Exportar resultados a archivos
+            semantico.export_semantic_analysis_files(
+                annotated_ast, symbol_table, semantic_errors, "semantic_analysis_output"
             )
-            self.semantico_tab.insert('1.0', resultado_semantico)
-            
-            # Mostrar tabla de símbolos mejorada en Hash Table tab
-            tabla_simbolos = self._format_enhanced_symbol_table(symbol_table)
-            self.hash_table_tab.delete('1.0', 'end')
-            self.hash_table_tab.insert('1.0', tabla_simbolos)
-            
-            # Mostrar errores semánticos con formato mejorado
+
+            # Mostrar AST anotado en la pestaña "Semántico" con el visualizador
+            if annotated_ast:
+                container = tk.Frame(self.semantico_tab)
+                self.semantico_tab.window_create('1.0', window=container)
+                VisualizadorAST(container, annotated_ast)
+            else:
+                self.semantico_tab.insert('1.0', "No se pudo generar el AST anotado.")
+
+            # Cargar y mostrar la tabla de símbolos
+            try:
+                with open("semantic_analysis_output_symbol_table.txt", 'r', encoding='utf-8') as f:
+                    self.hash_table_tab.insert('1.0', f.read())
+            except FileNotFoundError:
+                self.hash_table_tab.insert('1.0', "No se encontró el archivo de la tabla de símbolos.")
+
+            # Mostrar errores semánticos
             errores_formateados = self._format_enhanced_semantic_errors(semantic_errors)
             self.errores_semanticos_tab.insert('1.0', errores_formateados)
-            
-            # Configurar navegación interactiva de errores
             self._setup_error_navigation(semantic_errors)
-            
-            # Exportar archivos de análisis semántico
-            try:
-                export_status = semantico.export_semantic_analysis_files(
-                    annotated_ast, symbol_table, semantic_errors, "semantic_analysis_output"
-                )
-                
-                # Mostrar información sobre archivos generados en la pestaña semántico
-                files_info = "\n\nARCHIVOS GENERADOS:\n" + "=" * 40 + "\n"
-                for file_type, success in export_status.items():
-                    status = "✓" if success else "✗"
-                    files_info += f"{status} {file_type}: semantic_analysis_output_{file_type}.txt\n"
-                
-                self.semantico_tab.insert('end', files_info)
-                
-            except Exception as e:
-                print(f"Error exportando archivos de análisis semántico: {e}")
-            
+
             # Cambiar a las pestañas relevantes
             self.right_tabs.select(2)  # Pestaña Semántico
             if semantic_errors:
                 self.bottom_tabs.select(2)  # Pestaña Errores Semánticos
-            
-        except ImportError as e:
-            self.semantico_tab.delete('1.0', 'end')
-            self.semantico_tab.insert('1.0', f"Error: No se pudo importar el módulo semántico\n{str(e)}")
-            
-            self.errores_semanticos_tab.delete('1.0', 'end')
-            self.errores_semanticos_tab.insert('1.0', "Error: Archivo semantico.py no encontrado o tiene errores")
-            
-            self.right_tabs.select(2)
-            self.bottom_tabs.select(2)
-            
+
         except Exception as e:
-            self.semantico_tab.delete('1.0', 'end')
             self.semantico_tab.insert('1.0', f"Error durante el análisis semántico:\n{str(e)}")
-            
-            self.errores_semanticos_tab.delete('1.0', 'end')
-            self.errores_semanticos_tab.insert('1.0', f"Error inesperado:\n{str(e)}")
-            
             self.right_tabs.select(2)
-            self.bottom_tabs.select(2)
     
-    def _format_enhanced_semantic_results(self, semantic_analyzer, annotated_ast, symbol_table, semantic_errors):
-        """Formatea los resultados del análisis semántico con mejor presentación"""
-        resultado = "🔍 ANÁLISIS SEMÁNTICO COMPLETADO\n"
-        resultado += "=" * 80 + "\n\n"
-        
-        # Resumen ejecutivo con iconos
-        resultado += "📊 RESUMEN EJECUTIVO:\n"
-        resultado += "-" * 50 + "\n"
-        
-        # Estado general
-        if len(semantic_errors) == 0:
-            resultado += "✅ Estado: EXITOSO - Sin errores semánticos\n"
-        else:
-            resultado += f"❌ Estado: CON ERRORES - {len(semantic_errors)} error(es) encontrado(s)\n"
-        
-        # Estadísticas básicas
-        all_symbols = symbol_table.get_all_symbols()
-        resultado += f"📝 Variables declaradas: {len(all_symbols)}\n"
-        resultado += f"🏗️  Ámbitos creados: {len(symbol_table.scopes)}\n"
-        resultado += f"🎯 Ámbito actual: {symbol_table.get_current_scope()}\n"
-        
-        # Estadísticas del AST si está disponible
-        if annotated_ast:
-            import semantico
-            stats = semantico.get_annotation_statistics(annotated_ast)
-            resultado += f"🌳 Nodos del AST: {stats['total_nodes']}\n"
-            resultado += f"🏷️  Nodos anotados: {stats['annotated_nodes']} ({stats['annotation_percentage']:.1f}%)\n"
-        
-        resultado += "\n"
-        
-        # Distribución de tipos de variables
-        if all_symbols:
-            resultado += "📈 DISTRIBUCIÓN DE TIPOS:\n"
-            resultado += "-" * 50 + "\n"
-            type_distribution = {}
-            for symbol in all_symbols:
-                type_str = str(symbol.type_info)
-                type_distribution[type_str] = type_distribution.get(type_str, 0) + 1
-            
-            for tipo, count in sorted(type_distribution.items()):
-                percentage = (count / len(all_symbols)) * 100
-                resultado += f"  {tipo}: {count} variable(s) ({percentage:.1f}%)\n"
-            resultado += "\n"
-        
-        # Resumen de errores por categoría
-        if semantic_errors:
-            resultado += "⚠️  ERRORES POR CATEGORÍA:\n"
-            resultado += "-" * 50 + "\n"
-            error_categories = {}
-            for error in semantic_errors:
-                category = error.error_type.replace('_', ' ').title()
-                error_categories[category] = error_categories.get(category, 0) + 1
-            
-            for category, count in sorted(error_categories.items()):
-                resultado += f"  {category}: {count} error(es)\n"
-            resultado += "\n"
-        
-        # Lista de variables declaradas con detalles
-        if all_symbols:
-            resultado += "📋 VARIABLES DECLARADAS:\n"
-            resultado += "-" * 50 + "\n"
-            resultado += f"{'Nombre':<15} {'Tipo':<12} {'Ámbito':<20} {'Línea':<8} {'Dirección':<10}\n"
-            resultado += "-" * 70 + "\n"
-            
-            # Ordenar por línea de declaración
-            sorted_symbols = sorted(all_symbols, key=lambda s: s.line)
-            for symbol in sorted_symbols:
-                resultado += f"{symbol.name:<15} {str(symbol.type_info):<12} {symbol.scope:<20} {symbol.line:<8} {symbol.memory_address or 'N/A':<10}\n"
-            resultado += "\n"
-        
-        # Información sobre archivos generados
-        resultado += "💾 ARCHIVOS DE SALIDA:\n"
-        resultado += "-" * 50 + "\n"
-        resultado += "Los siguientes archivos han sido generados:\n"
-        resultado += "  • semantic_analysis_output_symbol_table.txt - Tabla de símbolos detallada\n"
-        resultado += "  • semantic_analysis_output_errors.txt - Reporte de errores\n"
-        resultado += "  • semantic_analysis_output_annotated_ast.txt - AST anotado\n"
-        resultado += "  • semantic_analysis_output_annotated_ast.json - AST en formato JSON\n"
-        resultado += "  • semantic_analysis_output_summary.txt - Resumen completo\n\n"
-        
-        # Recomendaciones
-        if semantic_errors:
-            resultado += "💡 RECOMENDACIONES:\n"
-            resultado += "-" * 50 + "\n"
-            resultado += "1. Revise los errores en la pestaña 'Errores Semánticos'\n"
-            resultado += "2. Corrija las variables no declaradas\n"
-            resultado += "3. Verifique la compatibilidad de tipos en asignaciones\n"
-            resultado += "4. Ejecute el análisis nuevamente después de las correcciones\n"
-        else:
-            resultado += "🎉 ¡FELICITACIONES!\n"
-            resultado += "-" * 50 + "\n"
-            resultado += "Su código ha pasado todas las verificaciones semánticas.\n"
-            resultado += "Puede proceder con la generación de código intermedio.\n"
-        
-        return resultado
     
-    def _format_enhanced_symbol_table(self, symbol_table):
-        """Formatea la tabla de símbolos con mejor presentación"""
-        resultado = "🗂️  TABLA DE SÍMBOLOS - ANÁLISIS DETALLADO\n"
-        resultado += "=" * 100 + "\n\n"
-        
-        all_symbols = symbol_table.get_all_symbols()
-        
-        if not all_symbols:
-            resultado += "ℹ️  No hay variables declaradas en el programa\n"
-            return resultado
-        
-        # Información general
-        resultado += "📊 INFORMACIÓN GENERAL:\n"
-        resultado += "-" * 60 + "\n"
-        resultado += f"Total de variables: {len(all_symbols)}\n"
-        resultado += f"Ámbitos activos: {len(symbol_table.scopes)}\n"
-        resultado += f"Ámbito actual: {symbol_table.get_current_scope()}\n"
-        resultado += f"Memoria asignada: {max([s.memory_address for s in all_symbols if s.memory_address]) if all_symbols else 0} bytes\n\n"
-        
-        # Tabla principal con formato mejorado
-        resultado += "📋 TABLA PRINCIPAL:\n"
-        resultado += "-" * 100 + "\n"
-        resultado += "| {:<15} | {:<12} | {:<20} | {:<8} | {:<8} | {:<10} | {:<12} |\n".format(
-            "NOMBRE", "TIPO", "ÁMBITO", "LÍNEA", "COLUMNA", "DIRECCIÓN", "ESTADO"
-        )
-        resultado += "|" + "-" * 17 + "|" + "-" * 14 + "|" + "-" * 22 + "|" + "-" * 10 + "|" + "-" * 10 + "|" + "-" * 12 + "|" + "-" * 14 + "|\n"
-        
-        # Ordenar símbolos por ámbito y luego por línea
-        sorted_symbols = sorted(all_symbols, key=lambda s: (s.scope, s.line))
-        
-        current_scope = None
-        for symbol in sorted_symbols:
-            # Separador visual entre ámbitos
-            if current_scope != symbol.scope:
-                if current_scope is not None:
-                    resultado += "|" + "-" * 17 + "|" + "-" * 14 + "|" + "-" * 22 + "|" + "-" * 10 + "|" + "-" * 10 + "|" + "-" * 12 + "|" + "-" * 14 + "|\n"
-                current_scope = symbol.scope
-            
-            estado = "Inicializada" if symbol.is_initialized else "Declarada"
-            resultado += "| {:<15} | {:<12} | {:<20} | {:<8} | {:<8} | {:<10} | {:<12} |\n".format(
-                symbol.name,
-                str(symbol.type_info),
-                symbol.scope,
-                symbol.line,
-                symbol.column,
-                symbol.memory_address or "N/A",
-                estado
-            )
-        
-        resultado += "|" + "-" * 17 + "|" + "-" * 14 + "|" + "-" * 22 + "|" + "-" * 10 + "|" + "-" * 10 + "|" + "-" * 12 + "|" + "-" * 14 + "|\n\n"
-        
-        # Análisis por ámbito
-        scopes_analysis = {}
-        for symbol in all_symbols:
-            if symbol.scope not in scopes_analysis:
-                scopes_analysis[symbol.scope] = []
-            scopes_analysis[symbol.scope].append(symbol)
-        
-        resultado += "🏗️  ANÁLISIS POR ÁMBITO:\n"
-        resultado += "-" * 60 + "\n"
-        
-        for scope, symbols in scopes_analysis.items():
-            resultado += f"\n📁 Ámbito: {scope}\n"
-            resultado += f"   Variables: {len(symbols)}\n"
-            resultado += f"   Tipos utilizados: {len(set(str(s.type_info) for s in symbols))}\n"
-            
-            # Mostrar variables en este ámbito
-            resultado += "   Variables declaradas:\n"
-            for symbol in sorted(symbols, key=lambda s: s.line):
-                resultado += f"     • {symbol.name} ({symbol.type_info}) - Línea {symbol.line}\n"
-        
-        # Estadísticas adicionales
-        resultado += f"\n📈 ESTADÍSTICAS ADICIONALES:\n"
-        resultado += "-" * 60 + "\n"
-        
-        # Distribución por tipo
-        type_stats = {}
-        for symbol in all_symbols:
-            type_str = str(symbol.type_info)
-            type_stats[type_str] = type_stats.get(type_str, 0) + 1
-        
-        resultado += "Distribución por tipo:\n"
-        for tipo, count in sorted(type_stats.items()):
-            percentage = (count / len(all_symbols)) * 100
-            resultado += f"  • {tipo}: {count} variable(s) ({percentage:.1f}%)\n"
-        
-        # Uso de memoria
-        total_memory = sum(s.memory_address for s in all_symbols if s.memory_address)
-        if total_memory > 0:
-            resultado += f"\nUso de memoria:\n"
-            resultado += f"  • Dirección inicial: 1000\n"
-            resultado += f"  • Dirección final: {max(s.memory_address for s in all_symbols if s.memory_address)}\n"
-            resultado += f"  • Memoria total utilizada: {total_memory - 1000 * len(all_symbols) + 4 * len(all_symbols)} bytes\n"
-        
-        return resultado
+    
+    
     
     def _format_enhanced_semantic_errors(self, semantic_errors):
         """Formatea los errores semánticos con mejor presentación"""
@@ -1214,7 +1001,7 @@ class CustomIDE:
             self.resultados_tab.insert('1.0', f"Error durante la compilación:\n{str(e)}")
             self.bottom_tabs.select(3)
             messagebox.showerror("Error de Compilación", f"Ocurrió un error durante la compilación:\n{str(e)}")
-        self.right_tabs.select(3)  # Seleccionar la cuarta pestaña (Hash Table)
+        self.right_tabs.select(3)  # Seleccionar la cuarta pestaña (Tabla de Símbolos)
 
 if __name__ == '__main__':
     root = tk.Tk()

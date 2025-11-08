@@ -63,14 +63,14 @@ class SymbolEntry:
     name: str
     type_info: TypeInfo
     scope: str
-    line: int
+    lines: List[int] # Ahora almacena una lista de números de línea
     column: int
     memory_address: Optional[int] = None
     is_initialized: bool = False
     
     def __str__(self) -> str:
         """Representación en cadena de la entrada del símbolo"""
-        return f"{self.name}: {self.type_info} (scope: {self.scope}, line: {self.line})"
+        return f"{self.name}: {self.type_info} (scope: {self.scope}, lines: {self.lines})"
 
 @dataclass
 class SemanticError:
@@ -146,6 +146,10 @@ class AnnotatedASTNode(Nodo):
     def to_dict(self):
         """Convierte el nodo anotado a diccionario incluyendo información semántica"""
         base_dict = super().to_dict()
+        
+        # Si hay un valor semántico calculado, usarlo en lugar del valor original
+        if self.semantic_value is not None:
+            base_dict['valor'] = self.semantic_value
         
         # Agregar información semántica
         semantic_info = {}
@@ -733,7 +737,7 @@ class SymbolTable:
             name=name,
             type_info=type_info,
             scope=current_scope,
-            line=line,
+            lines=[line], # Inicializar con la línea de declaración
             column=column,
             memory_address=self.memory_counter,
             is_initialized=False
@@ -778,6 +782,16 @@ class SymbolTable:
             return True
         return False
     
+    def record_usage(self, name: str, line: int):
+        """
+        Registra el uso de una variable en una línea específica.
+        Si la variable existe, añade la línea a su lista de líneas si no está ya presente.
+        """
+        symbol = self.lookup_variable(name)
+        if symbol and line not in symbol.lines:
+            symbol.lines.append(line)
+            symbol.lines.sort() # Mantener las líneas ordenadas
+    
     def get_all_symbols(self) -> List[SymbolEntry]:
         """Obtiene todas las entradas de símbolos de todos los ámbitos"""
         all_symbols = []
@@ -801,28 +815,31 @@ class SymbolTable:
             return "Tabla de símbolos vacía"
         
         resultado = "TABLA DE SÍMBOLOS:\n"
-        resultado += "=" * 100 + "\n"
-        resultado += "| {:<15} | {:<12} | {:<20} | {:<8} | {:<8} | {:<10} | {:<8} |\n".format(
-            "NOMBRE", "TIPO", "ÁMBITO", "LÍNEA", "COLUMNA", "DIRECCIÓN", "INICIALIZADA"
+        header = "| {:<20} | {:<15} | {:<20} | {:<15} |\n".format(
+            "Nombre", "Tipo", "Líneas", "Dirección"
         )
-        resultado += "=" * 100 + "\n"
+        # Ajustar el separador a la nueva longitud del encabezado
+        separator_len = len(header.split('\n')[0]) - 1
+        separator = "=" * separator_len + "\n"
+
+        resultado += separator
+        resultado += header
+        resultado += separator
         
-        # Ordenar símbolos por ámbito y luego por línea
+        # Ordenar símbolos por ámbito y luego por línea para consistencia
         all_symbols = self.get_all_symbols()
-        all_symbols.sort(key=lambda s: (s.scope, s.line))
+        all_symbols.sort(key=lambda s: (s.scope, s.lines[0] if s.lines else 0))
         
         for symbol in all_symbols:
-            resultado += "| {:<15} | {:<12} | {:<20} | {:<8} | {:<8} | {:<10} | {:<8} |\n".format(
+            lines_str = ", ".join(map(str, symbol.lines))
+            resultado += "| {:<20} | {:<15} | {:<20} | {:<15} |\n".format(
                 symbol.name,
                 str(symbol.type_info),
-                symbol.scope,
-                symbol.line,
-                symbol.column,
-                symbol.memory_address or "N/A",
-                "Sí" if symbol.is_initialized else "No"
+                lines_str,
+                symbol.memory_address or "N/A"
             )
         
-        resultado += "=" * 100 + "\n"
+        resultado += separator
         return resultado
     
     def to_export_format(self) -> Dict[str, Any]:
@@ -840,7 +857,7 @@ class SymbolTable:
                 export_data['symbols_by_scope'][scope_id].append({
                     'name': symbol.name,
                     'type': str(symbol.type_info),
-                    'line': symbol.line,
+                    'lines': symbol.lines,
                     'column': symbol.column,
                     'memory_address': symbol.memory_address,
                     'is_initialized': symbol.is_initialized
@@ -1705,6 +1722,9 @@ class SemanticErrorDetector:
         
         # Verificar si el nodo actual es un identificador
         if node.tipo == 'ID':
+            # Registrar el uso de la variable en esta línea
+            self.symbol_table.record_usage(node.valor, node.linea)
+            
             if not self.symbol_table.is_declared(node.valor):
                 self.error_reporter.add_undeclared_variable_error(
                     node.valor, node.linea, node.columna
@@ -1758,7 +1778,7 @@ class SemanticErrorDetector:
             if self.symbol_table.is_declared_in_current_scope(variable_name):
                 # Buscar la declaración original para obtener su línea
                 existing_symbol = self.symbol_table.lookup_variable(variable_name)
-                original_line = existing_symbol.line if existing_symbol else None
+                original_line = existing_symbol.lines[0] if existing_symbol and existing_symbol.lines else None
                 
                 self.error_reporter.add_duplicate_declaration_error(
                     variable_name, id_nodo.linea, id_nodo.columna, original_line
@@ -2259,16 +2279,7 @@ class SemanticVisitor:
         # Crear nodo anotado
         annotated_node = AnnotatedASTNode.from_node(node)
         
-        # Procesar según el tipo de nodo
-        method_name = f'visit_{node.tipo.lower()}'
-        if hasattr(self, method_name):
-            method = getattr(self, method_name)
-            method(annotated_node)
-        else:
-            # Procesamiento genérico
-            self.visit_generic(annotated_node)
-        
-        # Visitar hijos recursivamente
+        # Visitar hijos recursivamente PRIMERO (para cálculo bottom-up)
         annotated_children = []
         for hijo in node.hijos:
             annotated_child = self.visit(hijo)
@@ -2280,6 +2291,19 @@ class SemanticVisitor:
         # Actualizar referencias padre
         for hijo in annotated_node.hijos:
             hijo.padre = annotated_node
+        
+        # Procesar según el tipo de nodo DESPUÉS de procesar hijos
+        method_name = f'visit_{node.tipo.lower()}'
+        
+        # Para operadores aritméticos, usar un método específico
+        if node.tipo in ['+', '-', '*', '/', '%', '^']:
+            self.visit_operador_aritmetico(annotated_node)
+        elif hasattr(self, method_name):
+            method = getattr(self, method_name)
+            method(annotated_node)
+        else:
+            # Procesamiento genérico
+            self.visit_generic(annotated_node)
         
         return annotated_node
     
@@ -2358,6 +2382,11 @@ class SemanticVisitor:
                 result_type = self.type_system.get_operation_result_type(node.tipo, left_type, right_type)
                 if result_type:
                     node.set_semantic_type(result_type)
+                    
+                # Calcular el valor de la operación si es posible
+                result_value = self._calculate_operation_value(node)
+                if result_value is not None:
+                    node.set_semantic_value(result_value)
     
     def visit_operador_relacional(self, node: AnnotatedASTNode):
         """Procesa operadores relacionales (>, <, >=, <=, ==, !=)"""
@@ -2374,6 +2403,104 @@ class SemanticVisitor:
         
         # Los operadores lógicos siempre retornan boolean
         node.set_semantic_type(TypeInfo('boolean'))
+    
+    def _calculate_operation_value(self, node: AnnotatedASTNode):
+        """
+        Calcula el valor de una operación aritmética si todos los operandos son conocidos.
+        Soporta cálculo recursivo de expresiones anidadas.
+        
+        Args:
+            node: Nodo de operación aritmética
+            
+        Returns:
+            El valor calculado o None si no se puede calcular
+        """
+        if node.tipo not in ['+', '-', '*', '/', '%', '^']:
+            return None
+            
+        if len(node.hijos) < 2:
+            return None
+        
+        # Obtener valores de los operandos (recursivamente si es necesario)
+        left_value = self._get_node_value(node.hijos[0])
+        right_value = self._get_node_value(node.hijos[1])
+        
+        if left_value is None or right_value is None:
+            return None
+        
+        try:
+            if node.tipo == '+':
+                return left_value + right_value
+            elif node.tipo == '-':
+                return left_value - right_value
+            elif node.tipo == '*':
+                return left_value * right_value
+            elif node.tipo == '/':
+                if right_value != 0:
+                    # Mantener como float para división
+                    return left_value / right_value
+                else:
+                    return None  # División por cero
+            elif node.tipo == '%':
+                if right_value != 0 and isinstance(left_value, int) and isinstance(right_value, int):
+                    return left_value % right_value
+                else:
+                    return None
+            elif node.tipo == '^':
+                return left_value ** right_value
+        except (ValueError, TypeError, ZeroDivisionError, OverflowError):
+            return None
+        
+        return None
+    
+    def _get_node_value(self, node):
+        """
+        Obtiene el valor de un nodo (literal, variable o expresión calculada).
+        
+        Args:
+            node: Nodo del cual obtener el valor
+            
+        Returns:
+            El valor del nodo o None si no se puede determinar
+        """
+        # Si ya tiene un valor semántico calculado, usarlo
+        if hasattr(node, 'semantic_value') and node.semantic_value is not None:
+            return node.semantic_value
+        
+        # Si es un literal numérico entero
+        if node.tipo == 'NUM_INT':
+            try:
+                value = int(node.valor)
+                if hasattr(node, 'set_semantic_value'):
+                    node.set_semantic_value(value)
+                return value
+            except (ValueError, AttributeError):
+                return None
+        
+        # Si es un literal numérico flotante
+        elif node.tipo == 'NUM_FLOAT':
+            try:
+                value = float(node.valor)
+                if hasattr(node, 'set_semantic_value'):
+                    node.set_semantic_value(value)
+                return value
+            except (ValueError, AttributeError):
+                return None
+        
+        # Si es una variable, no podemos calcular su valor en tiempo de compilación
+        elif node.tipo == 'ID':
+            return None
+        
+        # Si es una operación, calcularla recursivamente
+        elif node.tipo in ['+', '-', '*', '/', '%', '^']:
+            if isinstance(node, AnnotatedASTNode):
+                return self._calculate_operation_value(node)
+        
+        # Si es un nodo contenedor (COMPONENTE, SENT_EXPRESION, etc.), buscar en sus hijos
+        elif len(node.hijos) == 1:
+            return self._get_node_value(node.hijos[0])
+        
+        return None
     
     def visit_seleccion(self, node: AnnotatedASTNode):
         """Procesa estructuras if-then-else"""
@@ -2783,8 +2910,13 @@ def process_test_file(filename: str = "TestSemantica.txt") -> Tuple[Optional[Ann
         import sintactico
         
         # Leer archivo de prueba
-        with open(filename, 'r', encoding='utf-8') as f:
-            codigo_fuente = f.read()
+        try:
+            with open(filename, 'r', encoding='utf-8') as f:
+                codigo_fuente = f.read()
+        except UnicodeDecodeError:
+            # Si falla UTF-8, intentar con cp1252 (común en Windows)
+            with open(filename, 'r', encoding='cp1252') as f:
+                codigo_fuente = f.read()
         
         # Fase 1: Análisis léxico
         tokens, errores_lexicos = lexico.analizar_codigo(codigo_fuente)

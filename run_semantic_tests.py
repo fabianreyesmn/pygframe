@@ -21,18 +21,18 @@ def run_all_tests():
     try:
         unit_tests = loader.loadTestsFromName('test_semantic_analyzer')
         suite.addTests(unit_tests)
-        print("✓ Loaded unit tests")
+        print("(+) Loaded unit tests")
     except Exception as e:
-        print(f"✗ Failed to load unit tests: {e}")
+        print(f"(-) Failed to load unit tests: {e}")
         return False
     
     # Add integration tests
     try:
         integration_tests = loader.loadTestsFromName('test_integration_semantica')
         suite.addTests(integration_tests)
-        print("✓ Loaded integration tests")
+        print("(+) Loaded integration tests")
     except Exception as e:
-        print(f"✗ Failed to load integration tests: {e}")
+        print(f"(-) Failed to load integration tests: {e}")
         return False
     
     print(f"Total tests loaded: {suite.countTestCases()}")
