@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at": "2025-11-04T20:43:50.822449",
+    "generated_at": "2025-11-08T16:48:38.790856",
     "generator": "PyGFrame Semantic Analyzer",
     "version": "1.0"
   },
@@ -8,7 +8,7 @@
     "total_nodes": 264,
     "annotated_nodes": 193,
     "nodes_with_type": 193,
-    "nodes_with_value": 54,
+    "nodes_with_value": 79,
     "nodes_with_symbol_ref": 35,
     "constant_nodes": 54,
     "lvalue_nodes": 35,
@@ -613,7 +613,8 @@
                             "base_type": "int",
                             "is_array": false,
                             "is_numeric": true
-                          }
+                          },
+                          "value": 5
                         }
                       },
                       {
@@ -658,7 +659,8 @@
                         "base_type": "int",
                         "is_array": false,
                         "is_numeric": true
-                      }
+                      },
+                      "value": 4
                     }
                   }
                 ]
@@ -1079,7 +1081,8 @@
                                     "base_type": "float",
                                     "is_array": false,
                                     "is_numeric": true
-                                  }
+                                  },
+                                  "value": 28.0
                                 }
                               },
                               {
@@ -1171,7 +1174,8 @@
                                         "base_type": "int",
                                         "is_array": false,
                                         "is_numeric": true
-                                      }
+                                      },
+                                      "value": 0.3333333333333333
                                     }
                                   },
                                   {
@@ -1216,7 +1220,8 @@
                                     "base_type": "int",
                                     "is_array": false,
                                     "is_numeric": true
-                                  }
+                                  },
+                                  "value": 0.6666666666666666
                                 }
                               }
                             ],
@@ -1226,7 +1231,8 @@
                                 "base_type": "float",
                                 "is_array": false,
                                 "is_numeric": true
-                              }
+                              },
+                              "value": 27.333333333333332
                             }
                           },
                           {
@@ -1271,7 +1277,8 @@
                             "base_type": "float",
                             "is_array": false,
                             "is_numeric": true
-                          }
+                          },
+                          "value": 61.33333333333333
                         }
                       },
                       {
@@ -1316,7 +1323,8 @@
                         "base_type": "float",
                         "is_array": false,
                         "is_numeric": true
-                      }
+                      },
+                      "value": 60.33333333333333
                     }
                   }
                 ]
@@ -1457,7 +1465,8 @@
                                 "base_type": "int",
                                 "is_array": false,
                                 "is_numeric": true
-                              }
+                              },
+                              "value": 2
                             }
                           }
                         ],
@@ -1559,7 +1568,8 @@
                                 "base_type": "int",
                                 "is_array": false,
                                 "is_numeric": true
-                              }
+                              },
+                              "value": 4.0
                             }
                           }
                         ],
@@ -1579,7 +1589,8 @@
                         "base_type": "int",
                         "is_array": false,
                         "is_numeric": true
-                      }
+                      },
+                      "value": 8.0
                     }
                   }
                 ]
@@ -1720,7 +1731,8 @@
                                 "base_type": "int",
                                 "is_array": false,
                                 "is_numeric": true
-                              }
+                              },
+                              "value": 8
                             }
                           },
                           {
@@ -1812,7 +1824,8 @@
                                     "base_type": "int",
                                     "is_array": false,
                                     "is_numeric": true
-                                  }
+                                  },
+                                  "value": 8
                                 }
                               },
                               {
@@ -1857,7 +1870,8 @@
                                 "base_type": "int",
                                 "is_array": false,
                                 "is_numeric": true
-                              }
+                              },
+                              "value": 1.1428571428571428
                             }
                           }
                         ],
@@ -1867,7 +1881,8 @@
                             "base_type": "int",
                             "is_array": false,
                             "is_numeric": true
-                          }
+                          },
+                          "value": 6.857142857142858
                         }
                       },
                       {
@@ -1912,7 +1927,8 @@
                         "base_type": "int",
                         "is_array": false,
                         "is_numeric": true
-                      }
+                      },
+                      "value": -2.1428571428571423
                     }
                   }
                 ]
@@ -2047,7 +2063,8 @@
                             "base_type": "int",
                             "is_array": false,
                             "is_numeric": true
-                          }
+                          },
+                          "value": 4.0
                         }
                       },
                       {
@@ -2133,7 +2150,8 @@
                             "base_type": "int",
                             "is_array": false,
                             "is_numeric": true
-                          }
+                          },
+                          "value": 60
                         }
                       }
                     ],
@@ -2143,7 +2161,8 @@
                         "base_type": "int",
                         "is_array": false,
                         "is_numeric": true
-                      }
+                      },
+                      "value": 64.0
                     }
                   }
                 ]
@@ -3151,7 +3170,8 @@
                         "base_type": "int",
                         "is_array": false,
                         "is_numeric": true
-                      }
+                      },
+                      "value": 7
                     }
                   }
                 ]
@@ -3706,7 +3726,8 @@
                                                     "base_type": "int",
                                                     "is_array": false,
                                                     "is_numeric": true
-                                                  }
+                                                  },
+                                                  "value": 0.8888888888888888
                                                 }
                                               },
                                               {
@@ -3751,7 +3772,8 @@
                                                 "base_type": "int",
                                                 "is_array": false,
                                                 "is_numeric": true
-                                              }
+                                              },
+                                              "value": 7.111111111111111
                                             }
                                           },
                                           {
@@ -3796,7 +3818,8 @@
                                             "base_type": "int",
                                             "is_array": false,
                                             "is_numeric": true
-                                          }
+                                          },
+                                          "value": 2.3703703703703702
                                         }
                                       }
                                     ],
@@ -3806,7 +3829,8 @@
                                         "base_type": "int",
                                         "is_array": false,
                                         "is_numeric": true
-                                      }
+                                      },
+                                      "value": 8.37037037037037
                                     }
                                   }
                                 ]
@@ -3950,7 +3974,8 @@
                                         "base_type": "int",
                                         "is_array": false,
                                         "is_numeric": true
-                                      }
+                                      },
+                                      "value": 5.142857142857143
                                     }
                                   }
                                 ]

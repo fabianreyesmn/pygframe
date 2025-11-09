@@ -1,0 +1,7 @@
+feat: Display calculated values in annotated AST
+
+The semantic analyzer now displays the calculated values of arithmetic operations in the 'valor' column of the annotated Abstract Syntax Tree (AST). This enhancement ensures that for expressions involving only literals (e.g., '2+3-1'), the AST nodes representing the operations will show their computed results.
+
+- **AnnotatedASTNode.to_formatted_string:** Modified to prioritize 'semantic_value' for display.
+- **AnnotatedASTNode.to_annotated_dict:** Modified to prioritize 'semantic_value' for the top-level 'valor' key in the dictionary representation.
+- **SemanticVisitor._calculate_operation_value:** Confirmed that this method correctly computes and assigns 'semantic_value' to operation nodes when possible.

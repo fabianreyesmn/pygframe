@@ -653,7 +653,7 @@ class CustomIDE:
             import semantico
             import lexico
             import sintactico
-            from ast_visualizer import VisualizadorAST
+            from semantic_ast_visualizer import crear_visualizador_semantico
 
             # Limpiar pestañas
             self.semantico_tab.delete('1.0', 'end')
@@ -695,7 +695,7 @@ class CustomIDE:
             if annotated_ast:
                 container = tk.Frame(self.semantico_tab)
                 self.semantico_tab.window_create('1.0', window=container)
-                VisualizadorAST(container, annotated_ast)
+                crear_visualizador_semantico(container, annotated_ast, semantic_errors)
             else:
                 self.semantico_tab.insert('1.0', "No se pudo generar el AST anotado.")
 
@@ -727,21 +727,21 @@ class CustomIDE:
     def _format_enhanced_semantic_errors(self, semantic_errors):
         """Formatea los errores semánticos con mejor presentación"""
         if not semantic_errors:
-            resultado = "✅ ANÁLISIS SEMÁNTICO EXITOSO\n"
+            resultado = "ANÁLISIS SEMÁNTICO EXITOSO\n"
             resultado += "=" * 80 + "\n\n"
-            resultado += "🎉 ¡Felicitaciones! Su código no contiene errores semánticos.\n\n"
-            resultado += "✓ Todas las variables están correctamente declaradas\n"
-            resultado += "✓ Los tipos son compatibles en todas las operaciones\n"
-            resultado += "✓ No hay declaraciones duplicadas\n"
-            resultado += "✓ Las asignaciones son válidas\n\n"
-            resultado += "💡 Su código está listo para la siguiente fase de compilación.\n"
+            resultado += "¡Felicitaciones! Su código no contiene errores semánticos.\n\n"
+            resultado += "Todas las variables están correctamente declaradas\n"
+            resultado += "Los tipos son compatibles en todas las operaciones\n"
+            resultado += "No hay declaraciones duplicadas\n"
+            resultado += "Las asignaciones son válidas\n\n"
+            resultado += "Su código está listo para la siguiente fase de compilación.\n"
             return resultado
         
-        resultado = "❌ ERRORES SEMÁNTICOS DETECTADOS\n"
+        resultado = "ERRORES SEMÁNTICOS DETECTADOS\n"
         resultado += "=" * 80 + "\n\n"
         
         # Resumen de errores
-        resultado += f"📊 RESUMEN: Se encontraron {len(semantic_errors)} error(es) semántico(s)\n\n"
+        resultado += f"RESUMEN: Se encontraron {len(semantic_errors)} error(es) semántico(s)\n\n"
         
         # Agrupar errores por tipo
         errors_by_type = {}
@@ -752,7 +752,7 @@ class CustomIDE:
             errors_by_type[error_type].append(error)
         
         # Mostrar resumen por categoría
-        resultado += "📈 ERRORES POR CATEGORÍA:\n"
+        resultado += "ERRORES POR CATEGORÍA:\n"
         resultado += "-" * 50 + "\n"
         for error_type, errors in errors_by_type.items():
             icon = self._get_error_icon(error_type)
@@ -760,7 +760,7 @@ class CustomIDE:
         resultado += "\n"
         
         # Mostrar errores detallados
-        resultado += "📋 DETALLE DE ERRORES:\n"
+        resultado += "DETALLE DE ERRORES:\n"
         resultado += "-" * 80 + "\n"
         resultado += f"{'#':<3} {'Línea':<6} {'Col':<4} {'Tipo':<20} {'Descripción':<40}\n"
         resultado += "-" * 80 + "\n"
@@ -780,7 +780,7 @@ class CustomIDE:
         resultado += "-" * 80 + "\n\n"
         
         # Sugerencias de corrección por tipo de error
-        resultado += "💡 SUGERENCIAS DE CORRECCIÓN:\n"
+        resultado += "SUGERENCIAS DE CORRECCIÓN:\n"
         resultado += "-" * 50 + "\n"
         
         suggestions = {
@@ -813,7 +813,7 @@ class CustomIDE:
                     resultado += f"  {suggestion}\n"
         
         # Instrucciones para navegación
-        resultado += f"\n🧭 NAVEGACIÓN:\n"
+        resultado += f"\nNAVEGACIÓN:\n"
         resultado += "-" * 50 + "\n"
         resultado += "• Haga doble clic en un error para ir a la línea correspondiente\n"
         resultado += "• Los errores están ordenados por número de línea\n"

@@ -33,8 +33,8 @@ PROGRAMA (L0, C0)
     =: = (L7, C5)
       ID: y (L7, C5) [tipo=int, símbolo=y@global_0, lvalue]
       SENT_EXPRESION (L0, C0)
-        -: - (L7, C15) [tipo=int]
-          +: + (L7, C11) [tipo=int]
+        -: 4 (L7, C15) [tipo=int, valor=4]
+          +: 5 (L7, C11) [tipo=int, valor=5]
             COMPONENTE (L0, C0) [tipo=int]
               NUM_INT: 2 (L7, C9) [tipo=int, valor=2, constante]
             COMPONENTE (L0, C0) [tipo=int]
@@ -60,16 +60,16 @@ PROGRAMA (L0, C0)
     =: = (L10, C5)
       ID: a (L10, C5) [tipo=float, símbolo=a@global_0, lvalue]
       SENT_EXPRESION (L0, C0)
-        -: - (L10, C22) [tipo=float]
-          +: + (L10, C19) [tipo=float]
-            -: - (L10, C13) [tipo=float]
-              +: + (L10, C11) [tipo=float]
+        -: 60.33333333333333 (L10, C22) [tipo=float, valor=60.33333333333333]
+          +: 61.33333333333333 (L10, C19) [tipo=float, valor=61.33333333333333]
+            -: 27.333333333333332 (L10, C13) [tipo=float, valor=27.333333333333332]
+              +: 28.0 (L10, C11) [tipo=float, valor=28.0]
                 COMPONENTE (L0, C0) [tipo=float]
                   NUM_FLOAT: 24.0 (L10, C7) [tipo=float, valor=24.0, constante]
                 COMPONENTE (L0, C0) [tipo=int]
                   NUM_INT: 4 (L10, C12) [tipo=int, valor=4, constante]
-              *: * (L10, C17) [tipo=int]
-                /: / (L10, C15) [tipo=int]
+              *: 0.6666666666666666 (L10, C17) [tipo=int, valor=0.6666666666666666]
+                /: 0.3333333333333333 (L10, C15) [tipo=int, valor=0.3333333333333333]
                   COMPONENTE (L0, C0) [tipo=int]
                     NUM_INT: 1 (L10, C14) [tipo=int, valor=1, constante]
                   COMPONENTE (L0, C0) [tipo=int]
@@ -83,15 +83,15 @@ PROGRAMA (L0, C0)
     =: = (L11, C5)
       ID: x (L11, C5) [tipo=int, símbolo=x@global_0, lvalue]
       SENT_EXPRESION (L0, C0)
-        *: * (L11, C12) [tipo=int]
+        *: 8.0 (L11, C12) [tipo=int, valor=8.0]
           COMPONENTE (L0, C0) [tipo=int]
-            -: - (L11, C9) [tipo=int]
+            -: 2 (L11, C9) [tipo=int, valor=2]
               COMPONENTE (L0, C0) [tipo=int]
                 NUM_INT: 5 (L11, C8) [tipo=int, valor=5, constante]
               COMPONENTE (L0, C0) [tipo=int]
                 NUM_INT: 3 (L11, C10) [tipo=int, valor=3, constante]
           COMPONENTE (L0, C0) [tipo=int]
-            /: / (L11, C15) [tipo=int]
+            /: 4.0 (L11, C15) [tipo=int, valor=4.0]
               COMPONENTE (L0, C0) [tipo=int]
                 NUM_INT: 8 (L11, C14) [tipo=int, valor=8, constante]
               COMPONENTE (L0, C0) [tipo=int]
@@ -99,15 +99,15 @@ PROGRAMA (L0, C0)
     =: = (L12, C5)
       ID: y (L12, C5) [tipo=int, símbolo=y@global_0, lvalue]
       SENT_EXPRESION (L0, C0)
-        -: - (L12, C16) [tipo=int]
-          -: - (L12, C10) [tipo=int]
-            +: + (L12, C8) [tipo=int]
+        -: -2.1428571428571423 (L12, C16) [tipo=int, valor=-2.1428571428571423]
+          -: 6.857142857142858 (L12, C10) [tipo=int, valor=6.857142857142858]
+            +: 8 (L12, C8) [tipo=int, valor=8]
               COMPONENTE (L0, C0) [tipo=int]
                 NUM_INT: 5 (L12, C7) [tipo=int, valor=5, constante]
               COMPONENTE (L0, C0) [tipo=int]
                 NUM_INT: 3 (L12, C9) [tipo=int, valor=3, constante]
-            /: / (L12, C14) [tipo=int]
-              *: * (L12, C12) [tipo=int]
+            /: 1.1428571428571428 (L12, C14) [tipo=int, valor=1.1428571428571428]
+              *: 8 (L12, C12) [tipo=int, valor=8]
                 COMPONENTE (L0, C0) [tipo=int]
                   NUM_INT: 2 (L12, C11) [tipo=int, valor=2, constante]
                 COMPONENTE (L0, C0) [tipo=int]
@@ -119,13 +119,13 @@ PROGRAMA (L0, C0)
     =: = (L13, C5)
       ID: z (L13, C5) [tipo=int, símbolo=z@global_0, lvalue]
       SENT_EXPRESION (L0, C0)
-        +: + (L13, C15) [tipo=int]
-          /: / (L13, C11) [tipo=int]
+        +: 64.0 (L13, C15) [tipo=int, valor=64.0]
+          /: 4.0 (L13, C11) [tipo=int, valor=4.0]
             COMPONENTE (L0, C0) [tipo=int]
               NUM_INT: 8 (L13, C9) [tipo=int, valor=8, constante]
             COMPONENTE (L0, C0) [tipo=int]
               NUM_INT: 2 (L13, C13) [tipo=int, valor=2, constante]
-          *: * (L13, C20) [tipo=int]
+          *: 60 (L13, C20) [tipo=int, valor=60]
             COMPONENTE (L0, C0) [tipo=int]
               NUM_INT: 15 (L13, C17) [tipo=int, valor=15, constante]
             COMPONENTE (L0, C0) [tipo=int]
@@ -160,7 +160,7 @@ PROGRAMA (L0, C0)
                 COMPONENTE (L0, C0) [tipo=int]
                   NUM_INT: 2 (L18, C14) [tipo=int, valor=2, constante]
               COMPONENTE (L0, C0) [tipo=boolean]
-                BOOLEANO: true (L18, C19) [tipo=boolean, valor=True, constante]
+                BOOLEANO: True (L18, C19) [tipo=boolean, valor=True, constante]
             LISTA_SENTENCIAS (L0, C0)
               =: = (L19, C13)
                 ID: b (L19, C13) [tipo=float, símbolo=b@global_0, lvalue]
@@ -191,7 +191,7 @@ PROGRAMA (L0, C0)
     =: = (L27, C5)
       ID: x (L27, C5) [tipo=int, símbolo=x@global_0, lvalue]
       SENT_EXPRESION (L0, C0)
-        +: + (L27, C11) [tipo=int]
+        +: 7 (L27, C11) [tipo=int, valor=7]
           COMPONENTE (L0, C0) [tipo=int]
             NUM_INT: 3 (L27, C9) [tipo=int, valor=3, constante]
           COMPONENTE (L0, C0) [tipo=int]
@@ -223,12 +223,12 @@ PROGRAMA (L0, C0)
             =: = (L31, C13)
               ID: x (L31, C13) [tipo=int, símbolo=x@global_0, lvalue]
               SENT_EXPRESION (L0, C0)
-                +: + (L31, C19) [tipo=int]
+                +: 8.37037037037037 (L31, C19) [tipo=int, valor=8.37037037037037]
                   COMPONENTE (L0, C0) [tipo=int]
                     NUM_INT: 6 (L31, C17) [tipo=int, valor=6, constante]
-                  /: / (L31, C31) [tipo=int]
-                    *: * (L31, C27) [tipo=int]
-                      /: / (L31, C23) [tipo=int]
+                  /: 2.3703703703703702 (L31, C31) [tipo=int, valor=2.3703703703703702]
+                    *: 7.111111111111111 (L31, C27) [tipo=int, valor=7.111111111111111]
+                      /: 0.8888888888888888 (L31, C23) [tipo=int, valor=0.8888888888888888]
                         COMPONENTE (L0, C0) [tipo=int]
                           NUM_INT: 8 (L31, C21) [tipo=int, valor=8, constante]
                         COMPONENTE (L0, C0) [tipo=int]
@@ -242,7 +242,7 @@ PROGRAMA (L0, C0)
             =: = (L33, C13)
               ID: mas (L33, C13)
               SENT_EXPRESION (L0, C0)
-                /: / (L33, C22) [tipo=int]
+                /: 5.142857142857143 (L33, C22) [tipo=int, valor=5.142857142857143]
                   COMPONENTE (L0, C0) [tipo=int]
                     NUM_INT: 36 (L33, C19) [tipo=int, valor=36, constante]
                   COMPONENTE (L0, C0) [tipo=int]

@@ -275,8 +275,12 @@ class TestSemanticAnalysisComponents(unittest.TestCase):
     def test_lexical_analysis_integration(self):
         """Test integration with lexical analyzer"""
         # Read test file
-        with open(self.test_file, 'r', encoding='utf-8') as f:
-            codigo = f.read()
+        try:
+            with open(self.test_file, 'r', encoding='utf-8') as f:
+                codigo = f.read()
+        except UnicodeDecodeError:
+            with open(self.test_file, 'r', encoding='cp1252') as f:
+                codigo = f.read()
         
         # Run lexical analysis
         analizador_lexico = AnalizadorLexico(codigo)
@@ -296,8 +300,12 @@ class TestSemanticAnalysisComponents(unittest.TestCase):
     def test_syntactic_analysis_integration(self):
         """Test integration with syntactic analyzer"""
         # Read test file
-        with open(self.test_file, 'r', encoding='utf-8') as f:
-            codigo = f.read()
+        try:
+            with open(self.test_file, 'r', encoding='utf-8') as f:
+                codigo = f.read()
+        except UnicodeDecodeError:
+            with open(self.test_file, 'r', encoding='cp1252') as f:
+                codigo = f.read()
         
         # Run lexical analysis
         analizador_lexico = AnalizadorLexico(codigo)

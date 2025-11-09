@@ -35,6 +35,7 @@ main {
     until y == 5
     while y == 0
         cin >> mas;
-        coutÂ <<Â x;
-Â Â Â Â end
+        cout << x;
+    end
 }
+
