@@ -3297,11 +3297,11 @@ def export_semantic_analysis_files(annotated_ast: Optional[AnnotatedASTNode],
             
             # Agregar estadísticas adicionales
             all_symbols = symbol_table.get_all_symbols()
-            f.write(f"\n\nESTADÍSTICAS:\n")
+            f.write(f"\nESTADÍSTICAS:\n")
             f.write("-" * 40 + "\n")
             f.write(f"Total de variables declaradas: {len(all_symbols)}\n")
             f.write(f"Ámbitos creados: {len(symbol_table.scopes)}\n")
-            f.write(f"Ámbito actual: {symbol_table.get_current_scope()}\n")
+            #f.write(f"Ámbito actual: {symbol_table.get_current_scope()}\n")
             
             # Distribución por tipo
             type_distribution = {}

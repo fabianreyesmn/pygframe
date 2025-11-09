@@ -1,6 +1,6 @@
 TABLA DE SÍMBOLOS - ANÁLISIS SEMÁNTICO
 ================================================================================
-Generado: 2025-11-09 14:54:46
+Generado: 2025-11-09 15:34:15
 
 TABLA DE SÍMBOLOS:
 =======================================================================
@@ -14,12 +14,10 @@ TABLA DE SÍMBOLOS:
 | c      | float | 3, 26                                  | 1020      |
 =======================================================================
 
-
 ESTADÍSTICAS:
 ----------------------------------------
 Total de variables declaradas: 6
 Ámbitos creados: 6
-Ámbito actual: while_0_10
 
 DISTRIBUCIÓN POR TIPO:
   float: 3 variable(s)

@@ -11,9 +11,6 @@ class VisualizadorASTSemantico:
         self.annotated_ast = annotated_ast
         self.semantic_errors = semantic_errors or []
         
-        # Contexto de ejecución: almacena valores de variables
-        self.variable_values = {}
-        
         # Crear diccionario de errores por línea para búsqueda rápida
         self.errors_by_line = {}
         for error in self.semantic_errors:
@@ -141,33 +138,9 @@ class VisualizadorASTSemantico:
         # Configurar evento para doble clic
         self.tree.bind('<Double-1>', self.toggle_nodo)
         
-        # IMPORTANTE: Primero procesar todas las asignaciones para guardar valores
-        # Esto permite que las variables tengan valores disponibles para cálculos
-        self._preprocesar_asignaciones(self.annotated_ast)
-        
-        # Luego construir el árbol visual
+        # Construir el árbol visual directamente
+        # Los valores se calcularán bajo demanda según el contexto
         self.construir_arbol()
-    
-    def _preprocesar_asignaciones(self, nodo):
-        """
-        Preprocesa todas las asignaciones en orden para guardar valores de variables.
-        SOLO procesa nodos de tipo '=' (asignaciones explícitas).
-        Las declaraciones simples (int x, y;) NO asignan valores.
-        """
-        if not nodo:
-            return
-        
-        # Obtener información del nodo
-        info = self._get_node_info(nodo)
-        
-        # IMPORTANTE: Solo procesar asignaciones explícitas (operador '=')
-        # No procesar declaraciones simples sin asignación
-        if info['tipo'] == '=' and len(info['hijos']) >= 2:
-            self._procesar_asignacion(info)
-        
-        # Procesar hijos recursivamente (en orden pre-orden)
-        for hijo in info['hijos']:
-            self._preprocesar_asignaciones(hijo)
     
     def _count_nodes(self):
         """Cuenta el número total de nodos en el AST"""
@@ -216,16 +189,20 @@ class VisualizadorASTSemantico:
                 'node_obj': None
             }
     
-    def _get_display_value(self, info, es_lado_izquierdo_asignacion=False):
+    def _get_display_value(self, info, es_lado_izquierdo_asignacion=False, contexto_variables=None):
         """
         Obtiene el valor a mostrar en la columna 'Valor'.
         Solo muestra valores numéricos (int, float) y booleanos (true, false).
-        Para operaciones, calcula el resultado. Para variables, obtiene su valor.
+        Para operaciones, calcula el resultado. Para variables, obtiene su valor del contexto.
         
         Args:
             info: Información del nodo
             es_lado_izquierdo_asignacion: Si True, no mostrar valor (es la variable destino)
+            contexto_variables: Diccionario con valores de variables calculados hasta este punto
         """
+        if contexto_variables is None:
+            contexto_variables = {}
+            
         tipo = info['tipo']
         
         # REGLA ESPECIAL: Variables del lado izquierdo de asignación NO muestran valor
@@ -261,10 +238,9 @@ class VisualizadorASTSemantico:
         # 4. Para variables (ID), obtener su valor del contexto SOLO si existe
         if tipo == 'ID' and not es_lado_izquierdo_asignacion:
             var_name = info['valor']
-            # IMPORTANTE: Solo mostrar valor si la variable fue ASIGNADA explícitamente
-            # Variables solo declaradas (int x;) NO aparecen en variable_values
-            if var_name in self.variable_values:
-                val = self.variable_values[var_name]
+            # IMPORTANTE: Solo mostrar valor si la variable fue ASIGNADA en el contexto actual
+            if var_name in contexto_variables:
+                val = contexto_variables[var_name]
                 if isinstance(val, bool):
                     return 'true' if val else 'false'
                 elif isinstance(val, (int, float)):
@@ -275,7 +251,7 @@ class VisualizadorASTSemantico:
         # 5. Para operadores aritméticos y relacionales, SIEMPRE calcular el resultado
         if tipo in ['+', '-', '*', '/', '%', '^', '>', '<', '>=', '<=', '==', '!=', '&&', '||']:
             # Intentar calcular desde los hijos
-            resultado = self._calcular_valor_operacion(info)
+            resultado = self._calcular_valor_operacion(info, contexto_variables)
             if resultado is not None:
                 if isinstance(resultado, bool):
                     return 'true' if resultado else 'false'
@@ -288,7 +264,7 @@ class VisualizadorASTSemantico:
                 # Calcular el valor del lado derecho
                 hijo_derecho = info['hijos'][1]
                 hijo_der_info = self._get_node_info(hijo_derecho)
-                valor = self._calcular_valor_expresion(hijo_der_info)
+                valor = self._calcular_valor_expresion(hijo_der_info, contexto_variables)
                 
                 if valor is not None:
                     if isinstance(valor, bool):
@@ -299,121 +275,18 @@ class VisualizadorASTSemantico:
         # Para cualquier otro caso, no mostrar valor
         return ''
     
-    def _procesar_asignacion(self, info):
-        """
-        Procesa una asignación y guarda el valor en el contexto de variables.
-        Ejemplo: x = 5 + 3 → guarda variable_values['x'] = 8
-        SOLO se llama para nodos con operador '=' (asignaciones explícitas).
-        """
-        if info['tipo'] != '=' or len(info['hijos']) < 2:
-            return
-        
-        # Obtener el hijo izquierdo (variable)
-        hijo_izq = info['hijos'][0]
-        hijo_izq_info = self._get_node_info(hijo_izq)
-        
-        # Solo procesar si el hijo izquierdo es una variable (ID)
-        if hijo_izq_info['tipo'] != 'ID':
-            return
-        
-        var_name = hijo_izq_info['valor']
-        
-        # Obtener el hijo derecho (valor a asignar)
-        hijo_der = info['hijos'][1]
-        hijo_der_info = self._get_node_info(hijo_der)
-        
-        # Calcular el valor del lado derecho
-        valor = self._calcular_valor_expresion(hijo_der_info)
-        
-        # SOLO guardar si se pudo calcular un valor válido
-        # Variables sin asignación NO deben tener entrada en variable_values
-        if valor is not None:
-            self.variable_values[var_name] = valor
-    
-    def _procesar_y_obtener_valor_asignacion(self, info):
-        """
-        Procesa una asignación, guarda el valor en el contexto y retorna el valor.
-        Ejemplo: x = 5 + 3 → guarda variable_values['x'] = 8 y retorna 8
-        """
-        if info['tipo'] != '=' or len(info['hijos']) < 2:
-            return None
-        
-        # Obtener el hijo izquierdo (variable)
-        hijo_izq = info['hijos'][0]
-        hijo_izq_info = self._get_node_info(hijo_izq)
-        
-        # Solo procesar si el hijo izquierdo es una variable
-        if hijo_izq_info['tipo'] != 'ID':
-            return None
-        
-        var_name = hijo_izq_info['valor']
-        
-        # Obtener el hijo derecho (valor a asignar)
-        hijo_der = info['hijos'][1]
-        hijo_der_info = self._get_node_info(hijo_der)
-        
-        # Calcular el valor del lado derecho
-        valor = self._calcular_valor_expresion(hijo_der_info)
-        
-        # Guardar el valor en el contexto
-        if valor is not None:
-            self.variable_values[var_name] = valor
-            return valor
-        
-        return None
-    
-    def _calcular_valor_expresion(self, info):
-        """
-        Calcula el valor de cualquier expresión (literal, variable, operación).
-        Retorna el valor calculado o None.
-        """
-        tipo = info['tipo']
-        
-        # Literales numéricos
-        if tipo == 'NUM_INT':
-            try:
-                return int(info['valor'])
-            except (ValueError, TypeError):
-                return None
-        
-        if tipo == 'NUM_FLOAT':
-            try:
-                return float(info['valor'])
-            except (ValueError, TypeError):
-                return None
-        
-        # Booleanos
-        if tipo in ['TRUE', 'FALSE', 'BOOLEANO']:
-            return info['valor'].lower() == 'true'
-        
-        # Variables - buscar en el contexto
-        if tipo == 'ID':
-            var_name = info['valor']
-            if var_name in self.variable_values:
-                return self.variable_values[var_name]
-            # Si no está en el contexto, usar semantic_value si existe
-            if info['semantic_value'] is not None:
-                return info['semantic_value']
-            return None
-        
-        # Operaciones aritméticas y relacionales
-        if tipo in ['+', '-', '*', '/', '%', '^', '>', '<', '>=', '<=', '==', '!=', '&&', '||']:
-            if info['semantic_value'] is not None:
-                return info['semantic_value']
-            return self._calcular_valor_operacion(info)
-        
-        # Para nodos contenedor, buscar en el hijo
-        if len(info['hijos']) == 1:
-            hijo_info = self._get_node_info(info['hijos'][0])
-            return self._calcular_valor_expresion(hijo_info)
-        
-        return None
-    
-    def _calcular_valor_operacion(self, info):
+    def _calcular_valor_operacion(self, info, contexto_variables=None):
         """
         Calcula el valor de una operación aritmética o relacional.
         Retorna el resultado o None si no se puede calcular.
+        
+        Args:
+            info: Información del nodo de operación
+            contexto_variables: Diccionario con valores de variables en el contexto actual
         """
+        if contexto_variables is None:
+            contexto_variables = {}
+            
         tipo = info['tipo']
         hijos = info['hijos']
         
@@ -424,8 +297,8 @@ class VisualizadorASTSemantico:
         izq_info = self._get_node_info(hijos[0])
         der_info = self._get_node_info(hijos[1])
         
-        izq_valor = self._get_valor_numerico(izq_info)
-        der_valor = self._get_valor_numerico(der_info)
+        izq_valor = self._get_valor_numerico(izq_info, contexto_variables)
+        der_valor = self._get_valor_numerico(der_info, contexto_variables)
         
         if izq_valor is None or der_valor is None:
             return None
@@ -507,12 +380,73 @@ class VisualizadorASTSemantico:
         
         return None
     
-    def _get_valor_numerico(self, info):
+    def _calcular_valor_expresion(self, info, contexto_variables=None):
+        """
+        Calcula el valor de cualquier expresión (literal, variable, operación).
+        Retorna el valor calculado o None.
+        
+        Args:
+            info: Información del nodo
+            contexto_variables: Diccionario con valores de variables en el contexto actual
+        """
+        if contexto_variables is None:
+            contexto_variables = {}
+            
+        tipo = info['tipo']
+        
+        # Literales numéricos
+        if tipo == 'NUM_INT':
+            try:
+                return int(info['valor'])
+            except (ValueError, TypeError):
+                return None
+        
+        if tipo == 'NUM_FLOAT':
+            try:
+                return float(info['valor'])
+            except (ValueError, TypeError):
+                return None
+        
+        # Booleanos
+        if tipo in ['TRUE', 'FALSE', 'BOOLEANO']:
+            return info['valor'].lower() == 'true'
+        
+        # Variables - buscar en el contexto
+        if tipo == 'ID':
+            var_name = info['valor']
+            if var_name in contexto_variables:
+                return contexto_variables[var_name]
+            # Si no está en el contexto, usar semantic_value si existe
+            if info['semantic_value'] is not None:
+                return info['semantic_value']
+            return None
+        
+        # Operaciones aritméticas y relacionales
+        if tipo in ['+', '-', '*', '/', '%', '^', '>', '<', '>=', '<=', '==', '!=', '&&', '||']:
+            if info['semantic_value'] is not None:
+                return info['semantic_value']
+            return self._calcular_valor_operacion(info, contexto_variables)
+        
+        # Para nodos contenedor, buscar en el hijo
+        if len(info['hijos']) == 1:
+            hijo_info = self._get_node_info(info['hijos'][0])
+            return self._calcular_valor_expresion(hijo_info, contexto_variables)
+        
+        return None
+    
+    def _get_valor_numerico(self, info, contexto_variables=None):
         """
         Obtiene el valor numérico de un nodo para realizar cálculos.
         Retorna un número (int o float) o None si no se puede obtener.
         IMPORTANTE: Preserva el tipo (int vs float)
+        
+        Args:
+            info: Información del nodo
+            contexto_variables: Diccionario con valores de variables en el contexto actual
         """
+        if contexto_variables is None:
+            contexto_variables = {}
+            
         # Si tiene semantic_value, usarlo
         if info['semantic_value'] is not None:
             return info['semantic_value']
@@ -538,13 +472,13 @@ class VisualizadorASTSemantico:
         # Para variables - buscar en el contexto
         if info['tipo'] == 'ID':
             var_name = info['valor']
-            if var_name in self.variable_values:
-                return self.variable_values[var_name]
+            if var_name in contexto_variables:
+                return contexto_variables[var_name]
             return None
         
         # Para operaciones, calcular recursivamente
         if info['tipo'] in ['+', '-', '*', '/', '%', '^']:
-            return self._calcular_valor_operacion(info)
+            return self._calcular_valor_operacion(info, contexto_variables)
         
         return None
     
@@ -599,10 +533,13 @@ class VisualizadorASTSemantico:
         
         return tipo in nodos_estructurales
     
-    def construir_arbol(self, parent='', nodo=None, nivel=0, parent_info=None):
+    def construir_arbol(self, parent='', nodo=None, nivel=0, parent_info=None, contexto_variables=None):
         """Construye recursivamente el árbol visual con información semántica"""
         if nodo is None:
             nodo = self.annotated_ast
+        
+        if contexto_variables is None:
+            contexto_variables = {}
         
         # Obtener información del nodo
         info = self._get_node_info(nodo)
@@ -611,8 +548,25 @@ class VisualizadorASTSemantico:
         if not self.es_nodo_visible(info['tipo'], info['valor']):
             # No mostrar este nodo, pero sí procesar sus hijos
             for hijo in info['hijos']:
-                self.construir_arbol(parent, hijo, nivel, info)
+                self.construir_arbol(parent, hijo, nivel, info, contexto_variables.copy())
             return
+        
+        # IMPORTANTE: Procesar asignaciones para actualizar contexto
+        if info['tipo'] == '=' and len(info['hijos']) >= 2:
+            # Obtener nombre de variable y valor
+            hijo_izq = info['hijos'][0]
+            hijo_izq_info = self._get_node_info(hijo_izq)
+            
+            if hijo_izq_info['tipo'] == 'ID':
+                var_name = hijo_izq_info['valor']
+                hijo_der = info['hijos'][1]
+                hijo_der_info = self._get_node_info(hijo_der)
+                valor = self._calcular_valor_expresion(hijo_der_info, contexto_variables)
+                
+                if valor is not None:
+                    # Actualizar contexto para hijos subsecuentes
+                    contexto_variables = contexto_variables.copy()
+                    contexto_variables[var_name] = valor
         
         # Determinar el texto a mostrar
         if info['valor']:
@@ -634,13 +588,13 @@ class VisualizadorASTSemantico:
             if parent_info['hijos'][0] == nodo:
                 es_lado_izq = True
         
-        # Obtener el valor a mostrar
-        valor_display = self._get_display_value(info, es_lado_izquierdo_asignacion=es_lado_izq)
+        # Obtener el valor a mostrar (usando el contexto actual)
+        valor_display = self._get_display_value(info, es_lado_izquierdo_asignacion=es_lado_izq, contexto_variables=contexto_variables)
         
         # Preparar valores para las columnas
         valores = (
             info['tipo'],
-            valor_display,  # Solo mostrar valores calculados
+            valor_display,  # Solo mostrar valores calculados con el contexto actual
             info['semantic_type'] if info['semantic_type'] else '',
             str(info['linea']) if info['linea'] else '',
             str(info['columna']) if info['columna'] else ''
@@ -663,9 +617,9 @@ class VisualizadorASTSemantico:
                 open=nivel < 2
             )
         
-        # Procesar hijos recursivamente, pasando info como parent_info
+        # Procesar hijos recursivamente, pasando info como parent_info y el contexto actualizado
         for hijo in info['hijos']:
-            self.construir_arbol(node_id, hijo, nivel + 1, info)
+            self.construir_arbol(node_id, hijo, nivel + 1, info, contexto_variables.copy())
     
     def toggle_nodo(self, event):
         """Alterna entre colapsar y expandir un nodo al hacer doble clic"""
