@@ -2432,6 +2432,7 @@ class SemanticVisitor:
         """
         Calcula el valor de una operación aritmética si todos los operandos son conocidos.
         Soporta cálculo recursivo de expresiones anidadas.
+        IMPORTANTE: División entera (int/int) vs división flotante (float involucrado)
         
         Args:
             node: Nodo de operación aritmética
@@ -2452,26 +2453,59 @@ class SemanticVisitor:
         if left_value is None or right_value is None:
             return None
         
+        # Determinar si los operandos son enteros o flotantes
+        left_is_int = isinstance(left_value, int) and not isinstance(left_value, bool)
+        right_is_int = isinstance(right_value, int) and not isinstance(right_value, bool)
+        
         try:
             if node.tipo == '+':
-                return left_value + right_value
+                result = left_value + right_value
+                # Si ambos son int, mantener como int
+                if left_is_int and right_is_int:
+                    return int(result)
+                return result
+                
             elif node.tipo == '-':
-                return left_value - right_value
+                result = left_value - right_value
+                # Si ambos son int, mantener como int
+                if left_is_int and right_is_int:
+                    return int(result)
+                return result
+                
             elif node.tipo == '*':
-                return left_value * right_value
+                result = left_value * right_value
+                # Si ambos son int, mantener como int
+                if left_is_int and right_is_int:
+                    return int(result)
+                return result
+                
             elif node.tipo == '/':
                 if right_value != 0:
-                    # Mantener como float para división
-                    return left_value / right_value
+                    # REGLA DE DIVISIÓN:
+                    # int / int = división entera (resultado int)
+                    # float involucrado = división flotante (resultado float)
+                    if left_is_int and right_is_int:
+                        # División entera: 1/3 = 0, 7/2 = 3, 10/4 = 2
+                        return int(left_value // right_value)
+                    else:
+                        # División flotante: 1.0/3 = 0.333..., 7.5/2 = 3.75
+                        return float(left_value / right_value)
                 else:
                     return None  # División por cero
+                    
             elif node.tipo == '%':
-                if right_value != 0 and isinstance(left_value, int) and isinstance(right_value, int):
-                    return left_value % right_value
+                if right_value != 0 and left_is_int and right_is_int:
+                    return int(left_value % right_value)
                 else:
                     return None
+                    
             elif node.tipo == '^':
-                return left_value ** right_value
+                result = left_value ** right_value
+                # Si ambos son int y exponente >= 0, mantener como int
+                if left_is_int and right_is_int and right_value >= 0:
+                    return int(result)
+                return result
+                
         except (ValueError, TypeError, ZeroDivisionError, OverflowError):
             return None
         
@@ -2480,6 +2514,7 @@ class SemanticVisitor:
     def _get_node_value(self, node):
         """
         Obtiene el valor de un nodo (literal, variable o expresión calculada).
+        Preserva el tipo de dato (int vs float).
         
         Args:
             node: Nodo del cual obtener el valor
@@ -2518,10 +2553,13 @@ class SemanticVisitor:
         # Si es una operación, calcularla recursivamente
         elif node.tipo in ['+', '-', '*', '/', '%', '^']:
             if isinstance(node, AnnotatedASTNode):
-                return self._calculate_operation_value(node)
+                calculated = self._calculate_operation_value(node)
+                if calculated is not None and hasattr(node, 'set_semantic_value'):
+                    node.set_semantic_value(calculated)
+                return calculated
         
         # Si es un nodo contenedor (COMPONENTE, SENT_EXPRESION, etc.), buscar en sus hijos
-        elif len(node.hijos) == 1:
+        elif hasattr(node, 'hijos') and len(node.hijos) == 1:
             return self._get_node_value(node.hijos[0])
         
         return None
