@@ -1813,7 +1813,7 @@ class SemanticErrorDetector:
     def check_duplicate_declarations(self, node):
         """
         Verifica declaraciones duplicadas
-        CORREGIDO: No reporta variables en la misma lista como duplicadas
+        No reporta variables en la misma lista como duplicadas
         """
         if not node or node.tipo != 'DECLARACION_VARIABLE':
             return True
@@ -3343,22 +3343,22 @@ def export_semantic_analysis_files(annotated_ast: Optional[AnnotatedASTNode],
             
             # Agregar estadísticas adicionales
             all_symbols = symbol_table.get_all_symbols()
-            f.write(f"\nESTADÍSTICAS:\n")
-            f.write("-" * 40 + "\n")
-            f.write(f"Total de variables declaradas: {len(all_symbols)}\n")
-            f.write(f"Ámbitos creados: {len(symbol_table.scopes)}\n")
+            #f.write(f"\nESTADÍSTICAS:\n")
+            #f.write("-" * 40 + "\n")
+            #f.write(f"Total de variables declaradas: {len(all_symbols)}\n")
+            #f.write(f"Ámbitos creados: {len(symbol_table.scopes)}\n")
             #f.write(f"Ámbito actual: {symbol_table.get_current_scope()}\n")
             
             # Distribución por tipo
-            type_distribution = {}
-            for symbol in all_symbols:
-                type_str = str(symbol.type_info)
-                type_distribution[type_str] = type_distribution.get(type_str, 0) + 1
+            #type_distribution = {}
+            #for symbol in all_symbols:
+                #type_str = str(symbol.type_info)
+                #type_distribution[type_str] = type_distribution.get(type_str, 0) + 1
             
-            if type_distribution:
-                f.write(f"\nDISTRIBUCIÓN POR TIPO:\n")
-                for tipo, count in sorted(type_distribution.items()):
-                    f.write(f"  {tipo}: {count} variable(s)\n")
+            #if type_distribution:
+                #f.write(f"\nDISTRIBUCIÓN POR TIPO:\n")
+                #for tipo, count in sorted(type_distribution.items()):
+                    #f.write(f"  {tipo}: {count} variable(s)\n")
         
         export_status['symbol_table'] = True
     except Exception as e:

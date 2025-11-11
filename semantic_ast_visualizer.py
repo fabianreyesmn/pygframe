@@ -210,6 +210,11 @@ class VisualizadorASTSemantico:
         """
         if contexto_variables is None:
             contexto_variables = {}
+
+        # REGLA PRIORITARIA: Si el nodo tiene un error semántico, mostrar "error"
+        linea = info['linea']
+        if self._node_has_error(linea):
+            return 'error'
             
         tipo = info['tipo']
         

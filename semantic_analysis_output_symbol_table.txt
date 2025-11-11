@@ -1,6 +1,6 @@
 TABLA DE SÍMBOLOS - ANÁLISIS SEMÁNTICO
 ================================================================================
-Generado: 2025-11-10 22:54:15
+Generado: 2025-11-10 23:14:58
 
 TABLA DE SÍMBOLOS:
 =======================================================================
@@ -13,12 +13,3 @@ TABLA DE SÍMBOLOS:
 | b      | float | 3, 19, 21                              | 1016      |
 | c      | float | 3, 26                                  | 1020      |
 =======================================================================
-
-ESTADÍSTICAS:
-----------------------------------------
-Total de variables declaradas: 6
-Ámbitos creados: 6
-
-DISTRIBUCIÓN POR TIPO:
-  float: 3 variable(s)
-  int: 3 variable(s)
