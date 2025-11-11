@@ -738,7 +738,7 @@ class CustomIDE:
             return resultado
         
         resultado = "ERRORES SEMÁNTICOS DETECTADOS\n"
-        resultado += "=" * 80 + "\n\n"
+        resultado += "=" * 120 + "\n\n"
         
         # Resumen de errores
         resultado += f"RESUMEN: Se encontraron {len(semantic_errors)} error(es) semántico(s)\n\n"
@@ -752,18 +752,13 @@ class CustomIDE:
             errors_by_type[error_type].append(error)
         
         # Mostrar resumen por categoría
-        resultado += "ERRORES POR CATEGORÍA:\n"
-        resultado += "-" * 50 + "\n"
-        for error_type, errors in errors_by_type.items():
-            icon = self._get_error_icon(error_type)
-            resultado += f"{icon} {error_type}: {len(errors)} error(es)\n"
-        resultado += "\n"
+        
         
         # Mostrar errores detallados
         resultado += "DETALLE DE ERRORES:\n"
-        resultado += "-" * 80 + "\n"
+        resultado += "-" * 120 + "\n"
         resultado += f"{'#':<3} {'Línea':<6} {'Col':<4} {'Tipo':<20} {'Descripción':<40}\n"
-        resultado += "-" * 80 + "\n"
+        resultado += "-" * 120 + "\n"
         
         # Ordenar errores por línea
         sorted_errors = sorted(semantic_errors, key=lambda e: (e.line, e.column))
@@ -772,53 +767,14 @@ class CustomIDE:
             error_type = error.error_type.replace('_', ' ').title()
             # Truncar descripción si es muy larga
             description = error.message
-            if len(description) > 38:
-                description = description[:35] + "..."
+            if len(description) > 118:
+                description = description[:115] + "..."
             
             resultado += f"{i:<3} {error.line:<6} {error.column:<4} {error_type:<20} {description:<40}\n"
         
-        resultado += "-" * 80 + "\n\n"
+        resultado += "-" * 120 + "\n\n"
         
         # Sugerencias de corrección por tipo de error
-        resultado += "SUGERENCIAS DE CORRECCIÓN:\n"
-        resultado += "-" * 50 + "\n"
-        
-        suggestions = {
-            'Undeclared Variable': [
-                "• Declare la variable antes de usarla",
-                "• Verifique la ortografía del nombre de la variable",
-                "• Asegúrese de que la variable esté en el ámbito correcto"
-            ],
-            'Duplicate Declaration': [
-                "• Use nombres únicos para cada variable en el mismo ámbito",
-                "• Elimine declaraciones duplicadas",
-                "• Considere usar diferentes ámbitos si es necesario"
-            ],
-            'Type Incompatibility': [
-                "• Verifique que los tipos sean compatibles en asignaciones",
-                "• Use conversiones explícitas cuando sea necesario",
-                "• Revise los operadores utilizados con cada tipo"
-            ],
-            'Invalid Conversion': [
-                "• Evite conversiones automáticas no válidas",
-                "• Use tipos compatibles en operaciones",
-                "• Considere cambiar el tipo de la variable si es apropiado"
-            ]
-        }
-        
-        for error_type in errors_by_type.keys():
-            if error_type in suggestions:
-                resultado += f"\n{error_type}:\n"
-                for suggestion in suggestions[error_type]:
-                    resultado += f"  {suggestion}\n"
-        
-        # Instrucciones para navegación
-        resultado += f"\nNAVEGACIÓN:\n"
-        resultado += "-" * 50 + "\n"
-        resultado += "• Haga doble clic en un error para ir a la línea correspondiente\n"
-        resultado += "• Los errores están ordenados por número de línea\n"
-        resultado += "• Corrija los errores y ejecute el análisis nuevamente\n"
-        
         return resultado
     
     def _get_error_icon(self, error_type):
@@ -936,7 +892,7 @@ class CustomIDE:
             # Verificar si hay errores léxicos antes de continuar
             errores_lexicos = self.errores_lexicos_tab.get('1.0', 'end').strip()
             if errores_lexicos and "Error" in errores_lexicos:
-                messagebox.showerror("Error de Compilación", "Se encontraron errores léxicos. Corrija los errores antes de continuar.")
+                #messagebox.showerror("Error de Compilación", "Se encontraron errores léxicos. Corrija los errores antes de continuar.")
                 return
             
             # Fase 2: Análisis Sintáctico
@@ -945,7 +901,7 @@ class CustomIDE:
             # Verificar si hay errores sintácticos antes de continuar
             errores_sintacticos = self.errores_sintacticos_tab.get('1.0', 'end').strip()
             if errores_sintacticos and "Error" in errores_sintacticos:
-                messagebox.showerror("Error de Compilación", "Se encontraron errores sintácticos. Corrija los errores antes de continuar.")
+                #messagebox.showerror("Error de Compilación", "Se encontraron errores sintácticos. Corrija los errores antes de continuar.")
                 return
             
             # Fase 3: Análisis Semántico
@@ -958,14 +914,14 @@ class CustomIDE:
                 for keyword in ['error', 'undeclared', 'incompatible', 'duplicate']
             )
             
-            if has_semantic_errors:
+            #if has_semantic_errors:
                 # Mostrar advertencia pero permitir continuar
-                result = messagebox.askyesno(
-                    "Advertencia de Compilación", 
-                    "Se encontraron errores semánticos. ¿Desea continuar con la generación de código intermedio?"
-                )
-                if not result:
-                    return
+                #result = messagebox.askyesno(
+                #    "Advertencia de Compilación", 
+                #    "Se encontraron errores semánticos. ¿Desea continuar con la generación de código intermedio?"
+                #)
+                #if not result:
+                #    return
             
             # Fase 4: Código Intermedio
             self.intermediate_code()
