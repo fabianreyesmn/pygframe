@@ -1205,6 +1205,17 @@ class TypeSystem:
         # Si ya tiene tipo asignado, retornarlo
         if hasattr(node, 'semantic_type') and node.semantic_type:
             return node.semantic_type
+
+        # Nodos contenedores - desenvolver sin error
+        if node.tipo in ['SENT_EXPRESION', 'COMPONENTE', 'EXPRESION_SIMPLE',
+                        'FACTOR_SIMPLE', 'TERMINO_SIMPLE', 'SALIDA', 
+                        'LISTA_SENTENCIAS', 'IDENTIFICADOR']:
+            if len(node.hijos) == 1:
+                return self.infer_expression_type(node.hijos[0], symbol_table)
+            elif len(node.hijos) > 0:
+                # Para contenedores con múltiples hijos, devolver None sin error
+                return None
+            return None
         
         # Literales
         if node.tipo == 'NUM_INT':
@@ -1429,27 +1440,31 @@ class TypeSystem:
     def _validate_assignment_expression(self, node, symbol_table=None) -> Tuple[bool, List[str]]:
         """Valida expresiones de asignación"""
         errors = []
-        
+    
         if len(node.hijos) < 2:
             errors.append(f"Asignación requiere variable y valor en línea {node.linea}")
             return False, errors
         
-        # Verificar que el lado izquierdo sea un identificador
         left_node = node.hijos[0]
+        
+        # Desenvolver nodos contenedores
+        while left_node.tipo in ['COMPONENTE', 'EXPRESION_SIMPLE', 'SENT_EXPRESION'] and len(left_node.hijos) == 1:
+            left_node = left_node.hijos[0]
+        
         if left_node.tipo != 'ID':
             errors.append(f"Lado izquierdo de asignación debe ser una variable en línea {node.linea}")
             return False, errors
         
-        # Verificar que la variable esté declarada
         if symbol_table:
             symbol = symbol_table.lookup_variable(left_node.valor)
             if not symbol:
                 errors.append(f"Variable '{left_node.valor}' no declarada en línea {node.linea}")
                 return False, errors
             
-            # Verificar compatibilidad de tipos
             right_type = self.infer_expression_type(node.hijos[1], symbol_table)
-            if right_type:
+            
+            # Solo validar si right_type no es None
+            if right_type:  # Solo si pudimos inferir el tipo
                 valid, error_msg = self.validate_assignment(symbol.type_info, right_type)
                 if not valid:
                     errors.append(f"{error_msg} en línea {node.linea}")
@@ -1497,6 +1512,8 @@ class ErrorReporter:
             'operator_misuse': 0,
             'other': 0
         }
+
+        self._reported_errors = set()
     
     def add_error(self, error_type: str, message: str, line: int, column: int, severity: str = 'error'):
         """
@@ -1509,6 +1526,16 @@ class ErrorReporter:
             column: Número de columna donde ocurre el error
             severity: Severidad del error ('error' o 'warning')
         """
+
+        # Crear una clave única para el error
+        error_key = (error_type, message, line, column, severity)
+        
+        # Si ya fue reportado, ignorar
+        if error_key in self._reported_errors:
+            return
+        
+        self._reported_errors.add(error_key)
+
         semantic_error = SemanticError(
             error_type=error_type,
             message=message,
@@ -1609,6 +1636,7 @@ class ErrorReporter:
         """Limpia todos los errores y advertencias"""
         self.errors.clear()
         self.warnings.clear()
+        self._reported_errors.clear()
         for key in self.error_counts:
             self.error_counts[key] = 0
     
@@ -1729,53 +1757,67 @@ class SemanticErrorDetector:
         self.symbol_table = symbol_table
         self.type_system = type_system
     
-    def check_undeclared_variables(self, node) -> bool:
+    def check_undeclared_variables(self, node, visited=None):
         """
         Verifica si hay variables no declaradas en el nodo y sus hijos
-        
-        Args:
-            node: Nodo del AST a verificar
-            
-        Returns:
-            True si no hay errores, False si se encontraron variables no declaradas
+        Evita duplicados y no verifica IDs en declaraciones
         """
         if not node:
             return True
         
+        if visited is None:
+            visited = set()
+        
         errors_found = False
         
-        # Verificar si el nodo actual es un identificador
-        if node.tipo == 'ID':
-            # Registrar el uso de la variable en esta línea
-            self.symbol_table.record_usage(node.valor, node.linea)
-            
-            if not self.symbol_table.is_declared(node.valor):
-                self.error_reporter.add_undeclared_variable_error(
-                    node.valor, node.linea, node.columna
-                )
-                errors_found = True
+        # Crear ID único para el nodo
+        node_id = (id(node), node.tipo, node.valor, node.linea, node.columna)
         
-        # Verificar recursivamente en los hijos
+        if node_id in visited:
+            return True
+        
+        visited.add(node_id)
+        
+        # Verificar si es un ID
+        if node.tipo == 'ID':
+            # NO verificar si está en una declaración
+            if not self._is_in_declaration(node):
+                # Registrar uso
+                self.symbol_table.record_usage(node.valor, node.linea)
+                
+                # Verificar si está declarada
+                if not self.symbol_table.is_declared(node.valor):
+                    self.error_reporter.add_undeclared_variable_error(
+                        node.valor, node.linea, node.columna
+                    )
+                    errors_found = True
+        
+        # Verificar hijos
         for hijo in node.hijos:
-            if not self.check_undeclared_variables(hijo):
+            if not self.check_undeclared_variables(hijo, visited):
                 errors_found = True
         
         return not errors_found
+
+    def _is_in_declaration(self, node):
+        """Verifica si un nodo ID está en una declaración"""
+        current = node.padre if hasattr(node, 'padre') else None
+        while current:
+            if current.tipo in ['DECLARACION_VARIABLE', 'IDENTIFICADOR']:
+                return True
+            if current.tipo == '=':
+                return False  # Es una asignación, no declaración
+            current = current.padre if hasattr(current, 'padre') else None
+        return False
     
-    def check_duplicate_declarations(self, node) -> bool:
+    def check_duplicate_declarations(self, node):
         """
-        Verifica declaraciones duplicadas en el nodo actual
-        
-        Args:
-            node: Nodo del AST a verificar (debe ser DECLARACION_VARIABLE)
-            
-        Returns:
-            True si no hay duplicados, False si se encontró una declaración duplicada
+        Verifica declaraciones duplicadas
+        CORREGIDO: No reporta variables en la misma lista como duplicadas
         """
         if not node or node.tipo != 'DECLARACION_VARIABLE':
             return True
         
-        # Buscar el tipo y los identificadores en la declaración
         tipo_nodo = None
         identificadores = []
         
@@ -1783,7 +1825,6 @@ class SemanticErrorDetector:
             if hijo.tipo == 'TIPO':
                 tipo_nodo = hijo
             elif hijo.tipo == 'IDENTIFICADOR':
-                # Recopilar todos los IDs en la declaración
                 for id_hijo in hijo.hijos:
                     if id_hijo.tipo == 'ID':
                         identificadores.append(id_hijo)
@@ -1791,27 +1832,33 @@ class SemanticErrorDetector:
         if not tipo_nodo or not identificadores:
             return True
         
-        # Verificar cada identificador
         errors_found = False
         tipo_info = crear_tipo_desde_string(tipo_nodo.valor)
+        processed = set()
         
         for id_nodo in identificadores:
-            variable_name = id_nodo.valor
+            var_name = id_nodo.valor
             
-            # Verificar si ya está declarada en el ámbito actual
-            if self.symbol_table.is_declared_in_current_scope(variable_name):
-                # Buscar la declaración original para obtener su línea
-                existing_symbol = self.symbol_table.lookup_variable(variable_name)
-                original_line = existing_symbol.lines[0] if existing_symbol and existing_symbol.lines else None
+            # Evitar procesar dos veces
+            if var_name in processed:
+                continue
+            processed.add(var_name)
+            
+            # Verificar si YA estaba declarada ANTES
+            if self.symbol_table.is_declared_in_current_scope(var_name):
+                existing = self.symbol_table.lookup_variable(var_name)
+                original_line = existing.lines[0] if existing and existing.lines else None
                 
-                self.error_reporter.add_duplicate_declaration_error(
-                    variable_name, id_nodo.linea, id_nodo.columna, original_line
-                )
-                errors_found = True
+                # Solo reportar si es diferente línea
+                if original_line and original_line != id_nodo.linea:
+                    self.error_reporter.add_duplicate_declaration_error(
+                        var_name, id_nodo.linea, id_nodo.columna, original_line
+                    )
+                    errors_found = True
             else:
-                # Declarar la variable si no hay duplicado
+                # Declarar la variable
                 self.symbol_table.declare_variable(
-                    variable_name, tipo_info, id_nodo.linea, id_nodo.columna
+                    var_name, tipo_info, id_nodo.linea, id_nodo.columna
                 )
         
         return not errors_found
@@ -2641,10 +2688,12 @@ class SemanticAnalyzer:
             return None, self.symbol_table, self.error_reporter.get_errors()
         
         try:
-            # Fase 1: Construcción de tabla de símbolos y detección de declaraciones duplicadas
+            # Fase 1: Construcción de tabla de símbolos
+            # IMPORTANTE: NO llamar a check_undeclared_variables aquí
             self._build_symbol_table(self.ast)
             
             # Fase 2: Verificación de variables no declaradas
+            # Llamar UNA SOLA VEZ
             self.error_detector.check_undeclared_variables(self.ast)
             
             # Fase 3: Verificación de compatibilidad de tipos
@@ -2653,10 +2702,9 @@ class SemanticAnalyzer:
             # Fase 4: Verificación de conversiones inválidas
             self.error_detector.check_invalid_conversions(self.ast)
             
-            # Fase 5: Anotación del AST con información semántica
+            # Fase 5: Anotación del AST
             self.annotated_ast = self.visitor.visit(self.ast)
             
-            # Marcar análisis como completado
             self.analysis_completed = True
             
             return self.annotated_ast, self.symbol_table, self.error_reporter.get_errors()
@@ -2668,7 +2716,7 @@ class SemanticAnalyzer:
                 0, 0
             )
             return None, self.symbol_table, self.error_reporter.get_errors()
-    
+
     def _build_symbol_table(self, node):
         """
         Construye la tabla de símbolos procesando declaraciones de variables
@@ -2681,22 +2729,20 @@ class SemanticAnalyzer:
         
         # Procesar declaraciones de variables
         if node.tipo == 'DECLARACION_VARIABLE':
+            # Solo verificar duplicados, NO variables no declaradas
             self.error_detector.check_duplicate_declarations(node)
         
-        # Procesar estructuras de control que crean nuevos ámbitos
+        # Procesar estructuras de control
         elif node.tipo in ['SELECCION', 'ITERACION', 'REPETICION']:
-            # Entrar a un nuevo ámbito
             scope_name = f"{node.tipo.lower()}_{node.linea}"
             self.symbol_table.enter_scope(scope_name)
             
-            # Procesar hijos en el nuevo ámbito
             for hijo in node.hijos:
                 self._build_symbol_table(hijo)
             
-            # Salir del ámbito
             self.symbol_table.exit_scope()
         else:
-            # Procesar hijos normalmente
+            # Procesar hijos
             for hijo in node.hijos:
                 self._build_symbol_table(hijo)
     
