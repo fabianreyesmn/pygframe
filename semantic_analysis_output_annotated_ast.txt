@@ -1,22 +1,22 @@
 AST ANOTADO CON INFORMACIÓN SEMÁNTICA
 ================================================================================
-Generado: 2025-11-10 23:14:58
+Generado: 2025-11-11 08:46:26
 
 ESTADÍSTICAS DEL AST ANOTADO:
 ----------------------------------------
-Total de nodos: 264
-Nodos anotados: 235 (89.0%)
-Nodos con tipo: 235
+Total de nodos: 266
+Nodos anotados: 237 (89.1%)
+Nodos con tipo: 237
 Nodos con valor: 79
-Referencias de símbolos: 35
+Referencias de símbolos: 37
 Nodos constantes: 54
-Nodos lvalue: 35
+Nodos lvalue: 37
 
 DISTRIBUCIÓN DE TIPOS EN EL AST:
 ----------------------------------------
   boolean: 8 nodo(s)
   float: 40 nodo(s)
-  int: 187 nodo(s)
+  int: 189 nodo(s)
 
 ESTRUCTURA DEL AST ANOTADO:
 ----------------------------------------
@@ -28,12 +28,14 @@ PROGRAMA (L0, C0)
         ID: x (L2, C9) [tipo=int, símbolo=x@global_0, lvalue]
         ID: y (L2, C12) [tipo=int, símbolo=y@global_0, lvalue]
         ID: z (L2, C15) [tipo=int, símbolo=z@global_0, lvalue]
+        ID: z (L2, C17) [tipo=int, símbolo=z@global_0, lvalue]
     DECLARACION_VARIABLE (L0, C0)
       TIPO: float (L3, C5)
       IDENTIFICADOR (L0, C0)
         ID: a (L3, C11) [tipo=float, símbolo=a@global_0, lvalue]
         ID: b (L3, C14) [tipo=float, símbolo=b@global_0, lvalue]
         ID: c (L3, C17) [tipo=float, símbolo=c@global_0, lvalue]
+        ID: y (L3, C19) [tipo=int, símbolo=y@global_0, lvalue]
     =: = (L4, C5) [tipo=int]
       ID: suma (L4, C5)
       SENT_EXPRESION (L0, C0) [tipo=int]

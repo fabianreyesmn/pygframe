@@ -1,11 +1,13 @@
 REPORTE DE ERRORES SEMÁNTICOS
 ================================================================================
-Generado: 2025-11-10 23:14:58
+Generado: 2025-11-11 08:51:47
 
 ERRORES SEMÁNTICOS:
 ====================================================================================================
 | SEVERIDAD    | TIPO            | DESCRIPCIÓN                                        | LÍNEA    | COLUMNA  |
 ====================================================================================================
+| ERROR        | duplicate_declaration | Variable 'r' ya declarada en el ámbito actual      | 2        | 19       |
+| ERROR        | duplicate_declaration | Variable 'x' ya declarada en línea 2               | 3        | 19       |
 | ERROR        | undeclared_variable | Variable 'suma' no declarada                       | 4        | 5        |
 | ERROR        | type_incompatibility | No se puede asignar valor de tipo float a var...   | 5        | 5        |
 | ERROR        | type_incompatibility | No se puede asignar valor de tipo float a var...   | 14       | 5        |
@@ -15,16 +17,21 @@ ERRORES SEMÁNTICOS:
 ====================================================================================================
 
 RESUMEN:
-- Errores: 6
+- Errores: 8
 - Advertencias: 0
 
 ERRORES POR TIPO:
 - Undeclared Variable: 3
+- Duplicate Declaration: 2
 - Type Incompatibility: 3
 
 
 ANÁLISIS DETALLADO DE ERRORES:
 --------------------------------------------------
+
+Duplicate Declaration:
+  - Línea 2, Columna 19: Variable 'r' ya declarada en el ámbito actual
+  - Línea 3, Columna 19: Variable 'x' ya declarada en línea 2
 
 Undeclared Variable:
   - Línea 4, Columna 5: Variable 'suma' no declarada

@@ -787,12 +787,14 @@ class SymbolTable:
     def record_usage(self, name: str, line: int):
         """
         Registra el uso de una variable en una línea específica.
-        Si la variable existe, añade la línea a su lista de líneas si no está ya presente.
+        IMPORTANTE: Permite MÚLTIPLES registros de la MISMA línea (ej: y = y + 1 registra línea 9 dos veces)
         """
         symbol = self.lookup_variable(name)
-        if symbol and line not in symbol.lines:
+        if symbol:
+            # SIEMPRE agregar la línea, incluso si ya existe
+            # Esto permite que "y = y + 1" registre la línea 9 dos veces
             symbol.lines.append(line)
-            symbol.lines.sort() # Mantener las líneas ordenadas
+            # NO ordenar ni eliminar duplicados - queremos contar cada aparición
     
     def get_all_symbols(self) -> List[SymbolEntry]:
         """Obtiene todas las entradas de símbolos de todos los ámbitos"""
@@ -1760,7 +1762,7 @@ class SemanticErrorDetector:
     def check_undeclared_variables(self, node, visited=None):
         """
         Verifica si hay variables no declaradas en el nodo y sus hijos
-        Evita duplicados y no verifica IDs en declaraciones
+        IMPORTANTE: Registra TODAS las apariciones de cada variable (incluyendo múltiples en la misma línea)
         """
         if not node:
             return True
@@ -1782,15 +1784,19 @@ class SemanticErrorDetector:
         if node.tipo == 'ID':
             # NO verificar si está en una declaración
             if not self._is_in_declaration(node):
-                # Registrar uso
-                self.symbol_table.record_usage(node.valor, node.linea)
+                # ✅ NUEVO: Guardar el nombre en variable
+                var_name = node.valor
                 
                 # Verificar si está declarada
-                if not self.symbol_table.is_declared(node.valor):
+                if not self.symbol_table.is_declared(var_name):
                     self.error_reporter.add_undeclared_variable_error(
-                        node.valor, node.linea, node.columna
+                        var_name, node.linea, node.columna
                     )
                     errors_found = True
+                else:
+                    # ✅ MODIFICADO: Registrar DESPUÉS de verificar (evita registros de variables no declaradas)
+                    # IMPORTANTE: Registrar CADA uso (permite múltiples apariciones en la misma línea)
+                    self.symbol_table.record_usage(var_name, node.linea)
         
         # Verificar hijos
         for hijo in node.hijos:
@@ -1813,7 +1819,7 @@ class SemanticErrorDetector:
     def check_duplicate_declarations(self, node):
         """
         Verifica declaraciones duplicadas
-        No reporta variables en la misma lista como duplicadas
+        IMPORTANTE: Detecta duplicados tanto en el mismo ámbito como en la misma línea
         """
         if not node or node.tipo != 'DECLARACION_VARIABLE':
             return True
@@ -1834,32 +1840,57 @@ class SemanticErrorDetector:
         
         errors_found = False
         tipo_info = crear_tipo_desde_string(tipo_nodo.valor)
-        processed = set()
+        
+        # DEBUG: Imprimir lo que estamos procesando
+        print(f"\n=== DEBUG: Procesando declaración en línea {node.linea} ===")
+        print(f"Tipo: {tipo_nodo.valor}")
+        print(f"Variables: {[id.valor for id in identificadores]}")
+        
+        # Conjunto para detectar duplicados en la MISMA declaración
+        vars_in_this_declaration = set()
         
         for id_nodo in identificadores:
             var_name = id_nodo.valor
             
-            # Evitar procesar dos veces
-            if var_name in processed:
-                continue
-            processed.add(var_name)
+            print(f"\n  Procesando variable '{var_name}' en línea {id_nodo.linea}, columna {id_nodo.columna}")
+            print(f"  - Ya vista en esta declaración? {var_name in vars_in_this_declaration}")
+            print(f"  - Ya existe en ámbito actual? {self.symbol_table.is_declared_in_current_scope(var_name)}")
             
-            # Verificar si YA estaba declarada ANTES
+            # PRIMERO: Verificar si ya apareció en ESTA MISMA declaración (int x, y, z, z;)
+            if var_name in vars_in_this_declaration:
+                print(f"  ❌ ERROR: Duplicada en ESTA declaración")
+                # Duplicado en la misma línea de declaración
+                self.error_reporter.add_duplicate_declaration_error(
+                    var_name, id_nodo.linea, id_nodo.columna
+                )
+                errors_found = True
+                continue  # No declarar esta variable duplicada
+            
+            # Agregar al conjunto de esta declaración
+            vars_in_this_declaration.add(var_name)
+            print(f"  ✓ Agregada al conjunto de esta declaración: {vars_in_this_declaration}")
+            
+            # SEGUNDO: Verificar si YA estaba declarada ANTES en el ámbito
             if self.symbol_table.is_declared_in_current_scope(var_name):
                 existing = self.symbol_table.lookup_variable(var_name)
                 original_line = existing.lines[0] if existing and existing.lines else None
                 
-                # Solo reportar si es diferente línea
-                if original_line and original_line != id_nodo.linea:
-                    self.error_reporter.add_duplicate_declaration_error(
-                        var_name, id_nodo.linea, id_nodo.columna, original_line
-                    )
-                    errors_found = True
+                print(f"  ❌ ERROR: Ya declarada en ámbito (línea {original_line})")
+                # Reportar duplicado con línea original
+                self.error_reporter.add_duplicate_declaration_error(
+                    var_name, id_nodo.linea, id_nodo.columna, original_line
+                )
+                errors_found = True
+                # NO declarar la variable (ya existe)
             else:
-                # Declarar la variable
+                # Es nueva en el ámbito: declarar
+                print(f"  ✓ Declarando variable en tabla de símbolos")
                 self.symbol_table.declare_variable(
                     var_name, tipo_info, id_nodo.linea, id_nodo.columna
                 )
+                print(f"  ✓ Variable '{var_name}' declarada exitosamente")
+        
+        print(f"=== FIN DEBUG declaración línea {node.linea} ===\n")
         
         return not errors_found
     
@@ -2688,8 +2719,8 @@ class SemanticAnalyzer:
             return None, self.symbol_table, self.error_reporter.get_errors()
         
         try:
-            # Fase 1: Construcción de tabla de símbolos
-            # IMPORTANTE: NO llamar a check_undeclared_variables aquí
+            # Fase 1: Construcción de tabla de símbolos Y verificación de duplicados
+            # IMPORTANTE: Solo llamar UNA VEZ
             self._build_symbol_table(self.ast)
             
             # Fase 2: Verificación de variables no declaradas
@@ -2703,7 +2734,8 @@ class SemanticAnalyzer:
             self.error_detector.check_invalid_conversions(self.ast)
             
             # Fase 5: Anotación del AST
-            self.annotated_ast = self.visitor.visit(self.ast)
+            # ⚠️ ELIMINAR: No volver a visitar el AST aquí
+            # self.annotated_ast = self.visitor.visit(self.ast)
             
             self.analysis_completed = True
             

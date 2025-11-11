@@ -1,19 +1,19 @@
 RESUMEN COMPLETO DEL ANÁLISIS SEMÁNTICO
 ================================================================================
-Generado: 2025-11-10 23:14:58
+Generado: 2025-11-11 08:51:47
 
 INFORMACIÓN GENERAL:
 ----------------------------------------
-AST anotado generado: Sí
-Variables declaradas: 6
-Errores semánticos: 6
+AST anotado generado: No
+Variables declaradas: 7
+Errores semánticos: 8
 Estado del análisis: Con errores
 
 ARCHIVOS GENERADOS:
 ----------------------------------------
 ✓ symbol_table: semantic_analysis_output_symbol_table.txt
 ✓ errors: semantic_analysis_output_errors.txt
-✓ annotated_ast: semantic_analysis_output_annotated_ast.txt
+✗ annotated_ast: semantic_analysis_output_annotated_ast.txt
 ✗ annotated_ast_json: semantic_analysis_output_annotated_ast_json.txt
 
 TABLA DE SÍMBOLOS (RESUMEN):
