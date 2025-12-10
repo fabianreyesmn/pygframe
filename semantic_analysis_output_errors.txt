@@ -1,44 +1,11 @@
 REPORTE DE ERRORES SEMÁNTICOS
 ================================================================================
-Generado: 2025-11-11 08:51:47
+Generado: 2025-12-09 20:36:03
 
-ERRORES SEMÁNTICOS:
-====================================================================================================
-| SEVERIDAD    | TIPO            | DESCRIPCIÓN                                        | LÍNEA    | COLUMNA  |
-====================================================================================================
-| ERROR        | duplicate_declaration | Variable 'r' ya declarada en el ámbito actual      | 2        | 19       |
-| ERROR        | duplicate_declaration | Variable 'x' ya declarada en línea 2               | 3        | 19       |
-| ERROR        | undeclared_variable | Variable 'suma' no declarada                       | 4        | 5        |
-| ERROR        | type_incompatibility | No se puede asignar valor de tipo float a var...   | 5        | 5        |
-| ERROR        | type_incompatibility | No se puede asignar valor de tipo float a var...   | 14       | 5        |
-| ERROR        | type_incompatibility | No se puede asignar valor de tipo float a var...   | 16       | 9        |
-| ERROR        | undeclared_variable | Variable 'mas' no declarada                        | 33       | 13       |
-| ERROR        | undeclared_variable | Variable 'mas' no declarada                        | 37       | 16       |
-====================================================================================================
+✓ No se encontraron errores semánticos
 
-RESUMEN:
-- Errores: 8
-- Advertencias: 0
-
-ERRORES POR TIPO:
-- Undeclared Variable: 3
-- Duplicate Declaration: 2
-- Type Incompatibility: 3
-
-
-ANÁLISIS DETALLADO DE ERRORES:
---------------------------------------------------
-
-Duplicate Declaration:
-  - Línea 2, Columna 19: Variable 'r' ya declarada en el ámbito actual
-  - Línea 3, Columna 19: Variable 'x' ya declarada en línea 2
-
-Undeclared Variable:
-  - Línea 4, Columna 5: Variable 'suma' no declarada
-  - Línea 33, Columna 13: Variable 'mas' no declarada
-  - Línea 37, Columna 16: Variable 'mas' no declarada
-
-Type Incompatibility:
-  - Línea 5, Columna 5: No se puede asignar valor de tipo float a variable 'x' de tipo int
-  - Línea 14, Columna 5: No se puede asignar valor de tipo float a variable 'y' de tipo int
-  - Línea 16, Columna 9: No se puede asignar valor de tipo float a variable 'y' de tipo int
+El código fuente pasó todas las verificaciones semánticas:
+- Variables declaradas correctamente
+- Tipos compatibles en todas las operaciones
+- No hay variables no declaradas
+- No hay declaraciones duplicadas

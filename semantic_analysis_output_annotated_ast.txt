@@ -1,22 +1,22 @@
 AST ANOTADO CON INFORMACIÓN SEMÁNTICA
 ================================================================================
-Generado: 2025-11-11 08:46:26
+Generado: 2025-12-09 20:36:03
 
 ESTADÍSTICAS DEL AST ANOTADO:
 ----------------------------------------
-Total de nodos: 266
-Nodos anotados: 237 (89.1%)
-Nodos con tipo: 237
-Nodos con valor: 79
-Referencias de símbolos: 37
-Nodos constantes: 54
-Nodos lvalue: 37
+Total de nodos: 274
+Nodos anotados: 112 (40.9%)
+Nodos con tipo: 112
+Nodos con valor: 22
+Referencias de símbolos: 55
+Nodos constantes: 22
+Nodos lvalue: 55
 
 DISTRIBUCIÓN DE TIPOS EN EL AST:
 ----------------------------------------
   boolean: 8 nodo(s)
-  float: 40 nodo(s)
-  int: 189 nodo(s)
+  float: 28 nodo(s)
+  int: 76 nodo(s)
 
 ESTRUCTURA DEL AST ANOTADO:
 ----------------------------------------
@@ -25,264 +25,272 @@ PROGRAMA (L0, C0)
     DECLARACION_VARIABLE (L0, C0)
       TIPO: int (L2, C5)
       IDENTIFICADOR (L0, C0)
-        ID: x (L2, C9) [tipo=int, símbolo=x@global_0, lvalue]
-        ID: y (L2, C12) [tipo=int, símbolo=y@global_0, lvalue]
-        ID: z (L2, C15) [tipo=int, símbolo=z@global_0, lvalue]
-        ID: z (L2, C17) [tipo=int, símbolo=z@global_0, lvalue]
+        ID: voto (L2, C9) [tipo=int, símbolo=voto@global_0, lvalue]
     DECLARACION_VARIABLE (L0, C0)
-      TIPO: float (L3, C5)
+      TIPO: int (L3, C5)
       IDENTIFICADOR (L0, C0)
-        ID: a (L3, C11) [tipo=float, símbolo=a@global_0, lvalue]
-        ID: b (L3, C14) [tipo=float, símbolo=b@global_0, lvalue]
-        ID: c (L3, C17) [tipo=float, símbolo=c@global_0, lvalue]
-        ID: y (L3, C19) [tipo=int, símbolo=y@global_0, lvalue]
-    =: = (L4, C5) [tipo=int]
-      ID: suma (L4, C5)
-      SENT_EXPRESION (L0, C0) [tipo=int]
-        COMPONENTE (L0, C0) [tipo=int]
-          NUM_INT: 45 (L4, C12) [tipo=int, valor=45, constante]
-    =: = (L5, C5) [tipo=float]
-      ID: x (L5, C5) [tipo=int, símbolo=x@global_0, lvalue]
-      SENT_EXPRESION (L0, C0) [tipo=float]
-        COMPONENTE (L0, C0) [tipo=float]
-          NUM_FLOAT: 32.32 (L5, C9) [tipo=float, valor=32.32, constante]
+        ID: c1 (L3, C9) [tipo=int, símbolo=c1@global_0, lvalue]
+        ID: c2 (L3, C13) [tipo=int, símbolo=c2@global_0, lvalue]
+        ID: c3 (L3, C17) [tipo=int, símbolo=c3@global_0, lvalue]
+        ID: c4 (L3, C21) [tipo=int, símbolo=c4@global_0, lvalue]
+        ID: total (L3, C25) [tipo=int, símbolo=total@global_0, lvalue]
+    DECLARACION_VARIABLE (L0, C0)
+      TIPO: float (L4, C5)
+      IDENTIFICADOR (L0, C0)
+        ID: p1 (L4, C11) [tipo=float, símbolo=p1@global_0, lvalue]
+        ID: p2 (L4, C15) [tipo=float, símbolo=p2@global_0, lvalue]
+        ID: p3 (L4, C19) [tipo=float, símbolo=p3@global_0, lvalue]
+        ID: p4 (L4, C23) [tipo=float, símbolo=p4@global_0, lvalue]
     =: = (L6, C5) [tipo=int]
-      ID: x (L6, C5) [tipo=int, símbolo=x@global_0, lvalue]
-      SENT_EXPRESION (L0, C0) [tipo=int]
-        COMPONENTE (L0, C0) [tipo=int]
-          NUM_INT: 23 (L6, C9) [tipo=int, valor=23, constante]
+      ID: c1 (L6, C5) [tipo=int, símbolo=c1@global_0, lvalue]
+      SENT_EXPRESION (L0, C0)
+        COMPONENTE (L0, C0)
+          NUM_INT: 0 (L6, C10) [tipo=int, valor=0, constante]
     =: = (L7, C5) [tipo=int]
-      ID: y (L7, C5) [tipo=int, símbolo=y@global_0, lvalue]
-      SENT_EXPRESION (L0, C0) [tipo=int]
-        -: 4 (L7, C15) [tipo=int, valor=4]
-          +: 5 (L7, C11) [tipo=int, valor=5]
-            COMPONENTE (L0, C0) [tipo=int]
-              NUM_INT: 2 (L7, C9) [tipo=int, valor=2, constante]
-            COMPONENTE (L0, C0) [tipo=int]
-              NUM_INT: 3 (L7, C13) [tipo=int, valor=3, constante]
-          COMPONENTE (L0, C0) [tipo=int]
-            NUM_INT: 1 (L7, C17) [tipo=int, valor=1, constante]
+      ID: c2 (L7, C5) [tipo=int, símbolo=c2@global_0, lvalue]
+      SENT_EXPRESION (L0, C0)
+        COMPONENTE (L0, C0)
+          NUM_INT: 0 (L7, C10) [tipo=int, valor=0, constante]
     =: = (L8, C5) [tipo=int]
-      ID: z (L8, C5) [tipo=int, símbolo=z@global_0, lvalue]
-      SENT_EXPRESION (L0, C0) [tipo=int]
-        +: + (L8, C11) [tipo=int]
-          COMPONENTE (L0, C0) [tipo=int]
-            ID: y (L8, C9) [tipo=int, símbolo=y@global_0, lvalue]
-          COMPONENTE (L0, C0) [tipo=int]
-            NUM_INT: 7 (L8, C13) [tipo=int, valor=7, constante]
+      ID: c3 (L8, C5) [tipo=int, símbolo=c3@global_0, lvalue]
+      SENT_EXPRESION (L0, C0)
+        COMPONENTE (L0, C0)
+          NUM_INT: 0 (L8, C10) [tipo=int, valor=0, constante]
     =: = (L9, C5) [tipo=int]
-      ID: y (L9, C5) [tipo=int, símbolo=y@global_0, lvalue]
-      SENT_EXPRESION (L0, C0) [tipo=int]
-        +: + (L9, C11) [tipo=int]
-          COMPONENTE (L0, C0) [tipo=int]
-            ID: y (L9, C9) [tipo=int, símbolo=y@global_0, lvalue]
-          COMPONENTE (L0, C0) [tipo=int]
-            NUM_INT: 1 (L9, C13) [tipo=int, valor=1, constante]
-    =: = (L10, C5) [tipo=float]
-      ID: a (L10, C5) [tipo=float, símbolo=a@global_0, lvalue]
-      SENT_EXPRESION (L0, C0) [tipo=float]
-        -: 61.0 (L10, C22) [tipo=float, valor=61.0]
-          +: 62.0 (L10, C19) [tipo=float, valor=62.0]
-            -: 28.0 (L10, C13) [tipo=float, valor=28.0]
-              +: 28.0 (L10, C11) [tipo=float, valor=28.0]
-                COMPONENTE (L0, C0) [tipo=float]
-                  NUM_FLOAT: 24.0 (L10, C7) [tipo=float, valor=24.0, constante]
-                COMPONENTE (L0, C0) [tipo=int]
-                  NUM_INT: 4 (L10, C12) [tipo=int, valor=4, constante]
-              *: 0 (L10, C17) [tipo=int, valor=0]
-                /: 0 (L10, C15) [tipo=int, valor=0]
-                  COMPONENTE (L0, C0) [tipo=int]
-                    NUM_INT: 1 (L10, C14) [tipo=int, valor=1, constante]
-                  COMPONENTE (L0, C0) [tipo=int]
-                    NUM_INT: 3 (L10, C16) [tipo=int, valor=3, constante]
-                COMPONENTE (L0, C0) [tipo=int]
-                  NUM_INT: 2 (L10, C18) [tipo=int, valor=2, constante]
-            COMPONENTE (L0, C0) [tipo=int]
-              NUM_INT: 34 (L10, C20) [tipo=int, valor=34, constante]
-          COMPONENTE (L0, C0) [tipo=int]
-            NUM_INT: 1 (L10, C23) [tipo=int, valor=1, constante]
-    =: = (L11, C5) [tipo=int]
-      ID: x (L11, C5) [tipo=int, símbolo=x@global_0, lvalue]
-      SENT_EXPRESION (L0, C0) [tipo=int]
-        *: 8 (L11, C12) [tipo=int, valor=8]
-          COMPONENTE (L0, C0) [tipo=int]
-            -: 2 (L11, C9) [tipo=int, valor=2]
-              COMPONENTE (L0, C0) [tipo=int]
-                NUM_INT: 5 (L11, C8) [tipo=int, valor=5, constante]
-              COMPONENTE (L0, C0) [tipo=int]
-                NUM_INT: 3 (L11, C10) [tipo=int, valor=3, constante]
-          COMPONENTE (L0, C0) [tipo=int]
-            /: 4 (L11, C15) [tipo=int, valor=4]
-              COMPONENTE (L0, C0) [tipo=int]
-                NUM_INT: 8 (L11, C14) [tipo=int, valor=8, constante]
-              COMPONENTE (L0, C0) [tipo=int]
-                NUM_INT: 2 (L11, C16) [tipo=int, valor=2, constante]
-    =: = (L12, C5) [tipo=int]
-      ID: y (L12, C5) [tipo=int, símbolo=y@global_0, lvalue]
-      SENT_EXPRESION (L0, C0) [tipo=int]
-        -: -2 (L12, C16) [tipo=int, valor=-2]
-          -: 7 (L12, C10) [tipo=int, valor=7]
-            +: 8 (L12, C8) [tipo=int, valor=8]
-              COMPONENTE (L0, C0) [tipo=int]
-                NUM_INT: 5 (L12, C7) [tipo=int, valor=5, constante]
-              COMPONENTE (L0, C0) [tipo=int]
-                NUM_INT: 3 (L12, C9) [tipo=int, valor=3, constante]
-            /: 1 (L12, C14) [tipo=int, valor=1]
-              *: 8 (L12, C12) [tipo=int, valor=8]
-                COMPONENTE (L0, C0) [tipo=int]
-                  NUM_INT: 2 (L12, C11) [tipo=int, valor=2, constante]
-                COMPONENTE (L0, C0) [tipo=int]
-                  NUM_INT: 4 (L12, C13) [tipo=int, valor=4, constante]
-              COMPONENTE (L0, C0) [tipo=int]
-                NUM_INT: 7 (L12, C15) [tipo=int, valor=7, constante]
-          COMPONENTE (L0, C0) [tipo=int]
-            NUM_INT: 9 (L12, C17) [tipo=int, valor=9, constante]
-    =: = (L13, C5) [tipo=int]
-      ID: z (L13, C5) [tipo=int, símbolo=z@global_0, lvalue]
-      SENT_EXPRESION (L0, C0) [tipo=int]
-        +: 64 (L13, C15) [tipo=int, valor=64]
-          /: 4 (L13, C11) [tipo=int, valor=4]
-            COMPONENTE (L0, C0) [tipo=int]
-              NUM_INT: 8 (L13, C9) [tipo=int, valor=8, constante]
-            COMPONENTE (L0, C0) [tipo=int]
-              NUM_INT: 2 (L13, C13) [tipo=int, valor=2, constante]
-          *: 60 (L13, C20) [tipo=int, valor=60]
-            COMPONENTE (L0, C0) [tipo=int]
-              NUM_INT: 15 (L13, C17) [tipo=int, valor=15, constante]
-            COMPONENTE (L0, C0) [tipo=int]
-              NUM_INT: 4 (L13, C22) [tipo=int, valor=4, constante]
-    =: = (L14, C5) [tipo=float]
-      ID: y (L14, C5) [tipo=int, símbolo=y@global_0, lvalue]
-      SENT_EXPRESION (L0, C0) [tipo=float]
-        COMPONENTE (L0, C0) [tipo=float]
-          NUM_FLOAT: 14.54 (L14, C9) [tipo=float, valor=14.54, constante]
-    SELECCION (L0, C0)
-      >: > (L15, C9) [tipo=boolean]
-        COMPONENTE (L0, C0) [tipo=int]
-          NUM_INT: 2 (L15, C8) [tipo=int, valor=2, constante]
-        COMPONENTE (L0, C0) [tipo=int]
-          NUM_INT: 3 (L15, C10) [tipo=int, valor=3, constante]
-      LISTA_SENTENCIAS (L0, C0) [tipo=float]
-        =: = (L16, C9) [tipo=float]
-          ID: y (L16, C9) [tipo=int, símbolo=y@global_0, lvalue]
-          SENT_EXPRESION (L0, C0) [tipo=float]
-            +: + (L16, C15) [tipo=float]
-              COMPONENTE (L0, C0) [tipo=float]
-                ID: a (L16, C13) [tipo=float, símbolo=a@global_0, lvalue]
-              COMPONENTE (L0, C0) [tipo=int]
-                NUM_INT: 3 (L16, C17) [tipo=int, valor=3, constante]
-      ELSE (L0, C0)
-        LISTA_SENTENCIAS (L0, C0)
-          SELECCION (L0, C0)
-            &&: && (L18, C16) [tipo=boolean]
-              >: > (L18, C13) [tipo=boolean]
-                COMPONENTE (L0, C0) [tipo=int]
-                  NUM_INT: 4 (L18, C12) [tipo=int, valor=4, constante]
-                COMPONENTE (L0, C0) [tipo=int]
-                  NUM_INT: 2 (L18, C14) [tipo=int, valor=2, constante]
-              COMPONENTE (L0, C0) [tipo=boolean]
-                BOOLEANO: True (L18, C19) [tipo=boolean, valor=True, constante]
-            LISTA_SENTENCIAS (L0, C0) [tipo=float]
-              =: = (L19, C13) [tipo=float]
-                ID: b (L19, C13) [tipo=float, símbolo=b@global_0, lvalue]
-                SENT_EXPRESION (L0, C0) [tipo=float]
-                  COMPONENTE (L0, C0) [tipo=float]
-                    NUM_FLOAT: 3.2 (L19, C17) [tipo=float, valor=3.2, constante]
-            ELSE (L0, C0)
-              LISTA_SENTENCIAS (L0, C0) [tipo=float]
-                =: = (L21, C13) [tipo=float]
-                  ID: b (L21, C13) [tipo=float, símbolo=b@global_0, lvalue]
-                  SENT_EXPRESION (L0, C0) [tipo=float]
-                    COMPONENTE (L0, C0) [tipo=float]
-                      NUM_FLOAT: 5.0 (L21, C17) [tipo=float, valor=5.0, constante]
-          =: = (L23, C9) [tipo=int]
-            ID: y (L23, C9) [tipo=int, símbolo=y@global_0, lvalue]
-            SENT_EXPRESION (L0, C0) [tipo=int]
-              +: + (L23, C15) [tipo=int]
-                COMPONENTE (L0, C0) [tipo=int]
-                  ID: y (L23, C13) [tipo=int, símbolo=y@global_0, lvalue]
-                COMPONENTE (L0, C0) [tipo=int]
-                  NUM_INT: 1 (L23, C17) [tipo=int, valor=1, constante]
-    INCREMENTO_UNARIO (L0, C0)
-      ID: a (L25, C5) [tipo=float, símbolo=a@global_0, lvalue]
-      OPERADOR_ASIG_UNARIO: ++ (L25, C6)
-    INCREMENTO_UNARIO (L0, C0)
-      ID: c (L26, C5) [tipo=float, símbolo=c@global_0, lvalue]
-      OPERADOR_ASIG_UNARIO: -- (L26, C6)
-    =: = (L27, C5) [tipo=int]
-      ID: x (L27, C5) [tipo=int, símbolo=x@global_0, lvalue]
-      SENT_EXPRESION (L0, C0) [tipo=int]
-        +: 7 (L27, C11) [tipo=int, valor=7]
-          COMPONENTE (L0, C0) [tipo=int]
-            NUM_INT: 3 (L27, C9) [tipo=int, valor=3, constante]
-          COMPONENTE (L0, C0) [tipo=int]
-            NUM_INT: 4 (L27, C13) [tipo=int, valor=4, constante]
-    REPETICION (L0, C0)
-      LISTA_SENTENCIAS (L0, C0)
-        =: = (L29, C9) [tipo=int]
-          ID: y (L29, C9) [tipo=int, símbolo=y@global_0, lvalue]
-          SENT_EXPRESION (L0, C0) [tipo=int]
-            +: + (L29, C25) [tipo=int]
-              *: * (L29, C21) [tipo=int]
-                COMPONENTE (L0, C0) [tipo=int]
-                  +: + (L29, C16) [tipo=int]
-                    COMPONENTE (L0, C0) [tipo=int]
-                      ID: y (L29, C14) [tipo=int, símbolo=y@global_0, lvalue]
-                    COMPONENTE (L0, C0) [tipo=int]
-                      NUM_INT: 1 (L29, C18) [tipo=int, valor=1, constante]
-                COMPONENTE (L0, C0) [tipo=int]
-                  NUM_INT: 2 (L29, C23) [tipo=int, valor=2, constante]
-              COMPONENTE (L0, C0) [tipo=int]
-                NUM_INT: 1 (L29, C27) [tipo=int, valor=1, constante]
-        ITERACION (L0, C0)
-          >: > (L30, C17) [tipo=boolean]
-            COMPONENTE (L0, C0) [tipo=int]
-              ID: x (L30, C15) [tipo=int, símbolo=x@global_0, lvalue]
-            COMPONENTE (L0, C0) [tipo=int]
-              NUM_INT: 7 (L30, C19) [tipo=int, valor=7, constante]
-          LISTA_SENTENCIAS (L0, C0)
-            =: = (L31, C13) [tipo=int]
-              ID: x (L31, C13) [tipo=int, símbolo=x@global_0, lvalue]
-              SENT_EXPRESION (L0, C0) [tipo=int]
-                +: 6 (L31, C19) [tipo=int, valor=6]
-                  COMPONENTE (L0, C0) [tipo=int]
-                    NUM_INT: 6 (L31, C17) [tipo=int, valor=6, constante]
-                  /: 0 (L31, C31) [tipo=int, valor=0]
-                    *: 0 (L31, C27) [tipo=int, valor=0]
-                      /: 0 (L31, C23) [tipo=int, valor=0]
-                        COMPONENTE (L0, C0) [tipo=int]
-                          NUM_INT: 8 (L31, C21) [tipo=int, valor=8, constante]
-                        COMPONENTE (L0, C0) [tipo=int]
-                          NUM_INT: 9 (L31, C25) [tipo=int, valor=9, constante]
-                      COMPONENTE (L0, C0) [tipo=int]
-                        NUM_INT: 8 (L31, C29) [tipo=int, valor=8, constante]
-                    COMPONENTE (L0, C0) [tipo=int]
-                      NUM_INT: 3 (L31, C33) [tipo=int, valor=3, constante]
-            SENT_IN (L0, C0)
-              ID: x (L32, C20) [tipo=int, símbolo=x@global_0, lvalue]
-            =: = (L33, C13) [tipo=int]
-              ID: mas (L33, C13)
-              SENT_EXPRESION (L0, C0) [tipo=int]
-                /: 5 (L33, C22) [tipo=int, valor=5]
-                  COMPONENTE (L0, C0) [tipo=int]
-                    NUM_INT: 36 (L33, C19) [tipo=int, valor=36, constante]
-                  COMPONENTE (L0, C0) [tipo=int]
-                    NUM_INT: 7 (L33, C24) [tipo=int, valor=7, constante]
-      ==: == (L35, C13) [tipo=boolean]
-        COMPONENTE (L0, C0) [tipo=int]
-          ID: y (L35, C11) [tipo=int, símbolo=y@global_0, lvalue]
-        COMPONENTE (L0, C0) [tipo=int]
-          NUM_INT: 5 (L35, C16) [tipo=int, valor=5, constante]
+      ID: c4 (L9, C5) [tipo=int, símbolo=c4@global_0, lvalue]
+      SENT_EXPRESION (L0, C0)
+        COMPONENTE (L0, C0)
+          NUM_INT: 0 (L9, C10) [tipo=int, valor=0, constante]
+    =: = (L10, C5) [tipo=int]
+      ID: total (L10, C5) [tipo=int, símbolo=total@global_0, lvalue]
+      SENT_EXPRESION (L0, C0)
+        COMPONENTE (L0, C0)
+          NUM_INT: 0 (L10, C13) [tipo=int, valor=0, constante]
+    SENT_OUT (L0, C0)
+      SALIDA (L0, C0)
+        CADENA: "Programa 4: captura votos (1-4). Teclee 0 para terminar." (L12, C13)
+    SENT_OUT (L0, C0)
+      SALIDA (L0, C0)
+        CADENA: "Introduzca un voto (0-4):" (L14, C13)
+    SENT_IN (L0, C0)
+      ID: voto (L15, C12) [tipo=int, símbolo=voto@global_0, lvalue]
     ITERACION (L0, C0)
-      ==: == (L36, C13) [tipo=boolean]
-        COMPONENTE (L0, C0) [tipo=int]
-          ID: y (L36, C11) [tipo=int, símbolo=y@global_0, lvalue]
-        COMPONENTE (L0, C0) [tipo=int]
-          NUM_INT: 0 (L36, C16) [tipo=int, valor=0, constante]
+      !=: != (L17, C16) [tipo=boolean]
+        COMPONENTE (L0, C0)
+          ID: voto (L17, C11) [tipo=int, símbolo=voto@global_0, lvalue]
+        COMPONENTE (L0, C0)
+          NUM_INT: 0 (L17, C19) [tipo=int, valor=0, constante]
       LISTA_SENTENCIAS (L0, C0)
-        SENT_IN (L0, C0)
-          ID: mas (L37, C16)
+        SELECCION (L0, C0)
+          <: < (L20, C17) [tipo=boolean]
+            COMPONENTE (L0, C0)
+              ID: voto (L20, C12) [tipo=int, símbolo=voto@global_0, lvalue]
+            COMPONENTE (L0, C0)
+              NUM_INT: 0 (L20, C19) [tipo=int, valor=0, constante]
+          LISTA_SENTENCIAS (L0, C0)
+            SENT_OUT (L0, C0)
+              SALIDA (L0, C0)
+                CADENA: "Voto no valido. Solo se permite 1-4, o 0 para terminar." (L21, C21)
+          ELSE (L0, C0)
+            LISTA_SENTENCIAS (L0, C0)
+              SELECCION (L0, C0)
+                >: > (L23, C21) [tipo=boolean]
+                  COMPONENTE (L0, C0)
+                    ID: voto (L23, C16) [tipo=int, símbolo=voto@global_0, lvalue]
+                  COMPONENTE (L0, C0)
+                    NUM_INT: 4 (L23, C23) [tipo=int, valor=4, constante]
+                LISTA_SENTENCIAS (L0, C0)
+                  SENT_OUT (L0, C0)
+                    SALIDA (L0, C0)
+                      CADENA: "Voto no valido. Solo se permite 1-4, o 0 para terminar." (L24, C25)
+                ELSE (L0, C0)
+                  LISTA_SENTENCIAS (L0, C0)
+                    SELECCION (L0, C0)
+                      ==: == (L28, C25) [tipo=boolean]
+                        COMPONENTE (L0, C0)
+                          ID: voto (L28, C20) [tipo=int, símbolo=voto@global_0, lvalue]
+                        COMPONENTE (L0, C0)
+                          NUM_INT: 1 (L28, C28) [tipo=int, valor=1, constante]
+                      LISTA_SENTENCIAS (L0, C0)
+                        =: = (L29, C21) [tipo=int]
+                          ID: c1 (L29, C21) [tipo=int, símbolo=c1@global_0, lvalue]
+                          SENT_EXPRESION (L0, C0)
+                            +: + (L29, C29) [tipo=int]
+                              COMPONENTE (L0, C0)
+                                ID: c1 (L29, C26) [tipo=int, símbolo=c1@global_0, lvalue]
+                              COMPONENTE (L0, C0)
+                                NUM_INT: 1 (L29, C31) [tipo=int, valor=1, constante]
+                      ELSE (L0, C0)
+                        LISTA_SENTENCIAS (L0, C0)
+                          SELECCION (L0, C0)
+                            ==: == (L31, C29) [tipo=boolean]
+                              COMPONENTE (L0, C0)
+                                ID: voto (L31, C24) [tipo=int, símbolo=voto@global_0, lvalue]
+                              COMPONENTE (L0, C0)
+                                NUM_INT: 2 (L31, C32) [tipo=int, valor=2, constante]
+                            LISTA_SENTENCIAS (L0, C0)
+                              =: = (L32, C25) [tipo=int]
+                                ID: c2 (L32, C25) [tipo=int, símbolo=c2@global_0, lvalue]
+                                SENT_EXPRESION (L0, C0)
+                                  +: + (L32, C33) [tipo=int]
+                                    COMPONENTE (L0, C0)
+                                      ID: c2 (L32, C30) [tipo=int, símbolo=c2@global_0, lvalue]
+                                    COMPONENTE (L0, C0)
+                                      NUM_INT: 1 (L32, C35) [tipo=int, valor=1, constante]
+                            ELSE (L0, C0)
+                              LISTA_SENTENCIAS (L0, C0)
+                                SELECCION (L0, C0)
+                                  ==: == (L34, C33) [tipo=boolean]
+                                    COMPONENTE (L0, C0)
+                                      ID: voto (L34, C28) [tipo=int, símbolo=voto@global_0, lvalue]
+                                    COMPONENTE (L0, C0)
+                                      NUM_INT: 3 (L34, C36) [tipo=int, valor=3, constante]
+                                  LISTA_SENTENCIAS (L0, C0)
+                                    =: = (L35, C29) [tipo=int]
+                                      ID: c3 (L35, C29) [tipo=int, símbolo=c3@global_0, lvalue]
+                                      SENT_EXPRESION (L0, C0)
+                                        +: + (L35, C37) [tipo=int]
+                                          COMPONENTE (L0, C0)
+                                            ID: c3 (L35, C34) [tipo=int, símbolo=c3@global_0, lvalue]
+                                          COMPONENTE (L0, C0)
+                                            NUM_INT: 1 (L35, C39) [tipo=int, valor=1, constante]
+                                  ELSE (L0, C0)
+                                    LISTA_SENTENCIAS (L0, C0)
+                                      SELECCION (L0, C0)
+                                        ==: == (L37, C37) [tipo=boolean]
+                                          COMPONENTE (L0, C0)
+                                            ID: voto (L37, C32) [tipo=int, símbolo=voto@global_0, lvalue]
+                                          COMPONENTE (L0, C0)
+                                            NUM_INT: 4 (L37, C40) [tipo=int, valor=4, constante]
+                                        LISTA_SENTENCIAS (L0, C0)
+                                          =: = (L38, C33) [tipo=int]
+                                            ID: c4 (L38, C33) [tipo=int, símbolo=c4@global_0, lvalue]
+                                            SENT_EXPRESION (L0, C0)
+                                              +: + (L38, C41) [tipo=int]
+                                                COMPONENTE (L0, C0)
+                                                  ID: c4 (L38, C38) [tipo=int, símbolo=c4@global_0, lvalue]
+                                                COMPONENTE (L0, C0)
+                                                  NUM_INT: 1 (L38, C43) [tipo=int, valor=1, constante]
+                    =: = (L44, C17) [tipo=int]
+                      ID: total (L44, C17) [tipo=int, símbolo=total@global_0, lvalue]
+                      SENT_EXPRESION (L0, C0)
+                        +: + (L44, C31) [tipo=int]
+                          COMPONENTE (L0, C0)
+                            ID: total (L44, C25) [tipo=int, símbolo=total@global_0, lvalue]
+                          COMPONENTE (L0, C0)
+                            NUM_INT: 1 (L44, C33) [tipo=int, valor=1, constante]
         SENT_OUT (L0, C0)
-          SALIDA (L0, C0) [tipo=int]
-            COMPONENTE (L0, C0) [tipo=int]
-              ID: x (L38, C17) [tipo=int, símbolo=x@global_0, lvalue]
+          SALIDA (L0, C0)
+            CADENA: "Introduzca un voto (0-4):" (L49, C17)
+        SENT_IN (L0, C0)
+          ID: voto (L50, C16) [tipo=int, símbolo=voto@global_0, lvalue]
+    SELECCION (L0, C0)
+      >: > (L55, C14) [tipo=boolean]
+        COMPONENTE (L0, C0)
+          ID: total (L55, C8) [tipo=int, símbolo=total@global_0, lvalue]
+        COMPONENTE (L0, C0)
+          NUM_INT: 0 (L55, C16) [tipo=int, valor=0, constante]
+      LISTA_SENTENCIAS (L0, C0)
+        =: = (L56, C9) [tipo=float]
+          ID: p1 (L56, C9) [tipo=float, símbolo=p1@global_0, lvalue]
+          SENT_EXPRESION (L0, C0)
+            /: / (L56, C25) [tipo=float]
+              *: * (L56, C17) [tipo=float]
+                COMPONENTE (L0, C0)
+                  ID: c1 (L56, C14) [tipo=int, símbolo=c1@global_0, lvalue]
+                COMPONENTE (L0, C0)
+                  NUM_FLOAT: 100.0 (L56, C19) [tipo=float, valor=100.0, constante]
+              COMPONENTE (L0, C0)
+                ID: total (L56, C27) [tipo=int, símbolo=total@global_0, lvalue]
+        =: = (L57, C9) [tipo=float]
+          ID: p2 (L57, C9) [tipo=float, símbolo=p2@global_0, lvalue]
+          SENT_EXPRESION (L0, C0)
+            /: / (L57, C25) [tipo=float]
+              *: * (L57, C17) [tipo=float]
+                COMPONENTE (L0, C0)
+                  ID: c2 (L57, C14) [tipo=int, símbolo=c2@global_0, lvalue]
+                COMPONENTE (L0, C0)
+                  NUM_FLOAT: 100.0 (L57, C19) [tipo=float, valor=100.0, constante]
+              COMPONENTE (L0, C0)
+                ID: total (L57, C27) [tipo=int, símbolo=total@global_0, lvalue]
+        =: = (L58, C9) [tipo=float]
+          ID: p3 (L58, C9) [tipo=float, símbolo=p3@global_0, lvalue]
+          SENT_EXPRESION (L0, C0)
+            /: / (L58, C25) [tipo=float]
+              *: * (L58, C17) [tipo=float]
+                COMPONENTE (L0, C0)
+                  ID: c3 (L58, C14) [tipo=int, símbolo=c3@global_0, lvalue]
+                COMPONENTE (L0, C0)
+                  NUM_FLOAT: 100.0 (L58, C19) [tipo=float, valor=100.0, constante]
+              COMPONENTE (L0, C0)
+                ID: total (L58, C27) [tipo=int, símbolo=total@global_0, lvalue]
+        =: = (L59, C9) [tipo=float]
+          ID: p4 (L59, C9) [tipo=float, símbolo=p4@global_0, lvalue]
+          SENT_EXPRESION (L0, C0)
+            /: / (L59, C25) [tipo=float]
+              *: * (L59, C17) [tipo=float]
+                COMPONENTE (L0, C0)
+                  ID: c4 (L59, C14) [tipo=int, símbolo=c4@global_0, lvalue]
+                COMPONENTE (L0, C0)
+                  NUM_FLOAT: 100.0 (L59, C19) [tipo=float, valor=100.0, constante]
+              COMPONENTE (L0, C0)
+                ID: total (L59, C27) [tipo=int, símbolo=total@global_0, lvalue]
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            CADENA: "RESULTADOS FINALES:" (L61, C17)
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            CADENA: "Votos candidato 1:" (L63, C17)
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            COMPONENTE (L0, C0)
+              ID: c1 (L64, C17) [tipo=int, símbolo=c1@global_0, lvalue]
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            CADENA: "Porcentaje candidato 1:" (L65, C17)
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            COMPONENTE (L0, C0)
+              ID: p1 (L66, C17) [tipo=float, símbolo=p1@global_0, lvalue]
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            CADENA: "Votos candidato 2:" (L68, C17)
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            COMPONENTE (L0, C0)
+              ID: c2 (L69, C17) [tipo=int, símbolo=c2@global_0, lvalue]
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            CADENA: "Porcentaje candidato 2:" (L70, C17)
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            COMPONENTE (L0, C0)
+              ID: p2 (L71, C17) [tipo=float, símbolo=p2@global_0, lvalue]
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            CADENA: "Votos candidato 3:" (L73, C17)
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            COMPONENTE (L0, C0)
+              ID: c3 (L74, C17) [tipo=int, símbolo=c3@global_0, lvalue]
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            CADENA: "Porcentaje candidato 3:" (L75, C17)
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            COMPONENTE (L0, C0)
+              ID: p3 (L76, C17) [tipo=float, símbolo=p3@global_0, lvalue]
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            CADENA: "Votos candidato 4:" (L78, C17)
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            COMPONENTE (L0, C0)
+              ID: c4 (L79, C17) [tipo=int, símbolo=c4@global_0, lvalue]
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            CADENA: "Porcentaje candidato 4:" (L80, C17)
+        SENT_OUT (L0, C0)
+          SALIDA (L0, C0)
+            COMPONENTE (L0, C0)
+              ID: p4 (L81, C17) [tipo=float, símbolo=p4@global_0, lvalue]

@@ -857,25 +857,150 @@ class CustomIDE:
         pass
         
     def intermediate_code(self):
-        # Mostrar resultados en la pestaña correspondiente
-        self.codigo_intermedio_tab.delete('1.0', tk.END)
-        self.codigo_intermedio_tab.insert('1.0', "Código Intermedio:\nImplementación pendiente")
+        """Genera y muestra el código intermedio (TAC) en la pestaña correspondiente"""
+        try:
+            import codigo_intermedio
+        except ImportError as e:
+            self.codigo_intermedio_tab.delete('1.0', tk.END)
+            self.codigo_intermedio_tab.insert(
+                '1.0',
+                f"No se pudo importar el generador de código intermedio: {str(e)}"
+            )
+            self.right_tabs.select(4)
+            return
+
+        codigo_fuente = self.editor.get('1.0', tk.END)
+
+        if not codigo_fuente.strip():
+            self.codigo_intermedio_tab.delete('1.0', tk.END)
+            self.codigo_intermedio_tab.insert('1.0', "No hay código para analizar.")
+            self.right_tabs.select(4)
+            return
+
+        try:
+            instrucciones, semantic_errors = codigo_intermedio.generar_tac_desde_fuente(codigo_fuente)
+
+            if not instrucciones:
+                texto = "No se generaron instrucciones de código intermedio."
+            else:
+                lines = ["CÓDIGO INTERMEDIO (tres direcciones):", "-" * 40]
+                for i, inst in enumerate(instrucciones, start=1):
+                    lines.append(f"{i:03}: {inst}")
+                texto = "\n".join(lines)
+
+            self.codigo_intermedio_tab.delete('1.0', tk.END)
+            self.codigo_intermedio_tab.insert('1.0', texto)
+            self.right_tabs.select(4)
+        except Exception as e:
+            self.codigo_intermedio_tab.delete('1.0', tk.END)
+            self.codigo_intermedio_tab.insert(
+                '1.0',
+                f"Error generando código intermedio: {str(e)}"
+            )
+            self.right_tabs.select(4)
         
         # Cambiar a la pestaña código intermedio
         self.right_tabs.select(4)  # Seleccionar la quinta pestaña (Código Intermedio)
         
     def execute_code(self):
-        code = self.editor.get('1.0', tk.END)
+        """Ejecuta el programa usando el código intermedio (TAC) y la VM."""
+        import codigo_intermedio
+
+        # Obtener código fuente del editor
+        codigo_fuente = self.editor.get('1.0', tk.END)
+
+        if not codigo_fuente.strip():
+            messagebox.showwarning("Advertencia", "No hay código para ejecutar")
+            return
+
+        # Preparar la 'terminal' en la pestaña Resultados
+        self.resultados_tab.delete('1.0', tk.END)
+        self.bottom_tabs.select(3)  # mostrar la pestaña Resultados
+        self.console_write("=== EJECUCIÓN DEL PROGRAMA ===")
+
         try:
-            # Aquí iría la implementación real de la ejecución
-            self.resultados_tab.delete('1.0', tk.END)
-            self.resultados_tab.insert('1.0', "Ejecución exitosa")
-            
-            # Cambiar a la pestaña de resultados
-            self.bottom_tabs.select(3)  # Seleccionar la cuarta pestaña (Resultados)
+            # Ejecutar usando la consola integrada
+            salida, hubo_errores = codigo_intermedio.ejecutar_tac_desde_fuente(
+                codigo_fuente,
+                read_func=self.console_read,
+                write_func=self.console_write
+            )
+
+            # Por si acaso no se escribió nada en tiempo real,
+            # podemos volcar la salida al final
+            if not self.resultados_tab.get('1.0', 'end').strip() and salida.strip():
+                self.console_write(salida)
+
+            if hubo_errores:
+                messagebox.showwarning(
+                    "Advertencia",
+                    "El programa se ejecutó, pero hubo errores/advertencias semánticas.\n"
+                    "Revisa también la pestaña de errores semánticos."
+                )
         except Exception as e:
             self.resultados_tab.delete('1.0', tk.END)
-            self.resultados_tab.insert('1.0', f"Error de ejecución: {str(e)}")
+            self.resultados_tab.insert('1.0', f"Error durante la ejecución:\n{str(e)}")
+            self.bottom_tabs.select(3)
+            messagebox.showerror(
+                "Error de Ejecución",
+                f"Ocurrió un error durante la ejecución:\n{str(e)}"
+            )
+
+    def console_write(self, text: str):
+        """Escribe una línea en la 'consola' (pestaña Resultados)."""
+        self.resultados_tab.insert(tk.END, str(text) + "\n")
+        self.resultados_tab.see(tk.END)
+
+    def console_read(self, prompt: str) -> str:
+        """
+        Lee una línea escrita por el usuario en la pestaña Resultados.
+        Muestra un 'prompt' y espera hasta que el usuario presione Enter.
+        """
+        import tkinter as tk
+
+        # Asegurarnos de que estamos en la pestaña de Resultados
+        self.bottom_tabs.select(3)
+
+        prom = prompt or "Entrada: "
+        # Escribimos el prompt sin salto de línea todavía
+        self.resultados_tab.insert(tk.END, prom)
+        self.resultados_tab.see(tk.END)
+
+        # Variable Tk para esperar hasta que el usuario presione Enter
+        value_var = tk.StringVar(self.root)
+
+        def on_enter(event):
+            # Tomamos la última línea escrita
+            line_start = "end-1l linestart"
+            line_end = "end-1c"
+            full_line = self.resultados_tab.get(line_start, line_end)
+
+            # Quitamos el prompt del inicio, si está
+            if full_line.startswith(prom):
+                user_text = full_line[len(prom):].strip()
+            else:
+                user_text = full_line.strip()
+
+            value_var.set(user_text)
+
+            # Agregamos salto de línea para el siguiente prompt
+            self.resultados_tab.insert(tk.END, "\n")
+            self.resultados_tab.see(tk.END)
+
+            # Desvincular la tecla Enter para esta lectura
+            self.resultados_tab.unbind("<Return>")
+
+            # Evitar que Tkinter meta otro salto de línea automático
+            return "break"
+
+        # Vinculamos Enter a la función anterior
+        self.resultados_tab.bind("<Return>", on_enter)
+
+        # Esperar hasta que el usuario teclee algo y presione Enter
+        self.root.wait_variable(value_var)
+
+        return value_var.get()
+
             
     def compile_code(self):
         """Ejecuta el proceso completo de compilación incluyendo análisis semántico"""

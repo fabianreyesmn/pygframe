@@ -331,11 +331,13 @@ class AnnotatedASTNode(Nodo):
                 'name': self.symbol_ref.name,
                 'type': str(self.symbol_ref.type_info),
                 'scope': self.symbol_ref.scope,
-                'line': self.symbol_ref.line,
+                # usar la PRIMERA línea registrada, o None si no hay
+                'line': self.symbol_ref.lines[0] if self.symbol_ref.lines else None,
                 'column': self.symbol_ref.column,
                 'memory_address': self.symbol_ref.memory_address,
                 'is_initialized': self.symbol_ref.is_initialized
             }
+
         
         # Agregar propiedades adicionales
         properties = {}
@@ -2734,12 +2736,13 @@ class SemanticAnalyzer:
             self.error_detector.check_invalid_conversions(self.ast)
             
             # Fase 5: Anotación del AST
-            # ⚠️ ELIMINAR: No volver a visitar el AST aquí
-            # self.annotated_ast = self.visitor.visit(self.ast)
-            
+            # Generar AST anotado una sola vez usando el anotador
+            self.annotated_ast = self.annotator.annotate_ast(self.ast)
+
             self.analysis_completed = True
-            
+
             return self.annotated_ast, self.symbol_table, self.error_reporter.get_errors()
+
             
         except Exception as e:
             self.error_reporter.add_error(
@@ -3542,9 +3545,11 @@ def export_semantic_analysis_files(annotated_ast: Optional[AnnotatedASTNode],
             all_symbols = symbol_table.get_all_symbols()
             if all_symbols:
                 for symbol in all_symbols:
-                    f.write(f"  {symbol.name} ({symbol.type_info}) - Línea {symbol.line}\n")
+                    primera_linea = symbol.lines[0] if symbol.lines else "N/A"
+                    f.write(f"  {symbol.name} ({symbol.type_info}) - Línea {primera_linea}\n")
             else:
                 f.write("  No hay variables declaradas\n")
+
             f.write("\n")
             
             # Errores resumidos
